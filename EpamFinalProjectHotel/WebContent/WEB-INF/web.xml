@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>MagicHotel</display-name>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+
+	<servlet>
+		<servlet-name>Controller</servlet-name>
+		<servlet-class>by.epamtc.jwd2020.dziadkouskaya.controller.Controller</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>Localization</servlet-name>
+		<servlet-class>by.epamtc.jwd2020.dziadkouskaya.controller.localization.ChangeLocale</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Controller</servlet-name>
+		<url-pattern>/mainPage</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>Localization</servlet-name>
+		<url-pattern>/localization</url-pattern>
+	</servlet-mapping>
+
+
+	<filter>
+		<display-name>CharsetFilter</display-name>
+		<filter-name>CharsetFilter</filter-name>
+		<filter-class>by.epamtc.jwd2020.dziadkouskaya.controller.filter.CharsetFilter</filter-class>
+		<init-param>
+			<param-name>characterEncoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>CharsetFilter</filter-name>
+		<url-pattern>/mainPage</url-pattern>
+	</filter-mapping>
+
+	<!-- <error-page> <error-code>404</error-code> <location>/errorPage.jsp</location> 
+		</error-page> -->
+
+
+
+
+</web-app>

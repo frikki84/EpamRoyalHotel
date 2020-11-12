@@ -1,0 +1,10 @@
+
+**/logs
+logs
+**/build
+build
+.settings
+.classpath
+.project
+.tern-project
+
