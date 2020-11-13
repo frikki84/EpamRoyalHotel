@@ -101,6 +101,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void addNewUser(User user) throws ServiceException {
 		try {
+			
 			userDao.addUser(user);
 
 		} catch (DaoException e) {

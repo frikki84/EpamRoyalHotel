@@ -80,9 +80,9 @@
 								<li class="nav-item">
 									<form action="mainPage" method="post">
 										<input type="hidden" name="command" value="locale_change">
-										<input type="hidden" name="local" value="en"> 
-										<input type="hidden" name="address" value="${address}"> 
-										<input type="submit" value="${language_button_en}" class="nav-link" />
+										<input type="hidden" name="local" value="en"> <input
+											type="hidden" name="address" value="${address}"> <input
+											type="submit" value="${language_button_en}" class="nav-link" />
 									</form>
 								</li>
 								<li class="nav-item">
@@ -112,8 +112,7 @@
 						<h3 class="text-center">${reg_form_title}</h3>
 
 						<div class="wrong_password">
-							<c:out value="${sessionScope.resultAnswer}"></c:out>
-
+							<c:out value="${resultAnswer}"></c:out>
 						</div>
 
 						<form class="form" action="mainPage" method="post">
@@ -160,8 +159,6 @@
 
 						</form>
 
-
-
 					</div>
 				</div>
 
@@ -173,135 +170,3 @@
 </body>
 </html>
 
-
-<%-- 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
-<fmt:setLocale value="${sessionScope.local}" />
-
-<fmt:setBundle basename="resources.local" var="loc" />
-
-
-<fmt:message bundle="${loc}" key="home_button" var="home_button" />
-<fmt:message bundle="${loc}" key="language_button" var="language_button" />
-<fmt:message bundle="${loc}" key="language_button_en"
-	var="language_button_en" />
-<fmt:message bundle="${loc}" key="language_button_ru"
-	var="language_button_ru" />
-<fmt:message bundle="${loc}" key="gallery_buttom" var="gallery_buttom" />
-<fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
-<fmt:message bundle="${loc}" key="reg_form_login" var="reg_form_login" />
-<fmt:message bundle="${loc}" key="reg_form_password"
-	var="reg_form_password" />
-<fmt:message bundle="${loc}" key="reg_form_repeat_password"
-	var="reg_form_repeat_password" />
-<fmt:message bundle="${loc}" key="reg_form_phone" var="reg_form_phone" />
-<fmt:message bundle="${loc}" key="reg_form_email" var="reg_form_email" />
-<fmt:message bundle="${loc}" key="reg_form_title" var="reg_form_title" />
-<fmt:message bundle="${loc}" key="submit" var="submit" />
-<fmt:message bundle="${loc}" key="reg_form_check_password"
-	var="reg_form_check_password" />
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-<link rel="stylesheet" href="css/style.css" />
-
-</head>
-
-<body>
-	<div class="container">
-		<div class="collapse navbar-collapse offset"
-			id="navbarSupportedContent">
-			<ul class="nav navbar-nav menu_nav ml-auto">
-				<li class="nav-item active"><a class="nav-link"
-					href="index.jsp">${home_button}</a></li>
-				<li class="nav-item submenu dropdown"><a href="#"
-					class="nav-link dropdown-toggle" data-toggle="dropdown"
-					role="button" aria-haspopup="true" aria-expanded="false">${language_button}</a>
-					<ul class="dropdown-menu">
-						<li class="nav-item">
-							<form action="localization" method="post">
-								<input type="hidden" name="local" value="en"> <input
-									type="submit" value="${language_button_en}" class="nav-link" />
-							</form>
-						</li>
-						<li class="nav-item">
-							<form action="localization" method="post">
-								<input type="hidden" name="local" value="ru"> <input
-									type="submit" value="${language_button_ru}" class="nav-link" />
-							</form>
-						</li>
-					</ul></li>
-				<li class="nav-item"><a class="nav-link" href="contacts.jsp">${contact_buttom}</a></li>
-			</ul>
-		</div>
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3 well">
-				<h3 class="text-center">${reg_form_title}</h3>
-
-				<div class="wrong_password">
-					<c:out value="${sessionScope.resultAnswer}"></c:out>
-
-				</div>
-
-				<form class="form" action="mainPage" method="post">
-
-					<input type="hidden" name="command" value="USER_REGISTRATION" />
-
-					<div class="col-xs-12">
-						<div class="form-group">
-
-							<input type="text" class="form-control"
-								placeholder="${reg_form_login}" name="login" required />
-						</div>
-					</div>
-					<div class="col-xs-12">
-						<div class="form-group">
-							<input type="email" class="form-control"
-								placeholder="${reg_form_email}" name="email" />
-						</div>
-					</div>
-					<div class="col-xs-12">
-						<div class="form-group">
-							<input type="text" class="form-control"
-								placeholder="${reg_form_phone}" name="phone" />
-						</div>
-					</div>
-
-					<div class="col-xs-12">
-						<div class="form-group">
-							<input type="password" class="form-control"
-								placeholder="${reg_form_password}" name="password" />
-						</div>
-					</div>
-					<div class="col-xs-12">
-						<div class="form-group">
-							<input type="password" class="form-control"
-								placeholder="${reg_form_repeat_password}" name="passwordRepeat" />
-						</div>
-					</div>
-					<div class="text-center col-xs-12">
-
-						<input type="submit" class="btn btn-default" value="${submit}" />
-					</div>
-
-				</form>
-				<label> </label>
-
-
-
-			</div>
-		</div>
-	</div>
-</body>
-</html> --%>
