@@ -17,8 +17,9 @@ import by.epamtc.jwd2020.dziadkouskaya.dao.UserDao;
 import by.epamtc.jwd2020.dziadkouskaya.dao.connection_pool.ConnectionPool;
 
 /**
- * class UserDaoImpl is implementation of interface UserDao, 
- * make all operations with magichotel.users table
+ * class UserDaoImpl is implementation of interface UserDao, make all operations
+ * with magichotel.users table
+ * 
  * @author Yana Dziadkouskaya
  *
  */
@@ -41,16 +42,15 @@ public class UserDaoImpl implements UserDao {
 	public static final String STRING_FIND_PHONE_EMAIL_BY_ID_LAST_PART = ";";
 	public static final String STRING_TO_UPDATE_EMAIL_PHONE = "update USERS set userEmail = ?, userPhone = ?  where idUser = ";
 	public static final String STRING_DELETE_USER = "Update users set UserActivity = 2 where idUser = ";
-	public static final String STRING_DELETE_USER2 =";";
+	public static final String STRING_DELETE_USER2 = ";";
 	public static final String STRING_FIND_PASSWORD = "	select UserPassword from users where idUser =";
 	public static final String STRING_UPDATE_PASWORD = "update users set UserPassword = ? where idUser=";
-	
+
 	/**
 	 * {@link ConnectionPool}
 	 */
 	private static final Logger logger = LogManager.getLogger(UserDaoImpl.class);
 	private final ConnectionPool connectionPool = ConnectionPool.getInstance();
-
 
 	@Override
 	public void addUser(User user) throws DaoException {
@@ -68,7 +68,7 @@ public class UserDaoImpl implements UserDao {
 			ps.setString(4, user.getEmail());
 			ps.setString(5, user.getPhone());
 			ps.setInt(6, user.getRole().getRoleId());
-			ps.setInt(7,  user.getActivity().getId());
+			ps.setInt(7, user.getActivity().getId());
 			ps.executeUpdate();
 
 		} catch (SQLException e) {
@@ -82,72 +82,136 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public String checkUser(User user) throws DaoException {
-		String login = user.getLogin();
-		String email = user.getEmail();
-		String phone = user.getPhone();
+	public boolean checkLogin(String login) throws DaoException {
+		boolean result = true;
 
-		String result = "";
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet set = null;
 
-		boolean loginCheck = checkLogin(login);
-		boolean emailCheck = checkEmail(email);
-		boolean phoneCheck = checkPhone(phone);
+		connection = connectionPool.takeConnection();
 
-		if (loginCheck) {
-			result = "This login already exists. Please change your login.";
+		String sql = STRING_CHECK_USER_LOGIN + login + STRING_CHECK_USER_LOGIN2;
 
-		} else if (emailCheck) {
+		try {
+			statement = connection.createStatement();
+			set = statement.executeQuery(sql);
 
-			result = "This email has already been used for registration. Please use another email.";
-
-		} else if (phoneCheck) {
-			result = "This phone number has already been used for registration. Please use another phone number.";
-		}
-
-		return result;
-
-	}
-
-	@Override
-	public String checkUserInLogination(String login, String password) throws DaoException {
-
-		boolean loginCheck = checkLogin(login);
-		boolean emailCheck = checkEmail(login);
-		boolean phoneCheck = checkPhone(login);
-
-		String result = "This username / email / phone number is not registered in the system";
-
-		if (loginCheck || emailCheck || phoneCheck) {
-
-			boolean passwordCheck = checkPassword(login, password);
-
-			if (!passwordCheck) {
-				result = "Wrong password. Please, repeat";
-			} else {
-				result = "";
+			if (set.next()) {
+				result = false;
 			}
 
+		} catch (SQLException e) {
+			logger.error("Error in checkin login ", e);
+			throw new DaoException("Error in checkin login " + e);
+		} finally {
+
+			connectionPool.closeConnection(connection, statement, set);
+
 		}
 
 		return result;
 	}
-	
+
 	@Override
-	public String checkClient(String login) throws DaoException {
+	public boolean checkEmail(String email) throws DaoException {
+		boolean result = true;
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet set = null;
 
-		boolean loginCheck = checkLogin(login);
-		boolean emailCheck = checkEmail(login);
-		boolean phoneCheck = checkPhone(login);
+		connection = connectionPool.takeConnection();
 
-		String result = "This username / email / phone number is not registered in the system";
+		String sql = STRING_CHECK_USER_EMAIL + email + LAST_PART_FOR_SELECT_STATEMENT;
 
-		if (loginCheck || emailCheck || phoneCheck) {		
-				result = "";
+		try {
+			statement = connection.createStatement();
+			set = statement.executeQuery(sql);
+			if (email != "" && set.next()) {
+				result = false;
+			}
+
+		} catch (SQLException e) {
+			logger.error("Error in checkin email ", e);
+			throw new DaoException("Error in checkin email " + e);
+
+		} finally {
+
+			connectionPool.closeConnection(connection, statement, set);
+
 		}
 
 		return result;
 	}
-	
+
+	@Override
+	public boolean checkPhone(String phone) throws DaoException {
+		boolean result = true;
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet set = null;
+
+		connection = connectionPool.takeConnection();
+
+		String sql = STRING_CHECK_USER_PHONE + phone + LAST_PART_FOR_SELECT_STATEMENT;
+
+		try {
+			statement = connection.createStatement();
+			set = statement.executeQuery(sql);
+			if (phone != "" && set.next()) {
+				result = false;
+			}
+
+		} catch (SQLException e) {
+			logger.error("Error in checkin phone", e);
+			throw new DaoException("Error in checkin phone " + e);
+		} finally {
+
+			connectionPool.closeConnection(connection, statement, set);
+
+		}
+
+		return result;
+	}
+
+	@Override
+	public boolean checkPassword(String login, String password) throws DaoException {
+		boolean result = true;
+
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet set = null;
+
+		connection = connectionPool.takeConnection();
+
+		String sql = STRING_CHECK_USER_PASSWORD_LOGIN + login + STRING_CHECK_USER_PASSWORD_EMAIL + login
+				+ STRING_CHECK_USER_PASSWORD_PHONE + login + LAST_PART_FOR_SELECT_STATEMENT;
+
+		try {
+			statement = connection.createStatement();
+			set = statement.executeQuery(sql);
+
+			if (set.next()) {
+				String givingPassword = set.getString(3);
+
+				if (password.equals(givingPassword)) {
+
+					result = false;
+				}
+			}
+
+		} catch (SQLException e) {
+			logger.error("Error in checkin password ", e);
+			throw new DaoException("Error in checkin password " + e);
+		} finally {
+
+			connectionPool.closeConnection(connection, statement, set);
+
+		}
+
+		return result;
+	}
+
 	@Override
 	public String findPasswordByUserId(int idUser) throws DaoException {
 		String password = "";
@@ -175,24 +239,22 @@ public class UserDaoImpl implements UserDao {
 			connectionPool.closeConnection(connection, statement, set);
 
 		}
-		
+
 		return password;
 	}
-	
-	
+
 	@Override
 	public void updatePassword(int idUser, String newPassword) throws DaoException {
 		Connection connection = null;
 		PreparedStatement ps = null;
- 		try {
+		try {
 			connection = connectionPool.takeConnection();
-			
-			String sql = STRING_UPDATE_PASWORD + idUser+ STRING_DELETE_USER2;
-					
+
+			String sql = STRING_UPDATE_PASWORD + idUser + STRING_DELETE_USER2;
+
 			ps = connection.prepareStatement(sql);
 
 			ps.setString(1, newPassword);
-			
 
 			ps.executeUpdate();
 
@@ -204,50 +266,7 @@ public class UserDaoImpl implements UserDao {
 		finally {
 			connectionPool.closeConnection(connection, ps);
 		}
-		
-	}
-	/**
-	 * checks if the password was entered by the user with the given login, or email, or phone number
-	 * @param login user's login or email or phone
-	 * @param password user's password
-	 * @return is password right or not
-	 * @@throws DaoException {@link DaoException}
-	 */
-	private boolean checkPassword(String login, String password) throws DaoException {
-		boolean result = false;
 
-		Connection connection = null;
-		Statement statement = null;
-		ResultSet set = null;
-
-		connection = connectionPool.takeConnection();
-
-		String sql = STRING_CHECK_USER_PASSWORD_LOGIN + login + STRING_CHECK_USER_PASSWORD_EMAIL + login
-				+ STRING_CHECK_USER_PASSWORD_PHONE + login + LAST_PART_FOR_SELECT_STATEMENT;
-
-		try {
-			statement = connection.createStatement();
-			set = statement.executeQuery(sql);
-
-			if (set.next()) {
-				String givingPassword = set.getString(3);
-
-				if (password.equals(givingPassword)) {
-
-					result = true;
-				}
-			}
-
-		} catch (SQLException e) {
-			logger.error("Error in checkin password ", e);
-			throw new DaoException("Error in checkin password " + e);
-		} finally {
-
-			connectionPool.closeConnection(connection, statement, set);
-
-		}
-
-		return result;
 	}
 
 	@Override
@@ -261,7 +280,8 @@ public class UserDaoImpl implements UserDao {
 
 		connection = connectionPool.takeConnection();
 
-		String sql = STRING_CHECK_USER_PASSWORD_LOGIN + login + STRING_CHECK_USER_PASSWORD_EMAIL + login + STRING_CHECK_USER_PASSWORD_PHONE + login + LAST_PART_FOR_SELECT_STATEMENT;
+		String sql = STRING_CHECK_USER_PASSWORD_LOGIN + login + STRING_CHECK_USER_PASSWORD_EMAIL + login
+				+ STRING_CHECK_USER_PASSWORD_PHONE + login + LAST_PART_FOR_SELECT_STATEMENT;
 
 		try {
 			statement = connection.createStatement();
@@ -308,7 +328,7 @@ public class UserDaoImpl implements UserDao {
 
 		} catch (SQLException e) {
 			logger.error("Error in finding userRole ", e);
-			throw new DaoException("Error in finding userRole ",  e);
+			throw new DaoException("Error in finding userRole ", e);
 
 		} finally {
 
@@ -350,19 +370,17 @@ public class UserDaoImpl implements UserDao {
 		}
 		return login;
 	}
-	
-	
+
 	@Override
 	public User takePhoneEmailFromDb(int id) throws DaoException {
 		User user = new User();
-		
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet set = null;
 
 		connection = connectionPool.takeConnection();
 
-		String sql = STRING_FIND_PHONE_EMAIL_BY_ID+ id + STRING_FIND_PHONE_EMAIL_BY_ID_LAST_PART;
+		String sql = STRING_FIND_PHONE_EMAIL_BY_ID + id + STRING_FIND_PHONE_EMAIL_BY_ID_LAST_PART;
 
 		try {
 			statement = connection.createStatement();
@@ -370,7 +388,7 @@ public class UserDaoImpl implements UserDao {
 
 			String email = "";
 			String phone = "";
-			
+
 			if (set.next()) {
 				email = set.getString(1);
 				phone = set.getString(2);
@@ -379,7 +397,6 @@ public class UserDaoImpl implements UserDao {
 			user.setUserId(id);
 			user.setEmail(email);
 			user.setPhone(phone);
-			
 
 		} catch (SQLException e) {
 			logger.error("Error in finding email/phone", e);
@@ -392,24 +409,22 @@ public class UserDaoImpl implements UserDao {
 		}
 		return user;
 	}
-	
+
 	@Override
 	public void updateEmailPhone(User user) throws DaoException {
 		Connection connection = null;
 		PreparedStatement ps = null;
- 
 
 		try {
 			connection = connectionPool.takeConnection();
 			int id = user.getUserId();
 
 			String sql = STRING_TO_UPDATE_EMAIL_PHONE + id + STRING_FIND_PHONE_EMAIL_BY_ID_LAST_PART;
-					
+
 			ps = connection.prepareStatement(sql);
 
 			ps.setString(1, user.getEmail());
 			ps.setString(2, user.getPhone());
-			
 
 			ps.executeUpdate();
 
@@ -421,10 +436,8 @@ public class UserDaoImpl implements UserDao {
 		finally {
 			connectionPool.closeConnection(connection, ps);
 		}
-		
+
 	}
-	
-	
 
 	@Override
 	public void deleteUser(int userId) throws DaoException {
@@ -436,7 +449,6 @@ public class UserDaoImpl implements UserDao {
 			ps = connection.createStatement();
 
 			String sql = STRING_DELETE_USER + userId + STRING_DELETE_USER2;
-	
 
 			ps.executeUpdate(sql);
 
@@ -451,115 +463,5 @@ public class UserDaoImpl implements UserDao {
 
 		}
 	}
-/**
- * checks during logination if a user with such login exists in the magichotel.users table
- * @param login user's login
- * @return does such user's login exist
- * @throws DaoException {@link DaoException}
- */
-	private boolean checkLogin(String login) throws DaoException {
-		boolean result = false;
-
-		Connection connection = null;
-		Statement statement = null;
-		ResultSet set = null;
-
-		connection = connectionPool.takeConnection();
-
-		String sql = STRING_CHECK_USER_LOGIN + login + STRING_CHECK_USER_LOGIN2;
-		
-		try {
-			statement = connection.createStatement();
-			set = statement.executeQuery(sql);
-
-			if (set.next()) {
-				result = true;
-			}
-
-		} catch (SQLException e) {
-			logger.error("Error in checkin login ", e);
-			throw new DaoException("Error in checkin login " + e);
-		} finally {
-
-			connectionPool.closeConnection(connection, statement, set);
-
-		}
-
-		return result;
-	}
-	
-	/**
-	 * checks during logination if a user with such email exists in the magichotel.users table
-	 * @param login user's login
-	 * @return does such user's login exist
-	 * @throws DaoException {@link DaoException}
-	 */
-
-	private boolean checkEmail(String email) throws DaoException {
-		boolean result = false;
-		Connection connection = null;
-		Statement statement = null;
-		ResultSet set = null;
-
-		connection = connectionPool.takeConnection();
-
-		String sql = STRING_CHECK_USER_EMAIL + email + LAST_PART_FOR_SELECT_STATEMENT;
-
-		try {
-			statement = connection.createStatement();
-			set = statement.executeQuery(sql);
-			if (email != "" && set.next()) {
-				result = true;
-			}
-
-		} catch (SQLException e) {
-			logger.error("Error in checkin email ", e);
-			throw new DaoException("Error in checkin email " + e);
-
-		} finally {
-
-			connectionPool.closeConnection(connection, statement, set);
-
-		}
-
-		return result;
-	}
-
-	/**
-	 * checks during logination if a user with such phone exists in the magichotel.users table
-	 * @param login user's login
-	 * @return does such user's login exist
-	 * @throws DaoException {@link DaoException}
-	 */
-	private boolean checkPhone(String phone) throws DaoException {
-		boolean result = false;
-		Connection connection = null;
-		Statement statement = null;
-		ResultSet set = null;
-
-		connection = connectionPool.takeConnection();
-
-		String sql = STRING_CHECK_USER_PHONE + phone + LAST_PART_FOR_SELECT_STATEMENT;
-
-		try {
-			statement = connection.createStatement();
-			set = statement.executeQuery(sql);
-			if (phone != "" && set.next()) {
-				result = true;
-			}
-
-		} catch (SQLException e) {
-			logger.error("Error in checkin phone", e);
-			throw new DaoException("Error in checkin phone " + e);
-		} finally {
-
-			connectionPool.closeConnection(connection, statement, set);
-
-		}
-
-		return result;
-	}
-
-	
 
 }

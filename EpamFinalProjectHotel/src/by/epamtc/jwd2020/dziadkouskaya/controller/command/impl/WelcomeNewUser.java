@@ -13,6 +13,7 @@ import by.epamtc.jwd2020.dziadkouskaya.bean.Country;
 import by.epamtc.jwd2020.dziadkouskaya.bean.User;
 import by.epamtc.jwd2020.dziadkouskaya.bean.UserDetail;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.Command;
+import by.epamtc.jwd2020.dziadkouskaya.controller.command.ParametrName;
 import by.epamtc.jwd2020.dziadkouskaya.service.CountryService;
 import by.epamtc.jwd2020.dziadkouskaya.service.RoomCategoryService;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceException;
@@ -23,7 +24,7 @@ import by.epamtc.jwd2020.dziadkouskaya.service.UserdetailService;
 public class WelcomeNewUser implements Command {
 	public static final ClientCategory DEFAULT_CLIENT_CATEGORY = new ClientCategory(1, "Клиент-заказчик");
 	public static final String PATH_TO_PERSONAL_DATA_PAGE = "/WEB-INF/jspPages/client_personal_data_page.jsp";
-	public static final String PATH_TO_BOOKING_PAGE = "/WEB-INF/jspPages/client_booking_page.jsp";
+
 
 	private ServiceProvider serviceProvider = ServiceProvider.getInstance();
 	private CountryService countryService = serviceProvider.getCountryService();
@@ -33,7 +34,9 @@ public class WelcomeNewUser implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		String address = ParametrName.UPDATE_USER_DETAILS.toString();
+		request.setAttribute("address", address);
+		
 		try {
 			int id = (Integer)request.getSession().getAttribute("user_code");
 			//country list for selection 

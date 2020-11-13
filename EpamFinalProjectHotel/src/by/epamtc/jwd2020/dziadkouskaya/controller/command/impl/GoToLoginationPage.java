@@ -8,13 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.Command;
+import by.epamtc.jwd2020.dziadkouskaya.controller.command.ParametrName;
 
 public class GoToLoginationPage implements Command{
+	public static final String PATH_TO_LOGINATION = "/WEB-INF/jspPages/logination_page_repeat.jsp";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jspPages/logination_page.jsp");
-		requestDispatcher.forward(request, response);
+		String address = ParametrName.GO_TO_LOGINATION_PAGE.toString();
+		request.setAttribute("address", address);
+		
+		request.getRequestDispatcher(PATH_TO_LOGINATION).forward(request, response);
 
 	}
 

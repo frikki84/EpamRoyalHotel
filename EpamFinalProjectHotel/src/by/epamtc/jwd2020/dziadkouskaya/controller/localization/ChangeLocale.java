@@ -20,9 +20,10 @@ public class ChangeLocale extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html");
 		
-		String local = request.getParameter("local");
-		System.out.println(local);
+
 		
+		String local = request.getParameter("local");
+				
 		request.getSession(true).setAttribute("local", local);
 
 		response.sendRedirect("mainPage?command=go_to_first_page");

@@ -2,7 +2,6 @@ package by.epamtc.jwd2020.dziadkouskaya.dao;
 
 import by.epamtc.jwd2020.dziadkouskaya.dao.impl.BookingDaoImpl;
 import by.epamtc.jwd2020.dziadkouskaya.dao.impl.CountryDaoImpl;
-import by.epamtc.jwd2020.dziadkouskaya.dao.impl.RoleDaoImpl;
 import by.epamtc.jwd2020.dziadkouskaya.dao.impl.RoomCategoryDaoImpl;
 import by.epamtc.jwd2020.dziadkouskaya.dao.impl.RoomCategoryPriceDaoImpl;
 import by.epamtc.jwd2020.dziadkouskaya.dao.impl.UserDaoImpl;
@@ -12,7 +11,6 @@ public class DaoProvider {
 	private static final DaoProvider instance = new DaoProvider();
 	
 	private final UserDao userDao = new UserDaoImpl();
-	private final RoleDao roleDao = new RoleDaoImpl();
 	private final CountryDao countryDao = new CountryDaoImpl();
 	private final UserDetailDao userDetailDao = new UserDetailDaoImpl();
 	private final RoomCategoryDao roomCategoryDao = new RoomCategoryDaoImpl();
@@ -30,11 +28,6 @@ public class DaoProvider {
 	}
 
 
-	public RoleDao getRoleDao() {
-		return roleDao;
-	}
-	
-	
 	public CountryDao getCountryDao() {
 		return countryDao;
 	}

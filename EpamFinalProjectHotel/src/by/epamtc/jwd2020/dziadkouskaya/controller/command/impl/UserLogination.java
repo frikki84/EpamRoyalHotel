@@ -26,13 +26,7 @@ public class UserLogination implements Command {
 	public static final String PATH_TO_LOGINATION_FORM_TO_CORRECT_INFO = "/WEB-INF/jspPages/logination_page_repeat.jsp";
 	public static final String PATH_TO_BOOKING_PAGE = "/WEB-INF/jspPages/client_booking_page.jsp";
 	public static final String PATH_TO_ADMIN_PAGE = "/WEB-INF/jspPages/admin_client_check_in.jsp";
-	/*
-	 * public static final ClientCategory DEFAULT_CLIENT_CATEGORY = new
-	 * ClientCategory(1, "Клиент-заказчик");
-	 */
-
 	private static ServiceProvider serviceProvider = ServiceProvider.getInstance();
-	
 
 	private UserService userService = serviceProvider.getUserService();
 	private CountryService countryService = serviceProvider.getCountryService();
@@ -44,13 +38,12 @@ public class UserLogination implements Command {
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 
-
 		String resultString = null;
 
 		try {
 			resultString = userService.checkUserForLogination(login, password);
 
-			if (!resultString.equals(LOGIN_PASSWORD_WAS_FOUND_IN_DB)) {
+			if (resultString.equals(LOGIN_PASSWORD_WAS_FOUND_IN_DB)) {
 				request.getSession(true).setAttribute("answerLogination", resultString);
 
 				request.getRequestDispatcher(PATH_TO_LOGINATION_FORM_TO_CORRECT_INFO).forward(request, response);
@@ -61,24 +54,17 @@ public class UserLogination implements Command {
 
 				request.getSession(true).setAttribute("user_code", id);
 				request.getSession().setAttribute("name", login);
-				
 
 				String userRole = userService.findUserRole(login);
 
 				if (userRole.equalsIgnoreCase("администратор")) {
 					request.getRequestDispatcher(PATH_TO_ADMIN_PAGE).forward(request, response);
 
-					/*
-					 * } else if (userRole.equalsIgnoreCase("директор")) {
-					 * 
-					 * } else if (userRole.equalsIgnoreCase("суперадмин")) {
-					 */
-
 				} else {
-				
-					List<Integer>roomCapasityList = roomCategoryService.createRoomCategoryList();
+
+					List<Integer> roomCapasityList = roomCategoryService.createRoomCategoryList();
 					request.setAttribute("room_capacity", roomCapasityList);
-					
+
 					request.getRequestDispatcher(PATH_TO_BOOKING_PAGE).forward(request, response);
 				}
 

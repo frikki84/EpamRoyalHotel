@@ -78,14 +78,18 @@
 							role="button" aria-haspopup="true" aria-expanded="false">${language_button}</a>
 							<ul class="dropdown-menu">
 								<li class="nav-item">
-									<form action="localization" method="post">
-										<input type="hidden" name="local" value="en"> <input
-											type="submit" value="${language_button_en}" class="nav-link" />
+									<form action="mainPage" method="post">
+										<input type="hidden" name="command" value="locale_change">
+										<input type="hidden" name="local" value="en"> 
+										<input type="hidden" name="address" value="${address}"> 
+										<input type="submit" value="${language_button_en}" class="nav-link" />
 									</form>
 								</li>
 								<li class="nav-item">
-									<form action="localization" method="post">
+									<form action="mainPage" method="post">
+										<input type="hidden" name="command" value="locale_change">
 										<input type="hidden" name="local" value="ru"> <input
+											type="hidden" name="address" value="${address}"> <input
 											type="submit" value="${language_button_ru}" class="nav-link" />
 									</form>
 								</li>

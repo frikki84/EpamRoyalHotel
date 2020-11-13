@@ -17,27 +17,14 @@ public interface UserDao {
 
 	public void addUser(User user) throws DaoException;
 
-	/**
-	 * check before registration user's login, email or phone
-	 * 
-	 * @param user 
-	 * @return a string with information about whether a user with such a login,
-	 * email or phone number exists in the database or not
-	 * @throws DaoException {@link DaoException}
-	 */
-	public String checkUser(User user) throws DaoException;
-	/**
-	 * checks during logination if a user exists in the database table with such a login, 
-	 * email or phone number, then checks the correctness of the entered password
-	 * @param login - String with login or email or phone
-	 * @param password - String with password
-	 * @return a string with information about whether a user with such a login,
-	 * email or phone number exists in the database and is entered password right
-	 * @throws DaoException  {@link DaoException}
-	 */
-
-	public String checkUserInLogination(String login, String password) throws DaoException;
-
+	public boolean checkLogin(String login) throws DaoException;
+	
+	public boolean checkEmail(String email) throws DaoException;
+	
+	public boolean checkPhone(String phone) throws DaoException;
+	
+	public boolean checkPassword(String login, String password) throws DaoException;
+	
 	/**
 	 * find user id by given user's login
 	 * @param login String with login
@@ -84,13 +71,7 @@ public interface UserDao {
 
 	public void deleteUser(int userId) throws DaoException;
 
-	/**
-	 * the administrator checks if the client exists with a login, email or phone numbers in the database
-	 * @param login String client's login, email, phone
-	 * @return String with information about existing user
-	 * @throws DaoException{@link DaoException}
-	 */
-	public String checkClient(String login) throws DaoException;
+	
 	/**
 	 * find user's password from magichotel.users by given user's id 
 	 * @param idUser int user's id

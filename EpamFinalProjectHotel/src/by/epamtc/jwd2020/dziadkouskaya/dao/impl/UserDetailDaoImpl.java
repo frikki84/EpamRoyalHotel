@@ -66,10 +66,7 @@ public class UserDetailDaoImpl implements UserDetailDao {
 				userDetail.setThirdName(set.getString(5));
 				userDetail.setFirstNameEnglish(set.getString(6));
 				userDetail.setSecondNameEnglish(set.getString(7));
-
 				userDetail.setBirthDate(set.getDate(8));
-				// System.out.println("Date from DB " + set.getDate(8));
-
 				userDetail.setPassportNumber(set.getString(9));
 				userDetail.setPassportId(set.getString(10));
 				userDetail.setPassportOtherInfo(set.getString(11));

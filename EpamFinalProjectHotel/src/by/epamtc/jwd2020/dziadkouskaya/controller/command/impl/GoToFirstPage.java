@@ -13,17 +13,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import by.epamtc.jwd2020.dziadkouskaya.bean.RoomCategory;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.Command;
+import by.epamtc.jwd2020.dziadkouskaya.controller.command.CommandProvider;
+import by.epamtc.jwd2020.dziadkouskaya.controller.command.ParametrName;
 import by.epamtc.jwd2020.dziadkouskaya.service.PriceService;
 import by.epamtc.jwd2020.dziadkouskaya.service.RoomCategoryService;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceException;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceProvider;
 
 public class GoToFirstPage implements Command {
+	public static final String PATH_TO_FIRST_PAGE = "/WEB-INF/jspPages/first_page.jsp";
+	
+	
 	private static ServiceProvider seviceProvider = ServiceProvider.getInstance();
 	private PriceService priceService = seviceProvider.getPriceService();
 	private RoomCategoryService roomCategoryService = seviceProvider.getRoomCategoryService();
-
-	public static final String PATH_TO_FIRST_PAGE = "/WEB-INF/jspPages/first_page.jsp";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,7 +53,10 @@ public class GoToFirstPage implements Command {
 			categoryPriceMap = priceService.findPriceForGivenCategoryes(categoryList);
 
 			request.setAttribute("map", categoryPriceMap);
-
+			
+			String adress = ParametrName.GO_TO_FIRST_PAGE.toString();
+			request.setAttribute("address", adress);
+						
 			request.getRequestDispatcher(PATH_TO_FIRST_PAGE).forward(request, response);
 
 		} catch (ServiceException e) {
