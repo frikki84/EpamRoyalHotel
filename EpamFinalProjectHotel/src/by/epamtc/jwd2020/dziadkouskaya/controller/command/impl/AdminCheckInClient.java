@@ -61,6 +61,9 @@ public class AdminCheckInClient implements Command {
 			
 			int guestNumber = bookingService.findGuestNumberWithoutUser(bookingId);
 			request.setAttribute("guest_number", guestNumber);
+			
+			double sumToPay = bookingService.findFinalBookingSum(bookingId);
+			request.setAttribute("sum_to_pay", sumToPay);
 
 			request.getRequestDispatcher(ADMIN_CLIENT_PAGE).forward(request, response);
 

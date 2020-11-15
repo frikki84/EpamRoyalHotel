@@ -24,7 +24,7 @@ public class UserRegistration implements Command {
 	public static final String STRING_FROM_DAO_IF_USER_WAS_NOT_FOUND_IN_DB = "";
 	public static final String PATH_TO_PERSONAL_DATA_PAGE = "/WEB-INF/jspPages/registration_repeat.jsp";
 	public static final String PATH_TO_WELCOME_PAGE = "mainPage?command=welcome_new_user";
-	public static final String PATH_TO_ERROR_PAGE = "mainPage?command = go_to_error_page";
+	public static final String PATH_TO_ERROR_PAGE = "mainPage?command=error_page";
 
 	private static final Logger logger = LogManager.getLogger(UserRegistration.class);
 
@@ -42,6 +42,7 @@ public class UserRegistration implements Command {
 		String passwordRepeat;
 		
 		try {
+			
 			login = request.getParameter("login");
 
 			email = request.getParameter("email");
@@ -49,9 +50,7 @@ public class UserRegistration implements Command {
 			password = request.getParameter("password");
 			passwordRepeat = request.getParameter("passwordRepeat");
 			
-			System.out.println(login + "  " + email + "  " + password + "  " + passwordRepeat);
-
-			if (!userService.checkNewUserPassword(password, passwordRepeat)) {
+		if (!userService.checkNewUserPassword(password, passwordRepeat)) {
 
 				request.setAttribute("resultAnswer", MSG_ABOUT_WRONG_PASSWORD);
 
@@ -60,14 +59,13 @@ public class UserRegistration implements Command {
 			} else {
 
 				User user = new User(login, passwordRepeat, email, phone, DEFAULTE_USER_ROLE);
-				
+			
 				String checkingResult = userService.checkInfoFromDB(user);
 				
-				System.out.println("checking " + checkingResult);
-
+				request.setAttribute("resultAnswer", checkingResult);
+				
+				
 				if (checkingResult == null || !checkingResult.equals(STRING_FROM_DAO_IF_USER_WAS_NOT_FOUND_IN_DB)) {
-
-					request.setAttribute("resultAnswer", checkingResult);
 
 					request.getRequestDispatcher(PATH_TO_PERSONAL_DATA_PAGE).forward(request, response);
 
@@ -79,8 +77,8 @@ public class UserRegistration implements Command {
 					userDetailService.addNewUserDetails(id);
 
 					request.getSession(true).setAttribute("user_code", id);
-
-					response.sendRedirect("mainPage?command=welcome_new_user");
+					
+					response.sendRedirect(PATH_TO_WELCOME_PAGE);
 
 				}
 			}

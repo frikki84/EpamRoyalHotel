@@ -38,7 +38,6 @@
 	var="language_button_en" />
 <fmt:message bundle="${loc}" key="language_button_ru"
 	var="language_button_ru" />
-<fmt:message bundle="${loc}" key="gallery_buttom" var="gallery_buttom" />
 <fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
 <fmt:message bundle="${loc}" key="lema_away_from_monotorios"
 	var="lema_away_from_monotorios" />
@@ -63,6 +62,7 @@
 </head>
 
 <body>
+
 	<header class="header_area">
 		<div class="container">
 			<nav class="navbar navbar-expand-lg navbar-light">

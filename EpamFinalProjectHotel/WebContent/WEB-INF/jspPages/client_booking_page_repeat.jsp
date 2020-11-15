@@ -26,123 +26,184 @@
 	var="booking_children" />
 <fmt:message bundle="${loc}" key="booking_find_roon"
 	var="booking_find_roon" />
+<fmt:message bundle="${loc}" key="home_button" var="home_button" />
+<fmt:message bundle="${loc}" key="language_button" var="language_button" />
+<fmt:message bundle="${loc}" key="language_button_en"
+	var="language_button_en" />
+<fmt:message bundle="${loc}" key="language_button_ru"
+	var="language_button_ru" />
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Booking page</title>
-<!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
-<!-- <link rel="stylesheet" href="vendors/linericon/style.css">
+
+<!-- <link rel="stylesheet" href="css/Personal_data_style.css" /> -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="vendors/linericon/style.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
 <link rel="stylesheet"
 	href="vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
-<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css"> -->
-
-<!-- <link rel="stylesheet" href="css/style.css"> -->
-<link rel="stylesheet" href="css/Personal_data_style.css">
-<!-- <link rel="stylesheet" href="css/responsive.css"> -->
-
-
+<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
+<!-- main css -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="icon" href="image/favicon.png" type="image/png">
 </head>
 <body>
-	<div class="container">
+	<div class="main_container">
+		<header class="header_area">
+			<div class="container">
+				<nav class="navbar navbar-expand-lg navbar-light">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<a class="navbar-brand logo_h" href="index.html"><img
+						src="image/Logo.png" alt=""></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse offset"
+						id="navbarSupportedContent">
+						<ul class="nav navbar-nav menu_nav ml-auto">
+							<li class="nav-item active"><a class="nav-link"
+								href="index.jsp">${home_button}</a></li>
+							<li class="nav-item submenu dropdown"><a href="#"
+								class="nav-link dropdown-toggle" data-toggle="dropdown"
+								role="button" aria-haspopup="true" aria-expanded="false">${language_button}</a>
+								<ul class="dropdown-menu">
+									<li class="nav-item">
+										<form action="mainPage" method="post">
+											<input type="hidden" name="command" value="locale_change">
+											<input type="hidden" name="local" value="en"> <input
+												type="hidden" name="address" value="${address}"> <input
+												type="submit" value="${language_button_en}" class="nav-link" />
+										</form>
+									</li>
+									<li class="nav-item">
+										<form action="mainPage" method="post">
+											<input type="hidden" name="command" value="locale_change">
+											<input type="hidden" name="local" value="ru"> <input
+												type="hidden" name="address" value="${address}"> <input
+												type="submit" value="${language_button_ru}" class="nav-link" />
+										</form>
+									</li>
 
-		<div class="view-account">
-
-			<div class="side-bar">
-
-				<div class="user-info">
-					<img class="img-profile img-circle img-responsive center-block"
-						src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-					<div class="meta list list-unstyled">
-						<c:out value="${name}"></c:out>
-
+								</ul></li>
+							<li class="nav-item"><a class="nav-link" href="contacts.jsp">${contact_buttom}</a></li>
+						</ul>
 					</div>
-
-
-				</div>
-				<nav class="side-menu">
-					<ul class="nav">
-
-						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" value="update_user_details" /> <input
-									type="submit" value="${client_dp_profile}" class="nonactive" />
-							</form>
-						</li>
-
-						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="BOOKING_PAGE" /> <input
-									type="submit" value="${client_dp_book}" class="active" />
-							</form>
-						</li>
-
-						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" value="welcome_new_user" /> <input
-									type="submit" value="${client_dp_history}" class="nonactive" />
-							</form>
-						</li>
-
-						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" value="welcome_new_user" /> <input
-									type="submit" value="${client_dp_exit}" class="nonactive" />
-							</form>
-						</li>
-
-					</ul>
 				</nav>
 			</div>
-		</div>
-		<div class="view-account_big">
+		</header>
+		<section class="banner_area">
+			<div class="booking_table d_flex align-items-center">
+				<div class="overlay bg-parallax" data-stellar-ratio="0.9"
+					data-stellar-vertical-offset="0" data-background=""
+					style="transform: translateY(-0.017054px);"></div>
+				<div class="container">
 
-			<div class="hotel_booking_table">
+					<div class="view-account">
 
-				<div class="col-md-3_my">
-					<h1>${wrong_date}</h1>
+						<div class="side-bar">
+
+							<div class="user-info">
+								<img class="img-profile img-circle img-responsive center-block"
+									src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+								<div class="my_table_title">
+									<c:out value="${name}"></c:out>
+
+								</div>
+
+
+							</div>
+							<nav class="side-menu">
+								<ul class="nav">
+
+									<li>
+										<form action="mainPage" method="post">
+											<input type="hidden" value="update_user_details" /> <input
+												type="submit" value="${client_dp_profile}" class="nonactive" />
+										</form>
+									</li>
+
+									<li>
+										<form action="mainPage" method="post">
+											<input type="hidden" name="command" value="BOOKING_PAGE" />
+											<input type="submit" value="${client_dp_book}" class="active" />
+										</form>
+									</li>
+
+									<li>
+										<form action="mainPage" method="post">
+											<input type="hidden" value="booking_history" /> <input
+												type="submit" value="${client_dp_history}" class="nonactive" />
+										</form>
+									</li>
+
+									<li>
+										<form action="mainPage" method="post">
+											<input type="hidden" value="welcome_new_user" /> <input
+												type="submit" value="${client_dp_exit}" class="nonactive" />
+										</form>
+									</li>
+
+								</ul>
+							</nav>
+						</div>
+					</div>
+					<div class="view-account_big">
+						<div class="col-md-3_my" color = "red">
+								<h1>${wrong_date}</h1>
+							</div>
+
+						<div class="hotel_booking_table">
+
+
+
+							<div class="col-md-3_my">
+								<h2>${booking_title}</h2>
+							</div>
+
+							<form action="mainPage" method="post" class="form-group_my">
+
+								<input type="hidden" name="command" value="result_booking_list" />
+
+								<div class="col-md-3_my">${booking_arravial}</div>
+								<input type="date" placeholder="${booking_date}"
+									class='input-group-addon' name="startDate" />
+
+								<div class="col-md-3_my">${booking_depatchure}</div>
+								<input type="date" placeholder="${booking_date}"
+									class='input-group-addon' name="endDate" />
+
+								<div class="col-md-3_my">${booking_adult}</div>
+
+								<select class="col-sm-10" name="peopleNumber">
+									<c:forEach items="${room_capacity}" var="item">
+										<option value="${item}">${item}</option>
+									</c:forEach>
+								</select>
+
+								<div class="col-md-3_my">${booking_children}</div>
+
+								<select name="childrenNumber" class="col-sm-10">
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+								</select> <br /> <input type="submit" value="${booking_find_roon}" />
+
+							</form>
+						</div>
+
+					</div>
 				</div>
-
-				<div class="col-md-3_my">
-					<h2>${booking_title}</h2>
-				</div>
-
-				<form action="mainPage" method="post" class="form-group_my">
-
-					<input type="hidden" name="command" value="result_booking_list" />
-
-					<div class="col-md-3_my">${booking_arravial}</div>
-					<input type="text" placeholder="${booking_date}"
-						class='input-group-addon' name="startDate" />
-
-					<div class="col-md-3_my">${booking_depatchure}</div>
-					<input type="text" placeholder="${booking_date}"
-						class='input-group-addon' name="endDate" />
-
-					<div class="col-md-3_my">${booking_adult}</div>
-
-					<select class="col-sm-10" name="peopleNumber">
-						<c:forEach items="${room_capacity}" var="item">
-							<option value="${item}">${item}</option>
-						</c:forEach>
-					</select>
-
-					<div class="col-md-3_my">${booking_children}</div>
-
-					<select name="childrenNumber" class="col-sm-10">
-						<option value="0">0</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-					</select> <br /> <input type="submit" value="${booking_find_roon}" />
-
-				</form>
 			</div>
-
-		</div>
+		</section>
 	</div>
 
 

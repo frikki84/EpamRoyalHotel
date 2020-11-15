@@ -19,7 +19,7 @@ import by.epamtc.jwd2020.dziadkouskaya.service.UserdetailService;
 public class AdminUserBooking implements Command {
 	public static final String DEFAULT_STRING_IF_USER_LOGIN_WAS_FIND_IN_DB = "";
 	public static final String PATH_TO_CLIENT_BOOKING_PAGE = "/WEB-INF/jspPages/admin_client_booking.jsp";
-	public static final String PATH_TO_PAGE_REPEAT_LOGIN = "/WEB-INF/jspPages/admin_client_check_in_wrong_login.jsp";
+	public static final String PATH_TO_PAGE_REPEAT_LOGIN = "/WEB-INF/jspPages/admin_client_check_in.jsp";
 
 	
 	private static ServiceProvider serviceProvider = ServiceProvider.getInstance();

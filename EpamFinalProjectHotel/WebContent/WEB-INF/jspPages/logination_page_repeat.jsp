@@ -25,6 +25,13 @@
 	var="log_form_forgot_password" />
 <fmt:message bundle="${loc}" key="log_form_create_account"
 	var="log_form_create_account" />
+<fmt:message bundle="${loc}" key="home_button" var="home_button" />
+<fmt:message bundle="${loc}" key="language_button" var="language_button" />
+<fmt:message bundle="${loc}" key="language_button_en"
+	var="language_button_en" />
+<fmt:message bundle="${loc}" key="language_button_ru"
+	var="language_button_ru" />
+<fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
 
 
 
@@ -104,11 +111,9 @@
 						<h3 class="text-center">${log_form_title}</h3>
 
 						<div class="wrong_password">
-							<c:out value="${sessionScope.answerLogination}"></c:out>
+							<c:out value="${answerLogination}"></c:out>
 
 						</div>
-
-
 						<form class="form" action="mainPage" method="post">
 
 							<input type="hidden" name="command" value="user_logination" />
@@ -129,7 +134,7 @@
 
 							<div class="text-center col-xs-12">
 
-								<input type="submit" class="btn btn-default"
+								<input type="submit" class="my_table_booking_submit"
 									value="${log_form_login}" />
 							</div>
 
@@ -141,7 +146,7 @@
 					</div> --%>
 
 						</form>
-						<form action="" class="text-center">
+						<form action="mainPage" method="post">
 							<input type="hidden" name="command"
 								value="go_to_registration_page" /> <input type="submit"
 								value="${log_form_create_account}" />

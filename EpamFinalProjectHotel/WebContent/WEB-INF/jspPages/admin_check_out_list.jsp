@@ -68,46 +68,121 @@
 
 <fmt:message bundle="${loc}" key="admin_client_booking_status"
 	var="admin_client_booking_status" />
-
+<fmt:message bundle="${loc}" key="admin_check_out_status"
+	var="admin_check_out_status" />
+	
+<fmt:message bundle="${loc}" key="admin_check_out_enter_date"
+	var="admin_check_out_enter_date" />
 
 <fmt:message bundle="${loc}" key="booking_history_pay"
 	var="booking_history_pay" />
+<fmt:message bundle="${loc}" key="home_button" var="home_button" />
+<fmt:message bundle="${loc}" key="language_button" var="language_button" />
+<fmt:message bundle="${loc}" key="language_button_en"
+	var="language_button_en" />
+<fmt:message bundle="${loc}" key="language_button_ru"
+	var="language_button_ru" />
+<fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
 
 
 
-<link rel="stylesheet" href="css/Personal_data_style.css" />
+
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="vendors/linericon/style.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
+<link rel="stylesheet"
+	href="vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
+<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
+<!-- main css -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="icon" href="image/favicon.png" type="image/png">
 
 </head>
 <body>
-	<div class="container">
-		<div class="view-account">
+	<header class="header_area">
+		<div class="container">
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<a class="navbar-brand logo_h" href="index.html"><img
+					src="image/Logo.png" alt=""></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse offset"
+					id="navbarSupportedContent">
+					<ul class="nav navbar-nav menu_nav ml-auto">
+						<li class="nav-item active"><a class="nav-link"
+							href="index.jsp">${home_button}</a></li>
+						<li class="nav-item submenu dropdown"><a href="#"
+							class="nav-link dropdown-toggle" data-toggle="dropdown"
+							role="button" aria-haspopup="true" aria-expanded="false">${language_button}</a>
+							<ul class="dropdown-menu">
+								<li class="nav-item">
+									<form action="mainPage" method="post">
+										<input type="hidden" name="command" value="locale_change">
+										<input type="hidden" name="local" value="en"> <input
+											type="hidden" name="address" value="${address}"> <input
+											type="submit" value="${language_button_en}" class="nav-link" />
+									</form>
+								</li>
+								<li class="nav-item">
+									<form action="mainPage" method="post">
+										<input type="hidden" name="command" value="locale_change">
+										<input type="hidden" name="local" value="ru"> <input
+											type="hidden" name="address" value="${address}"> <input
+											type="submit" value="${language_button_ru}" class="nav-link" />
+									</form>
+								</li>
 
-			<div class="side-bar">
-
-				<div class="user-info">
-					<img class="img-profile img-circle img-responsive center-block"
-						src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-					<div class="meta list list-unstyled">
-						<c:out value="${name}"></c:out>
-
-					</div>
-
-
+							</ul></li>
+						<li class="nav-item"><a class="nav-link" href="contacts.jsp">${contact_buttom}</a></li>
+					</ul>
 				</div>
-				<nav class="side-menu">
-					<ul class="nav">
+			</nav>
+		</div>
+	</header>
+	<section class="banner_area">
+		<div class="booking_table d_flex align-items-center">
+			<div class="overlay bg-parallax" data-stellar-ratio="0.9"
+				data-stellar-vertical-offset="0" data-background=""
+				style="transform: translateY(-0.017054px);"></div>
+			<div class="container">
+				<div class="view-account">
 
-						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command"
-									value="ADMIN_FIND_USER_TO_CHECK_IN" /> <input type="submit"
-									value="${admin_navigate_checkin}" class="nonactive" />
-							</form>
-						</li>
+					<div class="side-bar">
 
-<%-- 						<li>
+						<div class="user-info">
+							<img class="img-profile img-circle img-responsive center-block"
+								src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+							<div class="my_table_title">
+								<c:out value="${name}"></c:out>
+
+							</div>
+						</div>
+
+						<nav class="side-menu">
+							<ul class="nav">
+
+								<li>
+									<form action="mainPage" method="post">
+										<input type="hidden" name="command"
+											value="ADMIN_FIND_USER_TO_CHECK_IN" /> <input type="submit"
+											value="${admin_navigate_checkin}" class="nonactive" />
+									</form>
+								</li>
+
+								<%-- 						<li>
 							<form action="mainPage" method="post">
 								<input type="hidden" name="command" value="" /> <input
 									type="submit" value="${admin_navigate_add_tax}"
@@ -115,31 +190,31 @@
 							</form>
 						</li> --%>
 
-						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="ADMIN_CHECK_OUT_LIST" />
-								<input type="submit" value="${admin_navigate_checkout}"
-									class="active" />
-							</form>
-						</li>
+								<li>
+									<form action="mainPage" method="post">
+										<input type="hidden" name="command"
+											value="ADMIN_CHECK_OUT_LIST" /> <input type="submit"
+											value="${admin_navigate_checkout}" class="nonactive" />
+									</form>
+								</li>
 
-						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="admin_cleaner_List" />
-								<input type="submit" value="${admin_navigate_check_living_info}"
-									class="nonactive" />
-							</form>
-						</li>
+								<li>
+									<form action="mainPage" method="post">
+										<input type="hidden" name="command" value="admin_cleaner_List" />
+										<input type="submit"
+											value="${admin_navigate_check_living_info}" class="nonactive" />
+									</form>
+								</li>
 
-						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="ADMIN_GO_TO_PRICES" /> <input
-									type="submit" value="${admin_navigate_change_taxes}"
-									class="nonactive" />
-							</form>
-						</li>
+								<li>
+									<form action="mainPage" method="post">
+										<input type="hidden" name="command" value="ADMIN_GO_TO_PRICES" />
+										<input type="submit" value="${admin_navigate_change_taxes}"
+											class="active" />
+									</form>
+								</li>
 
-<%-- 						<li>
+								<%-- 						<li>
 							<form action="mainPage" method="post">
 								<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
 								<input type="submit" value="${admin_navigate_change_admin_info}"
@@ -147,7 +222,7 @@
 							</form>
 						</li> --%>
 
-	<%-- 					<li>
+								<%-- 					<li>
 							<form action="mainPage" method="post">
 								<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
 								<input type="submit" value="${admin_navigate_add_admin}"
@@ -155,87 +230,84 @@
 							</form>
 						</li> --%>
 
-						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
-								<input type="submit" value="${admin_navigate_exit}"
-									class="nonactive" />
-							</form>
-						</li>
+								<li>
+									<form action="mainPage" method="post">
+										<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
+										<input type="submit" value="${admin_navigate_exit}"
+											class="nonactive" />
+									</form>
+								</li>
 
 
 
-					</ul>
-				</nav>
-			</div>
+							</ul>
+						</nav>
+					</div>
 
-		</div>
+				</div>
 
-		<div class="view-account_big">
-			<div class="row">
-
-				<form action="mainPage" method="post">
-					<input type="hidden" name="command"
-						value="ADMIN_CHECK_OUT_LIST_WITH_DATE" /> <input type="text"
-						name="date_check_out" placeholder="${date}" /> <input
-						type="submit" value="${admin_check_out_list_date}">
-
-				</form>
-				<br />
-
-				<div class="my_table_booking">
-
-					<table border="2">
-						<tr>
-							<th>${booking_resultlist_room}</th>
-							<th>${booking_history_startDate}</th>
-							<th>${booking_history_endDate}</th>
-							<th>${admin_check_out_list}</th>
-							<th></th>
-
-
-						</tr>
+				<div class="view-account_big">
+				<h2 class="my_table_title">${admin_check_out_enter_date}</h2>
+					<div class="row">
 
 						<form action="mainPage" method="post">
-							<input type="hidden" name="command" value="ADMIN_CHECK_OUT_CLIENT_FINAL" />
-							
-							<c:forEach items="${check_out_list}" var="item">
-							<input type="hidden" name="endDate" value="${item.endDate}"/>
+							<input type="hidden" name="command"
+								value="ADMIN_CHECK_OUT_LIST_WITH_DATE" /> 
+								<input type="date" name="date_check_out" placeholder="${date}" /> 
+								<input type="submit" value="${admin_check_out_list_date}" class = "my_table_booking_submit">
+
+						</form>
+						<br />
+
+						<div class="my_table_booking">
+
+							<table border="2">
 								<tr>
-									<th width="10%" align="center">${item.roomNumber}</th>
-									<th width="20%" align="center">${item.startDate}</th>
-									
-									<th width="20%" align="center">${item.endDate}</th>
-									<th width="30%" align="center">${item.userName}
-										${item.userThirdName} ${item.userSecondName}</th>
+									<th width="10%">${booking_resultlist_room}</th>
+									<th width="20%">${booking_history_startDate}</th>
+									<th width="20%">${booking_history_endDate}</th>
+									<th width="30%">${admin_check_out_list}</th>
+									<th width="20%">${admin_check_out_status}</th>
 
-									<th width="20%" align="center"><c:if
-											test="${item.clientLivingInHotelState}">
-
-											<button type="submit" name="client_booking"
-												value="${item.idRoomBooking}">${admin_check_out_list_submit}</button>
-										</c:if> <c:if test="${!item.clientLivingInHotelState}">
-											<c:out value="${admin_check_out_list_client_out}"></c:out>
-
-										</c:if>
-										</th>
 
 								</tr>
 
-							</c:forEach>
+								<form action="mainPage" method="post">
+									<input type="hidden" name="command"
+										value="ADMIN_CHECK_OUT_CLIENT_FINAL" />
 
-						</form>
-					</table>
+									<c:forEach items="${check_out_list}" var="item">
+										<input type="hidden" name="endDate" value="${item.endDate}" />
+										<tr>
+											<th width="10%" align="center">${item.roomNumber}</th>
+											<th width="20%" align="center">${item.startDate}</th>
+
+											<th width="20%" align="center">${item.endDate}</th>
+											<th width="30%" align="center">${item.userName}
+												${item.userThirdName} ${item.userSecondName}</th>
+
+											<th width="20%" align="center"><c:if
+													test="${item.clientLivingInHotelState}">
+
+													<button type="submit" name="client_booking"
+														value="${item.idRoomBooking}">${admin_check_out_list_submit}</button>
+												</c:if> <c:if test="${!item.clientLivingInHotelState}">
+													<c:out value="${admin_check_out_list_client_out}"></c:out>
+
+												</c:if></th>
+
+										</tr>
+
+									</c:forEach>
+
+								</form>
+							</table>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
+	</section>
 
-
-
-
-
-
-
-	</div>
 </body>
 </html>

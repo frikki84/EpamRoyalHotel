@@ -1,5 +1,8 @@
 package by.epamtc.jwd2020.dziadkouskaya.service.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.epamtc.jwd2020.dziadkouskaya.bean.ClientCategory;
 import by.epamtc.jwd2020.dziadkouskaya.bean.UserDetail;
 import by.epamtc.jwd2020.dziadkouskaya.dao.DaoException;
@@ -12,6 +15,8 @@ public class UserDetailServiceImpl implements UserdetailService {
 	private static DaoProvider daoProvider = DaoProvider.getInstance();
 	UserDetailDao dao = daoProvider.getUserDetailDao();
 
+	
+	private static final Logger logger = LogManager.getLogger(UserDetailServiceImpl.class);
 	@Override
 	public UserDetail findUserDetails(int userId) throws ServiceException {
 		UserDetail userDetail = null;
@@ -20,6 +25,7 @@ public class UserDetailServiceImpl implements UserdetailService {
 			userDetail = dao.findUserDetails(userId);
 
 		} catch (DaoException e) {
+			logger.error("UserDetailServiceImpl findUserDetails(int userId)", e);
 			throw new ServiceException("Error in finding userDetails " + e);
 		}
 
@@ -32,10 +38,10 @@ public class UserDetailServiceImpl implements UserdetailService {
 		
 		try {
 			dao.updateUserDetails(userDetail);
-			//System.out.println("service update user detail");
-
+			
 		} catch (DaoException e) {
-			new ServiceException("Error in updating userdetails ", e);
+			logger.error("UserDetailServiceImpl updateUserDetails(UserDetail userDetail)", e);
+			throw new ServiceException("Error in updating userdetails ", e);
 		}
 
 	}
@@ -46,8 +52,8 @@ public class UserDetailServiceImpl implements UserdetailService {
 			dao.addNewUserDetails(userId);
 
 		} catch (DaoException e) {
-			
-			new ServiceException("Error in adding new  userdetails ", e);
+			logger.error("UserDetailServiceImpl addNewUserDetails(int userId)", e);
+			throw new ServiceException("Error in adding new  userdetails ", e);
 		}
 		
 	}
@@ -57,7 +63,10 @@ public class UserDetailServiceImpl implements UserdetailService {
 		String clientInfo = "";
 		try {
 			clientInfo = dao.findClientDetails(clientId);
+			
 		} catch (DaoException e) {
+			
+			logger.error("UserDetailServiceImpl findClientDetails(int clientId)", e);
 			throw new ServiceException("Error in info about client", e);
 		}
 		return clientInfo;
@@ -70,7 +79,9 @@ public class UserDetailServiceImpl implements UserdetailService {
 		
 		try {
 			dao.addNewGuest(userDetail);
+			
 		} catch (DaoException e) {
+			logger.error("UserDetailServiceImpl addNewGuest(UserDetail userDetail)", e);
 			throw new ServiceException("Error in adding new guest", e);
 		}
 		

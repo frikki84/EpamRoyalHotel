@@ -5023,6 +5023,20 @@ button.close {
   overflow: hidden;
 }
 
+.my_date {
+	width: 30%;
+	background-color: #00000;
+	font-size: 14px;
+}
+
+.form-group_my {
+	width: 60%;
+	margin: 20px 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
 .modal {
   position: fixed;
   top: 0;

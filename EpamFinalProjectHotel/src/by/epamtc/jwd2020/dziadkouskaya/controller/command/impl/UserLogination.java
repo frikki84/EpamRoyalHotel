@@ -16,6 +16,7 @@ import by.epamtc.jwd2020.dziadkouskaya.bean.Country;
 import by.epamtc.jwd2020.dziadkouskaya.bean.User;
 import by.epamtc.jwd2020.dziadkouskaya.bean.UserDetail;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.Command;
+import by.epamtc.jwd2020.dziadkouskaya.controller.command.ParametrName;
 import by.epamtc.jwd2020.dziadkouskaya.dao.CountryDao;
 import by.epamtc.jwd2020.dziadkouskaya.dao.impl.RoomCategoryPriceDaoImpl;
 import by.epamtc.jwd2020.dziadkouskaya.service.CountryService;
@@ -30,16 +31,16 @@ public class UserLogination implements Command {
 	public static final String PATH_TO_LOGINATION_FORM_TO_CORRECT_INFO = "/WEB-INF/jspPages/logination_page_repeat.jsp";
 	public static final String PATH_TO_BOOKING_PAGE = "/WEB-INF/jspPages/client_booking_page.jsp";
 	public static final String PATH_TO_ADMIN_PAGE = "/WEB-INF/jspPages/admin_client_check_in.jsp";
+	public static final String ROLE_ADMINISTRATOR = "Администратор";
 	public static final String PATH_TO_ERROR_PAGE = "mainPage?command = go_to_error_page";
-	public static final String ROLE_ADMINISTRATOR = "администратор";
 	
+	private static final Logger logger = LogManager.getLogger(UserLogination.class);
 	
 	private static ServiceProvider serviceProvider = ServiceProvider.getInstance();
 	private UserService userService = serviceProvider.getUserService();
 	private RoomCategoryService roomCategoryService = serviceProvider.getRoomCategoryService();
 	
 	
-	private static final Logger logger = LogManager.getLogger(UserLogination.class);
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter("login");
@@ -58,16 +59,17 @@ public class UserLogination implements Command {
 			} else {
 
 				int id = userService.findUserCode(login);
-
+				
 				request.getSession(true).setAttribute("user_code", id);
+				
 				request.getSession().setAttribute("name", login);
 
 				String userRole = userService.findUserRole(login);
 
-				if (userRole.equalsIgnoreCase(ROLE_ADMINISTRATOR)) {
-					
-					
-					
+				String adress = ParametrName.USER_LOGINATION.toString();
+				request.setAttribute("address", adress);
+				
+				if (userRole.trim().equalsIgnoreCase(ROLE_ADMINISTRATOR)) {											
 					request.getRequestDispatcher(PATH_TO_ADMIN_PAGE).forward(request, response);
 					
 

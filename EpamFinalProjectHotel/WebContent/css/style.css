@@ -111,20 +111,60 @@ button:focus {
 
 
 .my_table_booking {
-	margin: 40px;
-	width: 100%;
 	text-align: center;
+	color: #050210;
+	font-family: Times New Romans;
+	font-size: 20px;
+	width: 95%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background-color:#827e5f;
+	color: white;
+	border-color: #050210;
+
+}
+
+.my_table_booking_submit {
+	color: #0f0614;
+	font-size: 20px;
 	
 }
 
+.my_table_booking_title_mini{
+	color: #0f0614;
+	font-size: 20px;
+	
+	
+}
+
+.my_form_control {
+	text-align: center;
+	width: 50%;
+	background-color: #6a645d;
+	font-size: 20px;
+	color: #FFFFFF;
+	
+}
+
+.form-horizontal_my {
+	margin: 5px;
+	text-align: center;
+	align-self: center;
+}
+
+
 .my_table_title {
 	text-align: center;
-	color: #4682c5;
+	color: #ffffff;
 	font-family: Times New Romans;
 	font-weight: bold;
 	font-size: 40px;
 	width: 100%;
 	margin-top: 20px;
+}
+
+.wrong {
+	color: red;
 }
 
 .section_gap {
@@ -577,7 +617,7 @@ button:focus {
 
 /*============= End banner_area css =============*/
 .hotel_booking_table {
-  background: #04091e;
+  background: #828173;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -588,7 +628,7 @@ button:focus {
 }
 
 .hotel_booking_table_booking {
-  background: #04091e;
+  background: #828173;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;

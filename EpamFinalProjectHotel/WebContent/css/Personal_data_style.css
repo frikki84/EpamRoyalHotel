@@ -1,29 +1,43 @@
 @charset "UTF-8";
 
-.container {
-	background-image: #E0FFFF;
+.container_my {
 	display: flex;
 	flex-direction: row;
+	width: 90%;
+}
+
+.main_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	width: 100%;
+	text-align: center;
+	margin: 10% 0;
+	min-height: 200px;
 }
 
 .container_regist {
 	background-image: #E0FFFF;
 	display: flex;
 	flex-direction: row;
-	margin-top: 200px;
+	margin-top: 300px;
+	margin-left: 30px;
+	opacity: 0.7;
 }
 
 .view-account {
 	background: #FFFFFF;
-	margin-top: 20px;
+	/* margin-top: 20px;
+ */
 	flex-basis: 30%;
 	display: flex;
 	flex-direction: column;
 }
 
 .view-account_big {
-	background: #FFFFFF;
-	margin-top: 20px;
+	background: #828170;
+	/* margin-top: 20px; */
 	flex-basis: 70%;
 	font: normal Verdana 14px;
 }
@@ -36,8 +50,7 @@
 }
 
 .guest_data {
-	flex-grow:1;
-	
+	flex-grow: 1;
 }
 
 .banner_area_my {
@@ -62,6 +75,7 @@
 }
 
 .form-group_my {
+	width: 60%;
 	margin: 20px 10px;
 	display: flex;
 	flex-direction: column;
@@ -77,6 +91,7 @@
 }
 
 .input-group-addon {
+	width: 40%;
 	padding: 0.375rem 0.75rem;
 	margin-bottom: 0;
 	font-size: 1rem;
@@ -744,7 +759,7 @@
 		.form-horizontal .control-label {
 			text-align: right;
 			margin-bottom: 0;
-		f	padding-top: 7px;
+			f padding-top: 7px;
 		}
 	}
 	.profile__contact-info-icon {
@@ -766,8 +781,8 @@
 	}
 	.my_right_submit {
 		margin: 12px;
-		padding: 5px; 
-		text-align : center;
+		padding: 5px;
+		text-align: center;
 		width: 40%;
 		text-align: center;
 	}

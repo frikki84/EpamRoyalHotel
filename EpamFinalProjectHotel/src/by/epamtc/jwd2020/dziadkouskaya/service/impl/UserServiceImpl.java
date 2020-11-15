@@ -70,13 +70,12 @@ public class UserServiceImpl implements UserService {
 			if (!(loginCheck || emailCheck || phoneCheck)) {
 				result = MESSAGE_USER_LOGIN_INFO_NOT_IN_DB;
 
-			} else {
+			}
 
-				boolean passwordCheck = userDao.checkPassword(login, password);
+			boolean passwordCheck = userDao.checkPassword(login, password);
 
-				if (!passwordCheck) {
-					result = MESSAGE_WRONG_PASSWORD;
-				}
+			if (!passwordCheck) {
+				result = MESSAGE_WRONG_PASSWORD;
 			}
 
 		} catch (DaoException e) {
@@ -101,7 +100,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void addNewUser(User user) throws ServiceException {
 		try {
-			
+
 			userDao.addUser(user);
 
 		} catch (DaoException e) {
@@ -197,15 +196,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String checkClient(String login) throws ServiceException {
 
-		String result = DEFAULT_MESSAGE_VALUE;
+		String result = MESSAGE_USER_LOGIN_INFO_NOT_IN_DB;
 
 		try {
 			boolean loginCheck = userDao.checkLogin(login);
 			boolean emailCheck = userDao.checkEmail(login);
 			boolean phoneCheck = userDao.checkPhone(login);
 
-			if (!loginCheck || !emailCheck || !phoneCheck) {
-				result = MESSAGE_USER_LOGIN_INFO_NOT_IN_DB;
+			if (loginCheck || emailCheck || phoneCheck) {
+				result = DEFAULT_MESSAGE_VALUE;
 			}
 
 		} catch (DaoException e) {

@@ -11,6 +11,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.epamtc.jwd2020.dziadkouskaya.bean.RoomCategory;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.Command;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.CommandProvider;
@@ -22,11 +25,14 @@ import by.epamtc.jwd2020.dziadkouskaya.service.ServiceProvider;
 
 public class GoToFirstPage implements Command {
 	public static final String PATH_TO_FIRST_PAGE = "/WEB-INF/jspPages/first_page.jsp";
+	public static final String PATH_TO_ERROR_PAGE = "mainPage?command=error_page";
 	
 	
 	private static ServiceProvider seviceProvider = ServiceProvider.getInstance();
 	private PriceService priceService = seviceProvider.getPriceService();
 	private RoomCategoryService roomCategoryService = seviceProvider.getRoomCategoryService();
+	
+	private static final Logger logger = LogManager.getLogger(GoToFirstPage.class);
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -60,8 +66,12 @@ public class GoToFirstPage implements Command {
 			request.getRequestDispatcher(PATH_TO_FIRST_PAGE).forward(request, response);
 
 		} catch (ServiceException e) {
+			logger.error("UserRegistration ServiceException", e);
+			response.sendRedirect(PATH_TO_ERROR_PAGE);
 
-			e.printStackTrace();
+		} catch (Exception e) {
+			logger.error("UserRegistration Exception", e);
+			response.sendRedirect(PATH_TO_ERROR_PAGE);
 		}
 
 	}

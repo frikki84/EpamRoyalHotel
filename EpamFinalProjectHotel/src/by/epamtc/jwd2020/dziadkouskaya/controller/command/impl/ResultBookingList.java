@@ -48,7 +48,7 @@ public class ResultBookingList implements Command {
 				List<Integer> roomCapasityList = roomCategoryService.createRoomCategoryList();
 				request.setAttribute("room_capacity", roomCapasityList);
 
-				request.getRequestDispatcher("/WEB-INF/jspPages/client_booking_page_repeat.jsp").forward(request,
+				request.getRequestDispatcher("/WEB-INF/jspPages/client_booking_page.jsp").forward(request,
 						response);
 
 			} else {

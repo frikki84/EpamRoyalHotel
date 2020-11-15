@@ -259,12 +259,8 @@ public class UserDetailDaoImpl implements UserDetailDao {
 				String secondName = set.getString(3);
 				String englishName = set.getString(4);
 				String englishSurname = set.getString(5);
-				String login = set.getString(6);
-				String email = set.getString(7);
-				String phone = set.getString(8);
 
-				clientInfo += name + " " + thirdName + " " + secondName + " " + englishName + " " + englishSurname + " "
-						+ login + " " + email + " " + phone;
+				clientInfo += name + " " + thirdName + " " + secondName + " " + englishName + " " + englishSurname;
 
 			}
 

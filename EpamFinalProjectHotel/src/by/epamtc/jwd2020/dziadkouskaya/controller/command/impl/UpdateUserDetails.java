@@ -12,12 +12,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.epamtc.jwd2020.dziadkouskaya.bean.ClientCategory;
 import by.epamtc.jwd2020.dziadkouskaya.bean.Country;
 import by.epamtc.jwd2020.dziadkouskaya.bean.Role;
 import by.epamtc.jwd2020.dziadkouskaya.bean.User;
 import by.epamtc.jwd2020.dziadkouskaya.bean.UserDetail;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.Command;
+import by.epamtc.jwd2020.dziadkouskaya.controller.command.ParametrName;
 import by.epamtc.jwd2020.dziadkouskaya.service.CountryService;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceException;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceProvider;
@@ -30,6 +34,9 @@ public class UpdateUserDetails implements Command {
 	public static final String PATH_TO_PERSONAL_DATA_PAGE = "/WEB-INF/jspPages/client_personal_data_page.jsp";
 	public static Role DEFAULT_ROLE_VALUE = new Role(4);
 	public static String DEFAULT_BIRTH_DATE_VALUE = "1971-01-01";
+	public static final String PATH_TO_ERROR_PAGE = "mainPage?command=error_page";
+	
+	private static final Logger logger = LogManager.getLogger(UpdateUserDetails.class);
 
 	ServiceProvider seviceProvider = ServiceProvider.getInstance();
 
@@ -40,11 +47,10 @@ public class UpdateUserDetails implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// take id from Users (from session)
 		int userCode = (int) request.getSession().getAttribute("user_code");
 
 		try {
-			// take all parameters for creating UserDetail
+			
 			String firstName = request.getParameter("firstName");
 			String secondName = request.getParameter("secondName");
 			String thirdName = request.getParameter("thirdName");
@@ -59,7 +65,8 @@ public class UpdateUserDetails implements Command {
 
 			String date = request.getParameter("birthDate");
 			Date birthDate = null;
-			if (date.equals("")) {
+			
+			if (date == null || date.equals("")) {
 				birthDate = Date.valueOf(DEFAULT_BIRTH_DATE_VALUE);
 			} else {
 
@@ -102,13 +109,20 @@ public class UpdateUserDetails implements Command {
 			User userToJsp = userService.takePhoneEmailFromDb(userCode);
 
 			request.setAttribute("userPhoneTmail", userToJsp);
+			
+			String adress = ParametrName.WELCOME_NEW_USER.toString();
+			request.setAttribute("address", adress);
 
 			request.getRequestDispatcher(PATH_TO_PERSONAL_DATA_PAGE).forward(request, response);
 
 
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("UpdateUserDetails ServiceException", e);
+			response.sendRedirect(PATH_TO_ERROR_PAGE);
+
+		} catch (Exception e) {
+			logger.error("UpdateUserDetails Exception", e);
+			response.sendRedirect(PATH_TO_ERROR_PAGE);
 		}
 
 	}

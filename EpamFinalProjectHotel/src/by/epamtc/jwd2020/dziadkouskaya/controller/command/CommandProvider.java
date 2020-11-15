@@ -51,18 +51,19 @@ public class CommandProvider {
 	ParametrName parametrName;
 	
 	public CommandProvider() {
-		commands.put(ParametrName.GO_TO_FIRST_PAGE, new GoToFirstPage());//+
-		commands.put(ParametrName.GO_TO_LOGINATION_PAGE, new GoToLoginationPage());
-		commands.put(ParametrName.GO_TO_REGISTRATION_PAGE, new GoToRegistrationPage());//+
-		commands.put(ParametrName.USER_REGISTRATION, new UserRegistration());//-
-		commands.put(ParametrName.WELCOME_NEW_USER, new WelcomeNewUser());//-
-		commands.put(ParametrName.USER_LOGINATION, new UserLogination());
-		commands.put(ParametrName.UPDATE_USER_DETAILS, new UpdateUserDetails());//+
-		commands.put(ParametrName.UPDATE_USER, new UpdateUser());
-		commands.put(ParametrName.UPDATE_SECURITY, new UpdateSecurity());
-		commands.put(ParametrName.DELETE_USER, new DeleteUser());
-		commands.put(ParametrName.USER_WAS_DELETED, new UserWasDeleted());
-		commands.put(ParametrName.BOOKING_PAGE, new GoToBookingPage());//-
+		//первый +/- адрес, второй - логгер
+		commands.put(ParametrName.GO_TO_FIRST_PAGE, new GoToFirstPage());//+ +
+		commands.put(ParametrName.GO_TO_LOGINATION_PAGE, new GoToLoginationPage());//+-
+		commands.put(ParametrName.GO_TO_REGISTRATION_PAGE, new GoToRegistrationPage());//+ -
+		commands.put(ParametrName.USER_REGISTRATION, new UserRegistration());//- +
+		commands.put(ParametrName.WELCOME_NEW_USER, new WelcomeNewUser());//+ +
+		commands.put(ParametrName.USER_LOGINATION, new UserLogination()); //+ + 
+		commands.put(ParametrName.UPDATE_USER_DETAILS, new UpdateUserDetails());//+ +
+		commands.put(ParametrName.UPDATE_USER, new UpdateUser());//+ +
+		commands.put(ParametrName.UPDATE_SECURITY, new UpdateSecurity()); //-+
+		commands.put(ParametrName.DELETE_USER, new DeleteUser());//- - 
+		commands.put(ParametrName.USER_WAS_DELETED, new UserWasDeleted());//- + 
+		commands.put(ParametrName.BOOKING_PAGE, new GoToBookingPage());//- + 
 		commands.put(ParametrName.RESULT_BOOKING_LIST, new ResultBookingList());
 		commands.put(ParametrName.BOOKING_HISTORY, new GoToBookingHistory());
 		commands.put(ParametrName.EXIT_TO_MAIN_PAGE, new UserExit());
@@ -87,7 +88,7 @@ public class CommandProvider {
 		commands.put(ParametrName.CHANGE_LOCALE, new ChangeLocale());
 		commands.put(ParametrName.Go_TO_CONTACTS, new Contacts());
 		commands.put(ParametrName.LOCALE_CHANGE, new LocaleChange());
-		commands.put(ParametrName.ERROR_PAGE, new GoToErrorPage());
+		commands.put(ParametrName.ERROR_PAGE, new GoToErrorPage());//- - 
 		
 	}
 	

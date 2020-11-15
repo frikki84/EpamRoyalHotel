@@ -36,7 +36,7 @@ public class AdminPriceAdd implements Command {
 		if (categoryId==null || categoryId.equals("") || date == null || date.equals("") || priseSt == null || priseSt.equals("") ) {
 			msg = "Enter all parameters";
 			request.setAttribute("price_adding_error", msg);
-			response.sendRedirect(PATH_TO_NEW_PRICE);
+			request.getRequestDispatcher(PATH_TO_ADMIN_PRICES_PAGE).forward(request, response);;
 		}
 		
 		RoomCategory category = new RoomCategory(Integer.parseInt(categoryId));

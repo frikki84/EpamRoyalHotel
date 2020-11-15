@@ -18,6 +18,7 @@ public class GoToRegistrationPage implements Command{
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String address = ParametrName.GO_TO_REGISTRATION_PAGE.toString();
 		request.setAttribute("address", address);
+		
 		request.getRequestDispatcher(PATH_TO_REGISTRSTION_PAGE).forward(request, response);
 		
 	}
