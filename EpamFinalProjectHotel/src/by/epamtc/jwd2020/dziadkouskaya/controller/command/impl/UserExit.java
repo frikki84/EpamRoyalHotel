@@ -10,10 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.Command;
 
 public class UserExit implements Command {
+	public static final String PATH_TO_FIRST_PAGE = "mainPage?command=go_to_first_page";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("mainPage?command=go_to_first_page");
+		response.sendRedirect(PATH_TO_FIRST_PAGE);
 
 	}
 

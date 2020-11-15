@@ -12,50 +12,45 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import by.epamtc.jwd2020.dziadkouskaya.bean.CheckOutTransferObject;
+import by.epamtc.jwd2020.dziadkouskaya.bean.RoomCategory;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.Command;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.ParametrName;
 import by.epamtc.jwd2020.dziadkouskaya.service.BookingService;
+import by.epamtc.jwd2020.dziadkouskaya.service.PriceService;
+import by.epamtc.jwd2020.dziadkouskaya.service.RoomCategoryService;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceException;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceProvider;
 
-public class AdminCheckOutList implements Command {
-	public static final String PATH_TO_ADMIN_CHECK_OUT_LIST = "/WEB-INF/jspPages/admin_check_out_list.jsp";
+public class AdminGoToPricesAddPage implements Command {
+	public static final String PATH_TO_ADMIN_CHECK_OUT_LIST = "/WEB-INF/jspPages/admin_prices_add_new_price.jsp";
 	public static final String PATH_TO_ERROR_PAGE = "mainPage?command=error_page";
 
-	private static final Logger logger = LogManager.getLogger(AdminCheckOutList.class);
+	private static final Logger logger = LogManager.getLogger(AdminGoToPricesAddPage.class);
 	
-	private static ServiceProvider serviceProvider = ServiceProvider.getInstance();
-	private BookingService bookingService = serviceProvider.getBookingService();
-	
-	
+	private final ServiceProvider serviceProvider = ServiceProvider.getInstance();
+	private RoomCategoryService roomCategoryService = serviceProvider.getRoomCategoryService();
+
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Date date = new Date(System.currentTimeMillis());
-		request.setAttribute("date", date);
-		
-		String adress = ParametrName.ADMIN_CHECK_OUT_LIST.toString();
-		request.setAttribute("address", adress);
-		
-		List<CheckOutTransferObject> list = null;
-		
+		List<RoomCategory> roomCategoryList = null;
 		try {
-			list = bookingService.findInfoForCheckingOut(date);
-			request.setAttribute("check_out_list", list);
+			roomCategoryList = roomCategoryService.createFullRoomCategoryList();
+			request.setAttribute("room_category_names", roomCategoryList);			
 			
-			
+			String adress = ParametrName.ADMIN_PRICE_GO_TO_ADDING_PAGE.toString();
+			request.setAttribute("address", adress);
+
 			request.getRequestDispatcher(PATH_TO_ADMIN_CHECK_OUT_LIST).forward(request, response);
 			
-
 		} catch (ServiceException e) {
-			logger.error("AdminCheckOutList ServiceException", e);
+			logger.error("AdminGoToPricesAddPage ServiceException", e);
 			response.sendRedirect(PATH_TO_ERROR_PAGE);
 
 		} catch (Exception e) {
-			logger.error("AdminCheckOutList Exception", e);
+			logger.error("AdminGoToPricesAddPage Exception", e);
 			response.sendRedirect(PATH_TO_ERROR_PAGE);
 		}
-
 	}
 
 }

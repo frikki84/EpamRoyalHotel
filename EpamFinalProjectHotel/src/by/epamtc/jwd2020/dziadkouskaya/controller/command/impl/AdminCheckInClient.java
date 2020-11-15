@@ -7,10 +7,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.epamtc.jwd2020.dziadkouskaya.bean.Country;
 import by.epamtc.jwd2020.dziadkouskaya.bean.User;
 import by.epamtc.jwd2020.dziadkouskaya.bean.UserDetail;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.Command;
+import by.epamtc.jwd2020.dziadkouskaya.controller.command.ParametrName;
 import by.epamtc.jwd2020.dziadkouskaya.service.BookingService;
 import by.epamtc.jwd2020.dziadkouskaya.service.CountryService;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceException;
@@ -20,6 +24,9 @@ import by.epamtc.jwd2020.dziadkouskaya.service.UserdetailService;
 
 public class AdminCheckInClient implements Command {
 	public static final String ADMIN_CLIENT_PAGE = "/WEB-INF/jspPages/admin_client_personal_page.jsp";
+	public static final String PATH_TO_ERROR_PAGE = "mainPage?command=error_page";
+
+	private static final Logger logger = LogManager.getLogger(AdminCheckInClient.class);
 	
 	private static ServiceProvider serviceProvider = ServiceProvider.getInstance();
 	private UserdetailService userDetailService = serviceProvider.getUserDetailService();
@@ -32,6 +39,9 @@ public class AdminCheckInClient implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int clientId = (int) request.getSession().getAttribute("client_code");
+		
+		String adress = ParametrName.UPDATE_CLIENT_DETAILS.toString();
+		request.setAttribute("address", adress);
 
 		try {
 
@@ -68,8 +78,12 @@ public class AdminCheckInClient implements Command {
 			request.getRequestDispatcher(ADMIN_CLIENT_PAGE).forward(request, response);
 
 		} catch (ServiceException e) {
+			logger.error("AdminCheckInClient ServiceException", e);
+			response.sendRedirect(PATH_TO_ERROR_PAGE);
 
-			e.printStackTrace();
+		} catch (Exception e) {
+			logger.error("AdminCheckInClient Exception", e);
+			response.sendRedirect(PATH_TO_ERROR_PAGE);
 		}
 
 	}

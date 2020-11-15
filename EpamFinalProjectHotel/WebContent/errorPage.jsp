@@ -29,7 +29,7 @@
 	rel="stylesheet">
 
 <!-- Custom stlylesheet -->
-<link rel="stylesheet" href="/css/style_error.css">
+<link rel="stylesheet" href="css/style_error.css">
 
 </head>
 

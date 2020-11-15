@@ -13,22 +13,12 @@
 		<servlet-name>Controller</servlet-name>
 		<servlet-class>by.epamtc.jwd2020.dziadkouskaya.controller.Controller</servlet-class>
 	</servlet>
-	
-	<servlet>
-		<servlet-name>Localization</servlet-name>
-		<servlet-class>by.epamtc.jwd2020.dziadkouskaya.controller.localization.ChangeLocale</servlet-class>
-	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>Controller</servlet-name>
 		<url-pattern>/mainPage</url-pattern>
 	</servlet-mapping>
 	
-	<servlet-mapping>
-		<servlet-name>Localization</servlet-name>
-		<url-pattern>/localization</url-pattern>
-	</servlet-mapping>
-
 
 	<filter>
 		<display-name>CharsetFilter</display-name>

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.Command;
 
 public class GoToErrorPage implements Command {
-	public static final String PATH_TO_ERROR_PAGE = "/errorPage.jsp";
+	public static final String PATH_TO_ERROR_PAGE = "errorPage.jsp";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

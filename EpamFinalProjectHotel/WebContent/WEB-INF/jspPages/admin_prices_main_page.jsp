@@ -218,8 +218,8 @@
 						<h2 class="my_table_title">${admin_prices_title}</h2>
 						<form action="mainPage" method="post">
 							<input type="hidden" name="command" value="admin_prices_delete" />
-							
-							<table border="2" >
+
+							<table border="2">
 								<tr>
 									<th>${admin_prices_room_category}</th>
 									<th>${admin_prices_cost}</th>
@@ -234,46 +234,25 @@
 										<th width="20%">${item.startDate}</th>
 										<th width="20%">
 
-											<button type="submit" name="price_code" value="${item.id}" class = "my_table_booking_submit">${admin_prices_delete}</button>
+											<button type="submit" name="price_code" value="${item.id}"
+												class="my_table_booking_submit">${admin_prices_delete}</button>
 										</th>
 									</tr>
 								</c:forEach>
 							</table>
 						</form>
-						</div>
-						<br />
-						<div class = "my_table_booking">
-						<h3 class="my_table_title">${admin_prices_add}</h3>
-						<h4 >${price_adding_error}</h4>
+					</div>
+					<br />
+					<div class="my_table_booking">
 						<form action="mainPage" method="post">
-							<input type="hidden" name="command" value="admin_prices_add" />
-							<div class="my_table_booking">
-								<label class="my_table_booking_title_mini">${admin_prices_select_category}</label>
-								<div class="my_table_booking_submit">
-									<select name="roomCategoryId" class="col-sm-10">
-										<%-- <option selected="selected">${admin_prices_select_category}</option> --%>
-										<c:forEach items="${room_category_names}" var="roomCat">
-											<option value="${roomCat.id}">${roomCat.roomCategoryName}</option>
-										</c:forEach>
-									</select>
-								</div>
-								<label class="my_table_booking_title_mini">${admin_prices_add_date}</label>
-								<div class="my_table_booking_submit">
-									<input type="date" class="my_table_booking_submit" name="priceStartDate"
-										required>
-								</div>
-								<label class="my_table_booking_title_mini">${admin_prices_add_price}</label>
-								<div class="my_table_booking_submit">
-									<input type="text" class="form-control" name="price" required>
-								</div>
-							</div>
-							<br /> 
-							<input type="submit" value="${admin_prices_add}" class = "my_table_booking_submit" />
-							<div class = "my_table_booking"></div>
-							
+							<input type="hidden" name="command"
+								value="ADMIN_PRICE_GO_TO_ADDING_PAGE" /> <input type="submit"
+								value="${admin_prices_add}" class="my_table_booking_submit" />
+							<div class="my_table_booking"></div>
+
 						</form>
 					</div>
-					
+
 				</div>
 			</div>
 		</div>

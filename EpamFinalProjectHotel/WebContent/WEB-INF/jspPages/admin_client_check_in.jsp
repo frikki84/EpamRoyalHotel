@@ -209,7 +209,7 @@
 					<div class="row">
 						<div class="col-xs-12 col-sm-9">								
 						<div class="panel-body">
-									<div class="form-group">
+									<div class="my_table_booking ">
 										<form class="form-horizontal_my " action="mainPage" method="post">
 											<input type="hidden" name="command" value="admin_user_booking" /> 
 												<input type="text" name="user_info" /> 
@@ -220,7 +220,7 @@
 									</div>
 								</div>
 								<br />
-								<div class="panel-body">
+								<div class="my_table_booking ">
 									<div class="form-group">
 										<form class="form-horizontal_my " action="mainPage" method="post">
 											<input type="submit" class="my_form_control"

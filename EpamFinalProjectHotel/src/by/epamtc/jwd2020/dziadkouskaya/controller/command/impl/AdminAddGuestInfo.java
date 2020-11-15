@@ -1,3 +1,4 @@
+
 package by.epamtc.jwd2020.dziadkouskaya.controller.command.impl;
 
 import java.io.IOException;
@@ -8,6 +9,9 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import by.epamtc.jwd2020.dziadkouskaya.bean.Country;
 import by.epamtc.jwd2020.dziadkouskaya.bean.User;
@@ -22,7 +26,10 @@ import by.epamtc.jwd2020.dziadkouskaya.service.UserdetailService;
 
 public class AdminAddGuestInfo implements Command {
 	public static final String DEFAULT_BIRTH_DATE_VALUE = "1971-01-01";
-	public static final String UPDATE_CLIENT_PAGE = "/WEB-INF/jspPages/admin_client_personal_page_updated.jsp";
+	public static final String UPDATE_CLIENT_PAGE = "/WEB-INF/jspPages/admin_client_personal_page.jsp";
+	public static final String PATH_TO_ERROR_PAGE = "mainPage?command=error_page";
+
+	private static final Logger logger = LogManager.getLogger(AdminAddGuestInfo.class);
 
 	private static ServiceProvider serviceProvider = ServiceProvider.getInstance();
 	private BookingService bookingService = serviceProvider.getBookingService();
@@ -101,10 +108,13 @@ public class AdminAddGuestInfo implements Command {
 
 			request.getRequestDispatcher(UPDATE_CLIENT_PAGE).forward(request, response);
 
-		} catch (
+		} catch (ServiceException e) {
+			logger.error("AdminAddGuestInfo ServiceException", e);
+			response.sendRedirect(PATH_TO_ERROR_PAGE);
 
-		ServiceException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			logger.error("AdminAddGuestInfo Exception", e);
+			response.sendRedirect(PATH_TO_ERROR_PAGE);
 		}
 
 	}

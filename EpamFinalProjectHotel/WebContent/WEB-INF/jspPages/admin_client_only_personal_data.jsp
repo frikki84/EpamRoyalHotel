@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Client booking history</title>
+<title>Client personal page</title>
 
 <fmt:setLocale value="${sessionScope.local}" />
 
@@ -30,52 +30,47 @@
 	var="admin_navigate_change_admin_info" />
 <fmt:message bundle="${loc}" key="admin_navigate_exit"
 	var="admin_navigate_exit" />
-<fmt:message bundle="${loc}" key="check_in_title" var="check_in_title" />
-<fmt:message bundle="${loc}" key="check_in_check" var="check_in_check" />
-<fmt:message bundle="${loc}" key="check_in_new_client"
-	var="check_in_new_client" />
 
-<fmt:message bundle="${loc}" key="booking_history_title"
-	var="booking_history_title" />
-
-<fmt:message bundle="${loc}" key="booking_history_number"
-	var="booking_history_number" />
-
-<fmt:message bundle="${loc}" key="booking_history_startDate"
-	var="booking_history_startDate" />
-
-<fmt:message bundle="${loc}" key="booking_history_endDate"
-	var="booking_history_endDate" />
-
-<fmt:message bundle="${loc}" key="booking_resultlist_room"
-	var="booking_resultlist_room" />
-
-<fmt:message bundle="${loc}" key="booking_resultlist_peoplenumber"
-	var="booking_resultlist_peoplenumber" />
-
-<fmt:message bundle="${loc}" key="booking_history_childen"
-	var="booking_history_childen" />
-
-
-<fmt:message bundle="${loc}" key="booking_resultlist_full"
-	var="booking_resultlist_full" />
-
-<fmt:message bundle="${loc}" key="booking_history_prepayment"
-	var="booking_history_prepayment" />
-
-<fmt:message bundle="${loc}" key="admin_client_booking_info"
-	var="admin_client_booking_info" />
-
-<fmt:message bundle="${loc}" key="admin_client_booking_status"
-	var="admin_client_booking_status" />
-
-
-<fmt:message bundle="${loc}" key="booking_history_pay"
-	var="booking_history_pay" />
-	
-<fmt:message bundle="${loc}" key="admin_client_go_to_pers_page"
-	var="admin_client_go_to_pers_page" /> 
-	
+<fmt:message bundle="${loc}" key="admin_client_pers_info"
+	var="admin_client_pers_info" />
+<fmt:message bundle="${loc}" key="client_dp_country"
+	var="client_dp_country" />
+<fmt:message bundle="${loc}" key="client_dp_select_country"
+	var="client_dp_select_country" />
+<fmt:message bundle="${loc}" key="client_dp_name" var="client_dp_name" />
+<fmt:message bundle="${loc}" key="client_dp_surname"
+	var="client_dp_surname" />
+<fmt:message bundle="${loc}" key="client_dp_third_name"
+	var="client_dp_third_name" />
+<fmt:message bundle="${loc}" key="client_dp_name_english"
+	var="client_dp_name_english" />
+<fmt:message bundle="${loc}" key="client_dp_surname_english"
+	var="client_dp_surname_english" />
+<fmt:message bundle="${loc}" key="client_dp_birth" var="client_dp_birth" />
+<fmt:message bundle="${loc}" key="client_dp_passport"
+	var="client_dp_passport" />
+<fmt:message bundle="${loc}" key="client_dp_passport_id"
+	var="client_dp_passport_id" />
+<fmt:message bundle="${loc}" key="client_dp_passport_other_info"
+	var="client_dp_passport_other_info" />
+<fmt:message bundle="${loc}" key="client_dp_contact_info"
+	var="client_dp_contact_info" />
+<fmt:message bundle="${loc}" key="reg_form_phone" var="reg_form_phone" />
+<fmt:message bundle="${loc}" key="reg_form_email" var="reg_form_email" />
+<fmt:message bundle="${loc}" key="client_dp_update"
+	var="client_dp_update" />
+<fmt:message bundle="${loc}" key="client_dp_security"
+	var="client_dp_security" />
+<fmt:message bundle="${loc}" key="client_dp_old_password"
+	var="client_dp_old_password" />
+<fmt:message bundle="${loc}" key="client_dp_new_password"
+	var="client_dp_new_password" />
+<fmt:message bundle="${loc}" key="client_dp_repeat_password"
+	var="client_dp_repeat_password" />
+<fmt:message bundle="${loc}" key="client_dp_date_placeholder"
+	var="client_dp_date_placeholder" />
+<fmt:message bundle="${loc}" key="client_dp_delete_user"
+	var="client_dp_delete_user" />
 <fmt:message bundle="${loc}" key="home_button" var="home_button" />
 <fmt:message bundle="${loc}" key="language_button" var="language_button" />
 <fmt:message bundle="${loc}" key="language_button_en"
@@ -83,6 +78,7 @@
 <fmt:message bundle="${loc}" key="language_button_ru"
 	var="language_button_ru" />
 <fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
+
 
 
 
@@ -120,7 +116,7 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse offset"
 					id="navbarSupportedContent">
-					<ul class="nav navbar-nav menu_nav ml-auto">
+					<%-- <ul class="nav navbar-nav menu_nav ml-auto">
 						<li class="nav-item active"><a class="nav-link"
 							href="index.jsp">${home_button}</a></li>
 						<li class="nav-item submenu dropdown"><a href="#"
@@ -146,7 +142,7 @@
 
 							</ul></li>
 						<li class="nav-item"><a class="nav-link" href="contacts.jsp">${contact_buttom}</a></li>
-					</ul>
+					</ul> --%>
 				</div>
 			</nav>
 		</div>
@@ -156,7 +152,6 @@
 			<div class="overlay bg-parallax" data-stellar-ratio="0.9"
 				data-stellar-vertical-offset="0" data-background=""
 				style="transform: translateY(-0.017054px);"></div>
-				
 			<div class="container">
 				<div class="view-account">
 
@@ -170,7 +165,7 @@
 
 							</div>
 						</div>
-						
+
 						<nav class="side-menu">
 							<ul class="nav">
 
@@ -178,7 +173,7 @@
 									<form action="mainPage" method="post">
 										<input type="hidden" name="command"
 											value="ADMIN_FIND_USER_TO_CHECK_IN" /> <input type="submit"
-											value="${admin_navigate_checkin}" class="active" />
+											value="${admin_navigate_checkin}" class="nonactive" />
 									</form>
 								</li>
 
@@ -210,7 +205,7 @@
 									<form action="mainPage" method="post">
 										<input type="hidden" name="command" value="ADMIN_GO_TO_PRICES" />
 										<input type="submit" value="${admin_navigate_change_taxes}"
-											class="nonactive" />
+											class="active" />
 									</form>
 								</li>
 
@@ -246,63 +241,116 @@
 
 				</div>
 
-				<div class="view-account_big">				
+				<div class="view-account_big">
+					<h2 class="my_table_title">${admin_client_pers_info}</h2>
+
 					<div class="row">
-						<h2 class="my_table_title">${userInfoForGreetings}</h2>
-						<div class="my_table_booking">
+						<div class="col-xs-12 col-sm-9">
 
-							<table border="2">
-								<tr>
-									<th>${booking_history_number}</th>
-									<th>${booking_history_startDate}</th>
-									<th>${booking_history_endDate}</th>
-									<th>${booking_resultlist_room}</th>
-									<th>${booking_resultlist_peoplenumber}</th>
-									<th>${booking_history_childen}</th>
-									<th>${booking_resultlist_full}</th>
-									<th>${booking_history_prepayment}</th>
-									<th>${admin_client_booking_info}</th>
+							<form class="form-horizontal" action="mainPage" method="post">
+								<input type="hidden" name="command"
+									value="update_client_details" />
+								<div class="panel panel-default">
 
-								</tr>
+									<div class="panel-body">
+										<div class="form-group">
+											<label class="col-sm-2 control-label">${client_dp_name}</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control"
+													value="${userDetail.firstName}" name="firstName">
 
-								<form action="mainPage" method="post">
-									<input type="hidden" name="command"
-										value="ADMIN_CHECK_IN_CLIENT" />
-									<c:forEach items="${booking_list}" var="item">
-										<tr>
-											<th width="10%" align="center">${item.bookingId}</th>
-											<th width="15%" align="center">${item.startDate}</th>
-											<th width="15%" align="center">${item.endDate}</th>
-											<th width="10%" align="center">${item.hotelRoomNumber}</th>
-											<th width="10%" align="center">${item.peopleNumberInRoom}</th>
-											<th width="10%" align="center">${item.childrenNumber}</th>
-											<th width="10%" align="center">${item.fullPrice}</th>
-											<th width="10%" align="center">${item.prepayment}</th>
-											<th width="10%" align="center"><c:if
-													test="${item.isBookingPaid == true}">
-													<c:out value="${admin_client_booking_status}">
-													</c:out>
-												</c:if> <c:if test="${item.isBookingPaid==false}">
-													
-													<button type="submit" name="client_booking" class = "my_table_booking_submit"
-														value="${item.bookingId}">${admin_client_booking_info}</button>
-												</c:if></th>
-										</tr>
-									</c:forEach>
-								</form>
-							</table>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">${client_dp_surname}</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control"
+													value="${userDetail.secondName}" name="secondName">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">${client_dp_third_name}</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control"
+													value="${userDetail.thirdName}" name="thirdName">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">${client_dp_name_english}</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control"
+													value="${userDetail.firstNameEnglish}"
+													name="firstNameEnglish">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">${client_dp_surname_english}</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control"
+													value="${userDetail.secondNameEnglish}"
+													name="secondNameEnglish">
+											</div>
+										</div>
+
+
+										<!-- works good, don't touch -->
+										<div class="form-group">
+											<label class="col-sm-2 control-label">${client_dp_birth}</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" name="birthDate"
+													value="${userDetail.birthDate}" />
+
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-sm-2 control-label">${client_dp_passport}</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control"
+													value="${userDetail.passportNumber}" name="passportNumber">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">${client_dp_passport_id}</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control"
+													value="${userDetail.passportId}" name="passportId">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">${client_dp_passport_other_info}</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control"
+													value="${userDetail.passportOtherInfo}"
+													name="passportOtherInfo">
+											</div>
+										</div>
+
+										<!-- works good, don't touch -->
+
+										<div class="form-group">
+											<label class="col-sm-2 control-label">${client_dp_country}</label>
+											<br /> <select name="country" class="col-sm-10">
+												<option selected="selected">${userDetail.country.name}</option>
+												<c:forEach items="${countryList}" var="country">
+													<option value="${country.name}">${country.name}</option>
+												</c:forEach>
+											</select>
+										</div>
+
+
+
+										<div class="form-group">
+											<div class="col-sm-10">
+												<input type="submit" class="my_form_control"
+													value="${client_dp_update}">
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</form>
 						</div>
-						
-											<div class="my_table_booking">
-						<form action="mainPage" method="post">
-							<input type="hidden" name="command"
-								value="ADMIN_GO_TO_CLIENT_PERSONAL_PAGE" /> <input type="submit"
-								value="${admin_client_go_to_pers_page}" class="my_table_booking_submit" />
-							<div class="my_table_booking"></div>
-
-						</form>
-					</div>
-						
 					</div>
 				</div>
 			</div>

@@ -25,7 +25,7 @@ import by.epamtc.jwd2020.dziadkouskaya.service.ServiceProvider;
 import by.epamtc.jwd2020.dziadkouskaya.service.UserService;
 import by.epamtc.jwd2020.dziadkouskaya.service.UserdetailService;
 
-public class UpdateClientDetails implements Command {
+public class AdminGoToClientPersonalPage implements Command {
 	public static final int DEFAULT_ID_FOR_USER_DETAILS = 0;
 	public static final String PARAMETR_CLIENT_NAME = "firstName";
 	public static final String PARAMETR_CLIENT_SURNAME = "secondName";
@@ -39,7 +39,7 @@ public class UpdateClientDetails implements Command {
 	public static final String PARAMETR_CLIENT_BIRTHDATE = "birthDate";
 	public static final String PARAMETR_CLIENT_EMAIL = "email";
 	public static final String PARAMETR_CLIENT_PHONE = "phone";
-	public static final String PATH_TO_PERSONAL_DATA_PAGE = "/WEB-INF/jspPages/admin_client_personal_page.jsp";
+	public static final String PATH_TO_PERSONAL_DATA_PAGE = "/WEB-INF/jspPages/admin_client_only_personal_data.jsp";
 	
 	public static final ClientCategory DEFAULT_CLIENT_CATEGORY = new ClientCategory(1, "Клиент-заказчик");
 	public static Role DEFAULT_ROLE_VALUE = new Role(4);
@@ -59,9 +59,9 @@ public class UpdateClientDetails implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int clientCode = (int) request.getSession().getAttribute("client_code");
-		int bookingId = (int) request.getSession().getAttribute("client_booking");
-
+		
 		try {
+			
 
 			String firstName = request.getParameter(PARAMETR_CLIENT_NAME);
 			String secondName = request.getParameter(PARAMETR_CLIENT_SURNAME);
@@ -71,7 +71,6 @@ public class UpdateClientDetails implements Command {
 			String passportNumber = request.getParameter(PARAMETR_CLIENT_PASSPORT);
 			String passportId = request.getParameter(PARAMETR_CLIENT_PASSPORT_ID);
 			String passportOtherInfo = request.getParameter(PARAMETR_CLIENT_OTER_INFO);
-
 			String countryName = request.getParameter(PARAMETR_CLIENT_COUNTRY);
 			Country country = new Country(countryName);
 
@@ -120,9 +119,7 @@ public class UpdateClientDetails implements Command {
 
 			request.setAttribute("userPhoneTmail", userToJsp);
 
-			int guestNumber = bookingService.findGuestNumberWithoutUser(bookingId);
-			request.setAttribute("guest_number", guestNumber);
-
+			
 			String adress = ParametrName.UPDATE_CLIENT_DETAILS.toString() + "&" + PARAMETR_CLIENT_NAME + "=" + firstName + "&"
 					+ PARAMETR_CLIENT_SURNAME + "=" + secondName + "&" + PARAMETR_CLIENT_THIRD_NAME + "=" + thirdName
 					+ "&" + PARAMETR_CLIENT_ENGLISH_NAME + "=" + firstNameEnglish + "&"
