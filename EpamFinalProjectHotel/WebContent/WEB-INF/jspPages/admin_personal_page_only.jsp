@@ -71,6 +71,19 @@
 	var="client_dp_date_placeholder" />
 <fmt:message bundle="${loc}" key="client_dp_delete_user"
 	var="client_dp_delete_user" />
+<fmt:message bundle="${loc}" key="admin_client_next_step"
+	var="admin_client_next_step" />
+<fmt:message bundle="${loc}" key="admin_client_guest_info"
+	var="admin_client_guest_info" />
+<fmt:message bundle="${loc}" key="admin_client_guest_add"
+	var="admin_client_guest_add" />
+<fmt:message bundle="${loc}" key="admin_payment_page_sum"
+	var="admin_payment_page_sum" />
+<fmt:message bundle="${loc}" key="admin_payment_page_pay"
+	var="admin_payment_page_pay" />
+<fmt:message bundle="${loc}" key="admin_client_next_step"
+	var="admin_client_next_step" />
+
 <fmt:message bundle="${loc}" key="home_button" var="home_button" />
 <fmt:message bundle="${loc}" key="language_button" var="language_button" />
 <fmt:message bundle="${loc}" key="language_button_en"
@@ -249,7 +262,7 @@
 
 							<form class="form-horizontal" action="mainPage" method="post">
 								<input type="hidden" name="command"
-									value="update_client_details" />
+									value="UPDATE_CLIENT_DETAIL_WITHOUT_BOOKING" />
 								<div class="panel panel-default">
 
 									<div class="panel-body">
@@ -338,8 +351,6 @@
 											</select>
 										</div>
 
-
-
 										<div class="form-group">
 											<div class="col-sm-10">
 												<input type="submit" class="my_form_control"
@@ -347,15 +358,16 @@
 											</div>
 										</div>
 
+
 									</div>
 								</div>
 							</form>
+							<br />
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-
 </body>
 </html>
