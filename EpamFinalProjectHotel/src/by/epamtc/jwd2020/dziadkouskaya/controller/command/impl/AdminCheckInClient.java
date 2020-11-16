@@ -23,23 +23,25 @@ import by.epamtc.jwd2020.dziadkouskaya.service.UserService;
 import by.epamtc.jwd2020.dziadkouskaya.service.UserdetailService;
 
 public class AdminCheckInClient implements Command {
+	public static final String DEFAULT_STRING_VALUE = "";
 	public static final String ADMIN_CLIENT_PAGE = "/WEB-INF/jspPages/admin_client_personal_page.jsp";
+	public static final String ADMIN_CLIENT_PAGE_WITHOUT_CHECK_IN = "/WEB-INF/jspPages/admin_personal_page_only.jsp";
+
 	public static final String PATH_TO_ERROR_PAGE = "mainPage?command=error_page";
 
 	private static final Logger logger = LogManager.getLogger(AdminCheckInClient.class);
-	
+
 	private static ServiceProvider serviceProvider = ServiceProvider.getInstance();
 	private UserdetailService userDetailService = serviceProvider.getUserDetailService();
 	private CountryService countryService = serviceProvider.getCountryService();
 	private UserService userService = serviceProvider.getUserService();
 	private BookingService bookingService = serviceProvider.getBookingService();
-	
-	
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int clientId = (int) request.getSession().getAttribute("client_code");
-		
+
 		String adress = ParametrName.UPDATE_CLIENT_DETAILS.toString();
 		request.setAttribute("address", adress);
 
@@ -66,16 +68,18 @@ public class AdminCheckInClient implements Command {
 			User user = userService.takePhoneEmailFromDb(clientId);
 			request.setAttribute("userPhoneTmail", user);
 
-			int bookingId = Integer.parseInt(request.getParameter("client_booking"));
-			request.getSession().setAttribute("client_booking", bookingId);
-			
-			int guestNumber = bookingService.findGuestNumberWithoutUser(bookingId);
-			request.setAttribute("guest_number", guestNumber);
-			
-			double sumToPay = bookingService.findFinalBookingSum(bookingId);
-			request.setAttribute("sum_to_pay", sumToPay);
+			String bookingNumber = request.getParameter("client_booking");
 
-			request.getRequestDispatcher(ADMIN_CLIENT_PAGE).forward(request, response);
+			if (bookingNumber == null || bookingNumber.equals(DEFAULT_STRING_VALUE)) {
+
+				request.getRequestDispatcher(ADMIN_CLIENT_PAGE_WITHOUT_CHECK_IN).forward(request, response);
+
+			} else {
+				int bookingId = Integer.parseInt(bookingNumber);
+				request.getSession().setAttribute("client_booking", bookingId);
+				request.getRequestDispatcher(ADMIN_CLIENT_PAGE).forward(request, response);
+
+			}
 
 		} catch (ServiceException e) {
 			logger.error("AdminCheckInClient ServiceException", e);

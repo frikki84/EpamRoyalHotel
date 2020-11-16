@@ -81,6 +81,9 @@
 	var="admin_payment_page_sum" />
 <fmt:message bundle="${loc}" key="admin_payment_page_pay"
 	var="admin_payment_page_pay" />
+<fmt:message bundle="${loc}" key="admin_client_next_step"
+	var="admin_client_next_step" />
+
 <fmt:message bundle="${loc}" key="home_button" var="home_button" />
 <fmt:message bundle="${loc}" key="language_button" var="language_button" />
 <fmt:message bundle="${loc}" key="language_button_en"
@@ -348,8 +351,6 @@
 											</select>
 										</div>
 
-
-
 										<div class="form-group">
 											<div class="col-sm-10">
 												<input type="submit" class="my_form_control"
@@ -357,13 +358,24 @@
 											</div>
 										</div>
 
+
 									</div>
 								</div>
 							</form>
+							<form action="mainPage" method="post">
+							<input type="hidden" name = "command" value="ADMIN_GO_TO_ADDING_NEW_GUESTS"/>
+							<div class="form-group">
+								<div class="col-sm-10">
+									<input type="submit" class="my_form_control"
+										value="${admin_client_next_step}"/>
+								</div>
+							</div>
+							</form>
+
 						</div>
 					</div>
 
-					<div class="container_my_row">
+					<%-- <div class="container_my_row">
 
 						<form class="form-horizontal" action="mainPage" method="post">
 							<input type="hidden" name="command" value="admin_add_new_guest" />
@@ -475,9 +487,9 @@
 									</div>
 
 								</c:forEach>
-							</c:if>
+							</c:if> --%>
 
-							<div class="form-group">
+					<%-- <div class="form-group">
 								<div class="col-sm-10">
 									<input type="submit" class="my_form_control"
 										value="${admin_client_guest_add}" />
@@ -487,8 +499,9 @@
 						</form>
 
 					</div>
-				</div>
-
+					<jsp:include page="admin_client_suum_to_pay.jsp"></jsp:include>
+				</div> --%>
+					<%-- 
 				<form action="mainPage" method="post" class="my_table_booking">
 					<input type="hidden" name="command"
 						value="ADMIN_CLIENT_WAS_CHECKED_IN" />
@@ -502,12 +515,14 @@
 								class="my_table_booking_submit" /></th>
 						</tr>
 					</table>
-				</form>
-				<br />
+				</form> --%>
 
 
+					<br />
+
+
+				</div>
 			</div>
-		</div>
 	</section>
 
 </body>

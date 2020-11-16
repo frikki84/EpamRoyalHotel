@@ -11,6 +11,7 @@ import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.AdminCheckOutList
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.AdminCheckOutListWithDate;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.AdminClientWasCheckedIn;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.AdminFindUserToCheckIn;
+import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.AdminGoToAddCientGuests;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.AdminGoToClientPersonalPage;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.AdminGoToPrices;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.AdminGoToPricesAddPage;
@@ -31,6 +32,7 @@ import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.LocaleChange;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.NewRoomBooking;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.PaidPrepayment;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.ResultBookingList;
+import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.UpdateClientDetailWithoutBooking;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.UpdateClientDetails;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.UpdateSecurity;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.UpdateUser;
@@ -72,8 +74,10 @@ public class CommandProvider {
 		commands.put(ParametrName.ADMIN_FIND_USER_TO_CHECK_IN, new AdminFindUserToCheckIn());//+ - 
 		commands.put(ParametrName.ADMIN_CHECK_IN_CLIENT, new AdminCheckInClient());// + +
 		commands.put(ParametrName.ADMIN_GO_TO_CLIENT_PERSONAL_PAGE, new AdminGoToClientPersonalPage());
-		commands.put(ParametrName.UPDATE_CLIENT_DETAILS, new UpdateClientDetails());//+ + 
+		commands.put(ParametrName.UPDATE_CLIENT_DETAILS, new UpdateClientDetails());//+ +
+		commands.put(ParametrName.UPDATE_CLIENT_DETAIL_WITHOUT_BOOKING, new UpdateClientDetailWithoutBooking());
 		commands.put(ParametrName.ADMIN_CHECK_IN_PAYMENT, new AdminCheckInPayment());
+		commands.put(ParametrName.ADMIN_GO_TO_ADDING_NEW_GUESTS, new AdminGoToAddCientGuests());
 		commands.put(ParametrName.ADMIN_ADD_NEW_GUEST, new AdminAddGuestInfo());//- + 
 		commands.put(ParametrName.ADMIN_CLIENT_WAS_CHECKED_IN, new AdminClientWasCheckedIn());//++
 		commands.put(ParametrName.ADMIN_CHECK_OUT_LIST, new AdminCheckOutList());//++

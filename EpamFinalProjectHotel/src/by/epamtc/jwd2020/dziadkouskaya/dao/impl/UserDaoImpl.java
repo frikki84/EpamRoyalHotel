@@ -84,7 +84,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public boolean checkLogin(String login) throws DaoException {
 		boolean result = false;
-		
+
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet set = null;
@@ -116,7 +116,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public boolean checkEmail(String email) throws DaoException {
 		boolean result = false;
-		
+
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet set = null;
@@ -148,7 +148,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public boolean checkPhone(String phone) throws DaoException {
 		boolean result = false;
-		
+
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet set = null;
@@ -162,6 +162,7 @@ public class UserDaoImpl implements UserDao {
 			set = statement.executeQuery(sql);
 			if (set.next()) {
 				result = true;
+
 			}
 
 		} catch (SQLException e) {

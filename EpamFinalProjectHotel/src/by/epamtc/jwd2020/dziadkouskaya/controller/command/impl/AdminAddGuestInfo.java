@@ -25,8 +25,9 @@ import by.epamtc.jwd2020.dziadkouskaya.service.UserService;
 import by.epamtc.jwd2020.dziadkouskaya.service.UserdetailService;
 
 public class AdminAddGuestInfo implements Command {
+	public static final String DEFAULT_STRING_VALUE = "";
 	public static final String DEFAULT_BIRTH_DATE_VALUE = "1971-01-01";
-	public static final String UPDATE_CLIENT_PAGE = "/WEB-INF/jspPages/admin_client_personal_page.jsp";
+	public static final String PATH_TO_PAY = "/WEB-INF/jspPages/admin_client_suum_to_pay.jsp";
 	public static final String PATH_TO_ERROR_PAGE = "mainPage?command=error_page";
 
 	private static final Logger logger = LogManager.getLogger(AdminAddGuestInfo.class);
@@ -42,39 +43,44 @@ public class AdminAddGuestInfo implements Command {
 		int clientId = (int) request.getSession().getAttribute("client_code");
 		int bookingId = (int) request.getSession().getAttribute("client_booking");
 		double sumToPay = 0;
-
-		List<UserDetail> detailList = new ArrayList<UserDetail>();
-
-		String[] firstName = request.getParameterValues("firstName");
-		String[] secondName = request.getParameterValues("secondName");
-		String[] thirdName = request.getParameterValues("thirdName");
-		String[] firstNameEnglish = request.getParameterValues("firstNameEnglish");
-		String[] secondNameEnglish = request.getParameterValues("secondNameEnglish");
-		String[] passportNumber = request.getParameterValues("passportNumber");
-		String[] passportId = request.getParameterValues("passportId");
-		String[] passportOtherInfo = request.getParameterValues("passportOtherInfo");
-		String[] countryName = request.getParameterValues("country");
-		String[] date = request.getParameterValues("birthDate");
-
-		int guestNumber = firstName.length;
-
-		for (int i = 0; i < guestNumber; i++) {
-			Date birthDate = null;
-			if (date[i].equals("")) {
-				birthDate = Date.valueOf(DEFAULT_BIRTH_DATE_VALUE);
-			} else {
-				birthDate = Date.valueOf(date[i]);
-			}
-			Country country = new Country(countryName[i]);
-
-			UserDetail userDetail = new UserDetail(clientId, firstName[i], secondName[i], thirdName[i],
-					firstNameEnglish[i], secondNameEnglish[i], birthDate, passportNumber[i], passportId[i],
-					passportOtherInfo[i], country);
-
-			detailList.add(userDetail);
-		}
-		
+	
 		try {
+			
+			sumToPay = bookingService.findFinalBookingSum(bookingId);
+		
+			request.setAttribute("sum_to_pay", sumToPay);
+
+			List<UserDetail> detailList = new ArrayList<UserDetail>();
+
+			String[] firstName = request.getParameterValues("firstName");
+			String[] secondName = request.getParameterValues("secondName");
+			String[] thirdName = request.getParameterValues("thirdName");
+			String[] firstNameEnglish = request.getParameterValues("firstNameEnglish");
+			String[] secondNameEnglish = request.getParameterValues("secondNameEnglish");
+			String[] passportNumber = request.getParameterValues("passportNumber");
+			String[] passportId = request.getParameterValues("passportId");
+			String[] passportOtherInfo = request.getParameterValues("passportOtherInfo");
+			String[] countryName = request.getParameterValues("country");
+			String[] date = request.getParameterValues("birthDate");
+
+			int guestNumber = firstName.length;
+
+			for (int i = 0; i < guestNumber; i++) {
+				Date birthDate = null;
+				if (date[i] == null || date[i].equals(DEFAULT_STRING_VALUE)) {
+
+					birthDate = Date.valueOf(DEFAULT_BIRTH_DATE_VALUE);
+				} else {
+					birthDate = Date.valueOf(date[i]);
+				}
+				Country country = new Country(countryName[i]);
+
+				UserDetail userDetail = new UserDetail(clientId, firstName[i], secondName[i], thirdName[i],
+						firstNameEnglish[i], secondNameEnglish[i], birthDate, passportNumber[i], passportId[i],
+						passportOtherInfo[i], country);
+
+				detailList.add(userDetail);
+			}
 
 			sumToPay = bookingService.findFinalBookingSum(bookingId);
 			request.setAttribute("sum_to_pay", sumToPay);
@@ -106,7 +112,7 @@ public class AdminAddGuestInfo implements Command {
 
 			request.setAttribute("details_list", detailList);
 
-			request.getRequestDispatcher(UPDATE_CLIENT_PAGE).forward(request, response);
+			request.getRequestDispatcher(PATH_TO_PAY).forward(request, response);
 
 		} catch (ServiceException e) {
 			logger.error("AdminAddGuestInfo ServiceException", e);

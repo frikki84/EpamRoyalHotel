@@ -296,7 +296,8 @@
 											<div class="my_table_booking">
 						<form action="mainPage" method="post">
 							<input type="hidden" name="command"
-								value="ADMIN_GO_TO_CLIENT_PERSONAL_PAGE" /> <input type="submit"
+								value="ADMIN_CHECK_IN_CLIENT" /> 
+								<input type="submit"
 								value="${admin_client_go_to_pers_page}" class="my_table_booking_submit" />
 							<div class="my_table_booking"></div>
 

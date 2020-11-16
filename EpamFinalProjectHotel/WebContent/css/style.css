@@ -137,6 +137,12 @@ button:focus {
 	
 }
 
+.my_row_div {
+	display: flex;
+	flex-direction: row;
+	
+}
+
 .my_form_control {
 	text-align: center;
 	width: 50%;

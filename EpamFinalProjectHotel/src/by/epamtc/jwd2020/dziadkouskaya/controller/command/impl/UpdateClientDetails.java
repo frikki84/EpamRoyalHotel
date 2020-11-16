@@ -40,7 +40,8 @@ public class UpdateClientDetails implements Command {
 	public static final String PARAMETR_CLIENT_EMAIL = "email";
 	public static final String PARAMETR_CLIENT_PHONE = "phone";
 	public static final String PATH_TO_PERSONAL_DATA_PAGE = "/WEB-INF/jspPages/admin_client_personal_page.jsp";
-	
+	public static final String ADMIN_CLIENT_PAGE_WITHOUT_CHECK_IN = "/WEB-INF/jspPages/admin_personal_page_only.jsp";
+
 	public static final ClientCategory DEFAULT_CLIENT_CATEGORY = new ClientCategory(1, "Клиент-заказчик");
 	public static Role DEFAULT_ROLE_VALUE = new Role(4);
 	public static String DEFAULT_BIRTH_DATE_VALUE = "1971-01-01";
@@ -60,6 +61,7 @@ public class UpdateClientDetails implements Command {
 
 		int clientCode = (int) request.getSession().getAttribute("client_code");
 		int bookingId = (int) request.getSession().getAttribute("client_booking");
+		System.out.println(bookingId);
 
 		try {
 
@@ -77,7 +79,7 @@ public class UpdateClientDetails implements Command {
 
 			String date = request.getParameter(PARAMETR_CLIENT_BIRTHDATE);
 			Date birthDate = null;
-			
+
 			if (date == null || date.equals("")) {
 				birthDate = Date.valueOf(DEFAULT_BIRTH_DATE_VALUE);
 			} else {
@@ -92,7 +94,6 @@ public class UpdateClientDetails implements Command {
 			userdetailService.updateUserDetails(userDetail);
 
 			List<Country> countryList = countryService.findCountryList();
-
 			request.setAttribute("countryList", countryList);
 
 			UserDetail userDetailFromDB = userdetailService.findUserDetails(clientCode);
@@ -123,18 +124,24 @@ public class UpdateClientDetails implements Command {
 			int guestNumber = bookingService.findGuestNumberWithoutUser(bookingId);
 			request.setAttribute("guest_number", guestNumber);
 
-			String adress = ParametrName.UPDATE_CLIENT_DETAILS.toString() + "&" + PARAMETR_CLIENT_NAME + "=" + firstName + "&"
-					+ PARAMETR_CLIENT_SURNAME + "=" + secondName + "&" + PARAMETR_CLIENT_THIRD_NAME + "=" + thirdName
-					+ "&" + PARAMETR_CLIENT_ENGLISH_NAME + "=" + firstNameEnglish + "&"
+			String adress = ParametrName.UPDATE_CLIENT_DETAILS.toString() + "&" + PARAMETR_CLIENT_NAME + "=" + firstName
+					+ "&" + PARAMETR_CLIENT_SURNAME + "=" + secondName + "&" + PARAMETR_CLIENT_THIRD_NAME + "="
+					+ thirdName + "&" + PARAMETR_CLIENT_ENGLISH_NAME + "=" + firstNameEnglish + "&"
 					+ PARAMETR_CLIENT_ENGLISH_SURNAME + "=" + secondNameEnglish + "&" + PARAMETR_CLIENT_BIRTHDATE + "="
-					+ date + "&" + PARAMETR_CLIENT_PASSPORT + "=" + passportNumber + "&"
-					+ PARAMETR_CLIENT_PASSPORT_ID + "=" + passportId + "&" + PARAMETR_CLIENT_OTER_INFO + "="
-					+ passportOtherInfo + "&" + PARAMETR_CLIENT_COUNTRY + "=" + countryName + "&"
-					+ PARAMETR_CLIENT_EMAIL + "=" + email + "&" + PARAMETR_CLIENT_PHONE + "=" + phone;
-			
+					+ date + "&" + PARAMETR_CLIENT_PASSPORT + "=" + passportNumber + "&" + PARAMETR_CLIENT_PASSPORT_ID
+					+ "=" + passportId + "&" + PARAMETR_CLIENT_OTER_INFO + "=" + passportOtherInfo + "&"
+					+ PARAMETR_CLIENT_COUNTRY + "=" + countryName + "&" + PARAMETR_CLIENT_EMAIL + "=" + email + "&"
+					+ PARAMETR_CLIENT_PHONE + "=" + phone;
+
 			request.setAttribute("address", adress);
 
-			request.getRequestDispatcher(PATH_TO_PERSONAL_DATA_PAGE).forward(request, response);
+			if (bookingId == 0) {
+				request.getRequestDispatcher(ADMIN_CLIENT_PAGE_WITHOUT_CHECK_IN).forward(request, response);
+
+			} else {
+
+				request.getRequestDispatcher(PATH_TO_PERSONAL_DATA_PAGE).forward(request, response);
+			}
 
 		} catch (ServiceException e) {
 			logger.error("UpdateClientDetails ServiceException", e);

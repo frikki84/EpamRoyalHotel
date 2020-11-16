@@ -34,18 +34,17 @@ public class UserServiceImpl implements UserService {
 
 		try {
 			boolean loginCheck = userDao.checkLogin(login);
-
 			boolean emailCheck = userDao.checkEmail(email);
 			boolean phoneCheck = userDao.checkPhone(phone);
 
 			if (loginCheck) {
 				result = MESSAGE_LOGIN_EXIST_IN_DB;
 
-			} else if (emailCheck) {
+			} else if (emailCheck && !email.equals(DEFAULT_MESSAGE_VALUE)) {
 
 				result = MESSAGE_EMAIL_EXIST_IN_DB;
 
-			} else if (phoneCheck) {
+			} else if (phoneCheck && !phone.equals(DEFAULT_MESSAGE_VALUE)) {
 				result = MESSAGE_PHONE_EXIST_IN_DB;
 			}
 
