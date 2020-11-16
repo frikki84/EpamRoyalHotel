@@ -51,8 +51,11 @@ public class UserRegistration implements Command {
 			login = request.getParameter("login");
 
 			email = request.getParameter("email");
+
 			phone = request.getParameter("phone");
+
 			password = request.getParameter("password");
+
 			passwordRepeat = request.getParameter("passwordRepeat");
 
 			if (!userService.checkNewUserPassword(password, passwordRepeat)) {
@@ -62,11 +65,15 @@ public class UserRegistration implements Command {
 				request.getRequestDispatcher(PATH_TO_PERSONAL_DATA_PAGE).forward(request, response);
 
 			} else if (!UserValidation.checkUserPhoneNumber(phone) && !phone.equals(DEFAULT_STRING_VALUE)) {
+
 				request.setAttribute("resultAnswer", MSG_ABOUT_WRONG_PHONE);
+
 				request.getRequestDispatcher(PATH_TO_PERSONAL_DATA_PAGE).forward(request, response);
 
 			} else if (!UserValidation.checkUserEmail(email) && !phone.equals(DEFAULT_STRING_VALUE)) {
+
 				request.setAttribute("resultAnswer", MSG_ABOUT_WRONG_EMAIL);
+
 				request.getRequestDispatcher(PATH_TO_PERSONAL_DATA_PAGE).forward(request, response);
 
 			} else {
