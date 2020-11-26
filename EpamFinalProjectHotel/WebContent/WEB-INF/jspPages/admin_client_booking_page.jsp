@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Client check-in</title>
+<title>Addmin add new client</title>
 
 <fmt:setLocale value="${sessionScope.local}" />
 
@@ -41,6 +41,29 @@
 <fmt:message bundle="${loc}" key="language_button_ru"
 	var="language_button_ru" />
 <fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
+<fmt:message bundle="${loc}" key="reg_form_login" var="reg_form_login" />
+<fmt:message bundle="${loc}" key="reg_form_password"
+	var="reg_form_password" />
+<fmt:message bundle="${loc}" key="reg_form_repeat_password"
+	var="reg_form_repeat_password" />
+<fmt:message bundle="${loc}" key="reg_form_phone" var="reg_form_phone" />
+<fmt:message bundle="${loc}" key="reg_form_email" var="reg_form_email" />
+<fmt:message bundle="${loc}" key="reg_form_title" var="reg_form_title" />
+<fmt:message bundle="${loc}" key="submit" var="submit" />
+<fmt:message bundle="${loc}" key="reg_form_check_password"
+	var="reg_form_check_password" />
+<base>
+<fmt:message bundle="${loc}" key="booking_title" var="booking_title" />
+<fmt:message bundle="${loc}" key="booking_arravial"
+	var="booking_arravial" />
+<fmt:message bundle="${loc}" key="booking_depatchure"
+	var="booking_depatchure" />
+<fmt:message bundle="${loc}" key="booking_date" var="booking_date" />
+<fmt:message bundle="${loc}" key="booking_adult" var="booking_adult" />
+<fmt:message bundle="${loc}" key="booking_children"
+	var="booking_children" />
+<fmt:message bundle="${loc}" key="booking_find_roon"
+	var="booking_find_roon" />
 
 
 
@@ -207,41 +230,58 @@
 					<h2 class="my_table_title">${check_in_title}</h2>
 					<h2 class="my_table_title wrong">${wrong_login}</h2>
 					<div class="row">
-						<div class="col-xs-12 col-sm-9">								
-						<div class="panel-body">
-									<div class="my_table_booking ">
-										<form class="form-horizontal_my " action="mainPage" method="post">
-											<input type="hidden" name="command" value="admin_user_booking" /> 
-												<input type="text" name="user_info" /> 
-												<br /> 
-												<input type="submit"
-												class="my_form_control" value="${check_in_check}" />
+						<div class="col-xs-12 col-sm-9">
+							<div class="panel-body">
+								<div class="view-account_big">
+
+									<div class="hotel_booking_table">
+										<div class="col-md-3_my">
+											<h4 class="my_table_title">${booking_title}</h4>
+											<br />
+											<h4 class="my_table_title wrong">${wrong_date}</h4>
+										</div>
+
+
+										<form action="mainPage" method="post" class="form-group_my">
+
+											<input type="hidden" name="command"
+												value="admin_client_booking_list" />
+
+											<div class="my_table_booking_submit">${booking_arravial}</div>
+											<input type="date" placeholder="${booking_date}"
+												class="my_date" name="startDate" />
+
+											<div class="my_table_booking_submit">${booking_depatchure}</div>
+											<input type="date" placeholder="${booking_date}"
+												class="my_date" name="endDate" />
+
+											<div class="my_table_booking_submit">${booking_adult}</div>
+
+											<select class="my_table_booking_submit" name="peopleNumber">
+												<c:forEach items="${room_capacity}" var="item">
+													<option value="${item}">${item}</option>
+												</c:forEach>
+											</select>
+
+											<div class="my_table_booking_submit">${booking_children}</div>
+
+											<select name="childrenNumber" class="my_table_booking_submit">
+												<option selected value="0">0</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+											</select> <br /> <input type="submit" value="${booking_find_roon}"
+												class="my_table_booking_submit" />
+
 										</form>
 									</div>
-								</div>
-								<br />
-								<div class="my_table_booking ">
-									<div class="form-group">
-										<form class="form-horizontal_my " action="mainPage" method="post">
-										<input type="hidden" name="command" value="admin_go_to_adding_new_client" /> 
-											<input type="submit" class="my_form_control"
-												value="${check_in_new_client}" />
-										</form>
-									</div>
+
 								</div>
 							</div>
 						</div>
 					</div>
-
-
-
 				</div>
-
-
-
 			</div>
 		</div>
 	</section>
-
 </body>
 </html>

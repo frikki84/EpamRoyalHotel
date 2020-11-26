@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Client check-in</title>
+<title>Addmin add new client</title>
 
 <fmt:setLocale value="${sessionScope.local}" />
 
@@ -41,6 +41,17 @@
 <fmt:message bundle="${loc}" key="language_button_ru"
 	var="language_button_ru" />
 <fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
+<fmt:message bundle="${loc}" key="reg_form_login" var="reg_form_login" />
+<fmt:message bundle="${loc}" key="reg_form_password"
+	var="reg_form_password" />
+<fmt:message bundle="${loc}" key="reg_form_repeat_password"
+	var="reg_form_repeat_password" />
+<fmt:message bundle="${loc}" key="reg_form_phone" var="reg_form_phone" />
+<fmt:message bundle="${loc}" key="reg_form_email" var="reg_form_email" />
+<fmt:message bundle="${loc}" key="reg_form_title" var="reg_form_title" />
+<fmt:message bundle="${loc}" key="submit" var="submit" />
+<fmt:message bundle="${loc}" key="reg_form_check_password"
+	var="reg_form_check_password" />
 
 
 
@@ -207,40 +218,72 @@
 					<h2 class="my_table_title">${check_in_title}</h2>
 					<h2 class="my_table_title wrong">${wrong_login}</h2>
 					<div class="row">
-						<div class="col-xs-12 col-sm-9">								
-						<div class="panel-body">
-									<div class="my_table_booking ">
-										<form class="form-horizontal_my " action="mainPage" method="post">
-											<input type="hidden" name="command" value="admin_user_booking" /> 
-												<input type="text" name="user_info" /> 
-												<br /> 
-												<input type="submit"
-												class="my_form_control" value="${check_in_check}" />
-										</form>
+						<div class="col-xs-12 col-sm-9">
+							<div class="panel-body">
+							<!-- 	<div class="my_table_booking "> -->
+									<div class="row">
+										<div class="col-md-6 col-md-offset-3 well">
+											<h3 class="text-center">${reg_form_title}</h3>
+
+											<div class="wrong_password">
+												<c:out value="${resultAnswer}"></c:out>
+											</div>
+
+											<form class="form" action="mainPage" method="post">
+
+												<input type="hidden" name="command"
+													value="admin_add_new_client" />
+
+												<div class="col-xs-12">
+													<div class="form-group">
+
+														<input type="text" class="form-control"
+															placeholder="${reg_form_login}" name="login" required />
+													</div>
+												</div>
+												<div class="col-xs-12">
+													<div class="form-group">
+														<input type="email" class="form-control"
+															placeholder="${reg_form_email}" name="email" />
+													</div>
+												</div>
+												<div class="col-xs-12">
+													<div class="form-group">
+														<input type="text" class="form-control"
+															placeholder="${reg_form_phone}" name="phone" />
+													</div>
+												</div>
+
+												<div class="col-xs-12">
+													<div class="form-group">
+														<input type="password" class="form-control"
+															placeholder="${reg_form_password}" name="password" />
+													</div>
+												</div>
+												<div class="col-xs-12">
+													<div class="form-group">
+														<input type="password" class="form-control"
+															placeholder="${reg_form_repeat_password}"
+															name="passwordRepeat" />
+													</div>
+												</div>
+												<div class="text-center col-xs-12">
+
+													<input type="submit" class="form-control" value="${submit}" />
+												</div>
+
+											</form>
+
+										</div>
 									</div>
-								</div>
-								<br />
-								<div class="my_table_booking ">
-									<div class="form-group">
-										<form class="form-horizontal_my " action="mainPage" method="post">
-										<input type="hidden" name="command" value="admin_go_to_adding_new_client" /> 
-											<input type="submit" class="my_form_control"
-												value="${check_in_new_client}" />
-										</form>
-									</div>
+
 								</div>
 							</div>
 						</div>
 					</div>
-
-
-
 				</div>
-
-
-
 			</div>
-		</div>
+	<!-- 	</div> -->
 	</section>
 
 </body>

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Client check-in</title>
+<title>Addmin add new client</title>
 
 <fmt:setLocale value="${sessionScope.local}" />
 
@@ -40,7 +40,32 @@
 	var="language_button_en" />
 <fmt:message bundle="${loc}" key="language_button_ru"
 	var="language_button_ru" />
-<fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
+<fmt:message bundle="${loc}" key="booking_resultlist_title"
+	var="booking_resultlist_title" />
+<fmt:message bundle="${loc}" key="booking_resultlist_room"
+	var="booking_resultlist_room" />
+<fmt:message bundle="${loc}" key="booking_resultlist_floor"
+	var="booking_resultlist_floor" />
+<fmt:message bundle="${loc}" key="booking_resultlist_roomcategory"
+	var="booking_resultlist_roomcategory" />
+<fmt:message bundle="${loc}" key="booking_resultlist_peoplenumber"
+	var="booking_resultlist_peoplenumber" />
+<fmt:message bundle="${loc}" key="booking_resultlist_price_adult"
+	var="booking_resultlist_price" />
+<fmt:message bundle="${loc}" key="booking_resultlist_check"
+	var="booking_resultlist_check" />
+<fmt:message bundle="${loc}" key="booking_resultlist_baby"
+	var="booking_resultlist_baby" />
+<fmt:message bundle="${loc}" key="booking_resultlist_prepayment"
+	var="booking_resultlist_prepayment" />
+<fmt:message bundle="${loc}" key="booking_resultlist_full"
+	var="booking_resultlist_full" />
+<fmt:message bundle="${loc}" key="booking_resultlist_book"
+	var="booking_resultlist_book" />
+<fmt:message bundle="${loc}" key="booking_resultlist_from_date"
+	var="booking_resultlist_from_date" />
+<fmt:message bundle="${loc}" key="booking_resultlist_to_date"
+	var="booking_resultlist_to_date" />
 
 
 
@@ -207,41 +232,61 @@
 					<h2 class="my_table_title">${check_in_title}</h2>
 					<h2 class="my_table_title wrong">${wrong_login}</h2>
 					<div class="row">
-						<div class="col-xs-12 col-sm-9">								
-						<div class="panel-body">
-									<div class="my_table_booking ">
-										<form class="form-horizontal_my " action="mainPage" method="post">
-											<input type="hidden" name="command" value="admin_user_booking" /> 
-												<input type="text" name="user_info" /> 
-												<br /> 
-												<input type="submit"
-												class="my_form_control" value="${check_in_check}" />
-										</form>
-									</div>
-								</div>
-								<br />
+						<div class="col-xs-12 col-sm-9">
+							<div class="panel-body">
 								<div class="my_table_booking ">
-									<div class="form-group">
-										<form class="form-horizontal_my " action="mainPage" method="post">
-										<input type="hidden" name="command" value="admin_go_to_adding_new_client" /> 
-											<input type="submit" class="my_form_control"
-												value="${check_in_new_client}" />
-										</form>
-									</div>
+									<div class="my_table_title">${booking_resultlist_title}</div>
+
+									<div class="my_table_title">${booking_resultlist_from_date}
+										${booking_info.get(0).startDate} ${booking_resultlist_to_date}
+										${booking_info.get(0).endDate}</div>
+
+									<!-- <div class="my_booking_table"> -->
+									<form action="mainPage" method="post">
+										<input type="hidden" name="command" value="admin_client_new_booking" />
+
+										<table border="2" class="my_table_booking">
+											<tr>
+												<th>${booking_resultlist_room}</th>
+												<th>${booking_resultlist_floor}</th>
+												<th>${booking_resultlist_roomcategory}</th>
+												<th>${booking_resultlist_peoplenumber}</th>
+												<th>${booking_resultlist_price}</th>
+												<th>${booking_resultlist_baby}</th>
+												<th>${booking_resultlist_full}</th>
+												<th>${booking_resultlist_prepayment}</th>
+												<th></th>
+
+											</tr>
+											<c:forEach items="${booking_info}" var="item"
+												varStatus="loop">
+												<tr>
+													<th width="10%" align="center">${item.room.hotelRoomNumber}</th>
+													<th width="10%" align="center">${item.room.floorNumber}</th>
+													<th width="20%" align="center">${item.room.roomCategory.roomCategoryName}</th>
+													<th width="10%" align="center">${item.room.roomCategory.peopleNumberInRoom}</th>
+													<th width="10%" align="center">${item.basicPayment}</th>
+													<th width="10%" align="center">${item.babyExpenceSum}</th>
+													<th width="10%" align="center">${item.basicPayment + item.babyExpenceSum}</th>
+													<th width="10%" align="center">${item.prepaymentSum}</th>
+													<th><button type="submit"
+															class="my_table_booking_submit">${booking_resultlist_book}
+															<c:set var="booking_info" scope="session" value="${item}" />
+														</button></th>
+
+												</tr>
+											</c:forEach>
+										</table>
+									</form>
 								</div>
 							</div>
 						</div>
 					</div>
-
-
-
 				</div>
-
-
-
 			</div>
 		</div>
 	</section>
+
 
 </body>
 </html>

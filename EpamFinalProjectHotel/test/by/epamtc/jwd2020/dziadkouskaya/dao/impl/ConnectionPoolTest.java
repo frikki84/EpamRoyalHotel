@@ -1,4 +1,4 @@
-package by.epamtc.jwd2020.dziadkouskaya.dao.connection_pool;
+package by.epamtc.jwd2020.dziadkouskaya.dao.impl;
 
 import java.sql.Array;
 import java.sql.Blob;
@@ -17,7 +17,6 @@ import java.sql.SQLXML;
 import java.sql.Savepoint;
 import java.sql.Statement;
 import java.sql.Struct;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -28,12 +27,22 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import by.epamtc.jwd2020.dziadkouskaya.dao.DaoException;
-import by.epamtc.jwd2020.dziadkouskaya.dao.impl.BookingDaoImpl;
 
-public class ConnectionPool {
-	private static final ConnectionPool instance = new ConnectionPool();
+
+
+
+public class ConnectionPoolTest {
+	public static final String DB_DRIVER = "com.mysql.jdbc.Driver";
+	public static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/magichotel_test?useSSL=false";
+	public static final String DB_USER = "root";
+	public static final String DB_PASSWORD = "24081984";
+	public static final String DB_POOL_SIZE = "5";
 	
-	private static final Logger logger = LogManager.getLogger(ConnectionPool.class);
+	
+	
+private static final ConnectionPoolTest instance = new ConnectionPoolTest();
+	
+	private static final Logger logger = LogManager.getLogger(ConnectionPoolTest.class);
 	
 	// очередь свободных коннекшенов
 	private BlockingQueue<Connection> connectionQueue;
@@ -46,15 +55,14 @@ public class ConnectionPool {
 	private String password;
 	private int poolSize;
 
-	public ConnectionPool()  {
-		DBResourceManager dbResourceManager = DBResourceManager.getInstance();
-		this.driverName = dbResourceManager.getValue(DBParametr.DB_DRIVER);
-		this.url = dbResourceManager.getValue(DBParametr.DB_URL);
-		this.user = dbResourceManager.getValue(DBParametr.DB_USER);
-		this.password = dbResourceManager.getValue(DBParametr.DB_PASSWORD);
+	public ConnectionPoolTest()  {		
+		this.driverName = DB_DRIVER;
+		this.url = DB_URL;
+		this.user = DB_USER;
+		this.password = DB_PASSWORD;
 
 		try {
-			this.poolSize = Integer.parseInt(dbResourceManager.getValue(DBParametr.DB_POOL_SIZE));
+			this.poolSize = Integer.parseInt(DB_POOL_SIZE);
 		} catch (Exception e) {
 			poolSize = 5;
 		}
@@ -71,7 +79,7 @@ public class ConnectionPool {
 
 	}
 	
-	public static ConnectionPool getInstance() {
+	public static ConnectionPoolTest getInstance() {
 		return instance;
 	}
 
@@ -93,8 +101,8 @@ public class ConnectionPool {
 			}
 
 		} catch (SQLException e) {
-			logger.error("SQLConnections in ConnectionPool", e);
-			throw new DaoException("SQLConnections in ConnectionPool", e);
+			logger.error("SQLConnections in ConnectionPoolTestTest", e);
+			throw new DaoException("SQLConnections in ConnectionPoolTest", e);
 
 		} catch (ClassNotFoundException e) {
 			logger.error("Can't find database driver class", e);
@@ -113,7 +121,7 @@ public class ConnectionPool {
 		}
 	}
 
-	// уничтожение пула коннекшенов
+	
 	private void clearConnectionQueue() throws DaoException {
 		try {
 			
@@ -196,6 +204,8 @@ public class ConnectionPool {
             }
         }
     }
+	
+	
 
 	class PooledConnection implements Connection {
 		private Connection connection;

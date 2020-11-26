@@ -49,6 +49,8 @@ public class AdminUserBooking implements Command {
 		try {
 			checkingResult = userService.checkClient(clientName);
 
+			clientId = (int) request.getSession().getAttribute("client_code");
+
 			if (checkingResult.equals(DEFAULT_STRING_IF_USER_LOGIN_WAS_FIND_IN_DB)) {
 
 				clientId = userService.findUserCode(clientName);
@@ -62,6 +64,14 @@ public class AdminUserBooking implements Command {
 
 				request.getRequestDispatcher(PATH_TO_CLIENT_BOOKING_PAGE).forward(request, response);
 
+			} else if (clientId != 0) {
+				String userInfoForGreetings = userDetailService.findClientDetails(clientId);
+				request.setAttribute("userInfoForGreetings", userInfoForGreetings);
+
+				List<BookingTransferObject> clientBookings = bookingService.findUserBookings(clientId);
+				request.setAttribute("booking_list", clientBookings);
+
+				request.getRequestDispatcher(PATH_TO_CLIENT_BOOKING_PAGE).forward(request, response);
 			} else {
 				request.setAttribute("wrong_login", checkingResult);
 				request.getRequestDispatcher(PATH_TO_PAGE_REPEAT_LOGIN).forward(request, response);
