@@ -83,6 +83,28 @@ public class User implements Serializable {
 		this.activity = DEFAULT_USER_ACTIVITY;
 
 	}
+	
+
+	public User(String login, String password, String email, Role role, UserActivity activity) {
+		super();
+		this.login = login;
+		this.password = password;
+		this.email = email;
+		this.role = role;
+		this.activity = activity;
+	}
+
+
+	public User(String login, String password, String email, String phone, Role role, UserActivity activity) {
+		super();
+		this.login = login;
+		this.password = password;
+		this.email = email;
+		this.phone = phone;
+		this.role = role;
+		this.activity = activity;
+	}
+
 
 	public User(int userId, String login, String password, String email, String phone, Role role,
 			UserActivity activity) {

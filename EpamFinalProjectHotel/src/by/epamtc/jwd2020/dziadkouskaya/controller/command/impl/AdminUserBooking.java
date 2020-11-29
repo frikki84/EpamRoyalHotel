@@ -49,7 +49,9 @@ public class AdminUserBooking implements Command {
 		try {
 			checkingResult = userService.checkClient(clientName);
 
-			clientId = (int) request.getSession().getAttribute("client_code");
+			if (request.getSession().getAttribute("client_code") != null) {
+				clientId = (int) request.getSession().getAttribute("client_code");
+			}
 
 			if (checkingResult.equals(DEFAULT_STRING_IF_USER_LOGIN_WAS_FIND_IN_DB)) {
 

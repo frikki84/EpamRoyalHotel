@@ -30,7 +30,11 @@ public class AdminClientWasCheckedIn implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int bookingId = (int) request.getSession().getAttribute("client_booking");
+		int bookingId = Integer.parseInt(request.getParameter("client_booking"));
+		
+		/*
+		 * int bookingId = (int) request.getSession().getAttribute("client_booking");
+		 */
 		int clientId = (int) request.getSession().getAttribute("client_code");
 
 		try {

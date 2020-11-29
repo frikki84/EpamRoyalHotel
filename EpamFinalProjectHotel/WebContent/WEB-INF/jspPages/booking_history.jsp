@@ -24,56 +24,42 @@
 	<fmt:message bundle="${loc}" key="client_dp_history"
 		var="client_dp_history" />
 	<fmt:message bundle="${loc}" key="client_dp_exit" var="client_dp_exit" />
-
-
-
-	<fmt:message bundle="${loc}" key="booking_history_title"
-		var="booking_history_title" />
-
+	<fmt:message bundle="${loc}" key="booking_history_title" var="booking_history_title" />
 	<fmt:message bundle="${loc}" key="booking_history_number"
 		var="booking_history_number" />
-
 	<fmt:message bundle="${loc}" key="booking_history_startDate"
 		var="booking_history_startDate" />
-
 	<fmt:message bundle="${loc}" key="booking_history_endDate"
 		var="booking_history_endDate" />
-
 	<fmt:message bundle="${loc}" key="booking_resultlist_room"
 		var="booking_resultlist_room" />
-
 	<fmt:message bundle="${loc}" key="booking_resultlist_peoplenumber"
 		var="booking_resultlist_peoplenumber" />
-
 	<fmt:message bundle="${loc}" key="booking_history_childen"
 		var="booking_history_childen" />
-
-
 	<fmt:message bundle="${loc}" key="booking_resultlist_full"
 		var="booking_resultlist_full" />
-
 	<fmt:message bundle="${loc}" key="booking_history_prepayment"
 		var="booking_history_prepayment" />
-
 	<fmt:message bundle="${loc}" key="booking_history_prepayment_status"
 		var="booking_history_prepayment_status" />
-
 	<fmt:message bundle="${loc}" key="booking_history_prepaiment_paid"
 		var="booking_history_prepaiment_paid" />
-
-
 	<fmt:message bundle="${loc}" key="booking_history_pay"
 		var="booking_history_pay" />
-
 	<fmt:message bundle="${loc}" key="booking_history_category"
 		var="booking_history_category" />
 	<fmt:message bundle="${loc}" key="home_button" var="home_button" />
 	<fmt:message bundle="${loc}" key="language_button"
 		var="language_button" />
+	<fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
 	<fmt:message bundle="${loc}" key="language_button_en"
 		var="language_button_en" />
 	<fmt:message bundle="${loc}" key="language_button_ru"
 		var="language_button_ru" />
+		<fmt:message bundle="${loc}" key="booking_details_paid"
+		var="booking_details_paid" />
+
 
 
 	<!-- <link rel="stylesheet" href="css/Personal_data_style.css" /> -->
@@ -236,13 +222,32 @@
 									<th width="10%" align="center">${item.childrenNumber}</th>
 									<th width="10%" align="center">${item.fullPrice}</th>
 									<th width="10%" align="center">${item.prepayment}</th>
-									<th width="10%" align="center"><c:if
-											test="${item.isPrepayment == true}">
-											<c:out value="${booking_history_prepaiment_paid}"></c:out>
-										</c:if> <c:if test="${item.isPrepayment==false}">
-											<button type="submit" name="prepayment" class="my_table_booking_submit"
-												value="${item.bookingId}">${booking_history_pay}</button>
-										</c:if></th>
+									<th width="10%" align="center">
+									<c:choose>
+									<c:when test="${item.isPrepayment == true && item.isBookingPaid == false}">${booking_history_prepaiment_paid}"</c:when>
+									<c:when test="${item.isBookingPaid == true}">${booking_details_paid}}"</c:when>
+									<c:otherwise>
+									<button type="submit" name="prepayment" class="my_table_booking_submit"
+											value="${item.bookingId}">${booking_history_pay}</button>		
+																	
+									</c:otherwise>				
+									
+									
+									
+									</c:choose>							
+									
+								<%-- 	
+									<c:if test="${item.isPrepayment == true}">
+											<c:out value="${booking_history_prepaiment_paid}"></c:out></c:if> 
+									<c:if test="${item.isPrepayment==false}">
+										<button type="submit" name="prepayment" class="my_table_booking_submit"
+											value="${item.bookingId}">${booking_history_pay}</button>
+										</c:if>
+									<c:if test="${item.isBookingPaid == true}">
+									<c:out value="${booking_details_paid}"></c:out></c:if>						
+										 --%>
+										
+										</th>
 								</tr>
 
 							</c:forEach>

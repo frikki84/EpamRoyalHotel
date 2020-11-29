@@ -52,7 +52,7 @@
 <fmt:message bundle="${loc}" key="submit" var="submit" />
 <fmt:message bundle="${loc}" key="reg_form_check_password"
 	var="reg_form_check_password" />
-<base>
+<fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
 <fmt:message bundle="${loc}" key="booking_title" var="booking_title" />
 <fmt:message bundle="${loc}" key="booking_arravial"
 	var="booking_arravial" />

@@ -18,10 +18,10 @@ public class BookingTransferObject implements Serializable {
 	private double prepayment;
 	private boolean isPrepayment;
 	private boolean isBookingPaid;
+	
 
 	public BookingTransferObject() {
-		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public BookingTransferObject(Date startDate, Date endDate, String hotelRoomNumber, int peopleNumberInRoom,
@@ -67,7 +67,7 @@ public class BookingTransferObject implements Serializable {
 	public BookingTransferObject(Date startDate, Date endDate, String hotelRoomNumber, String roomCategoryName,
 			int peopleNumberInRoom, int childrenNumber, double fullPrice, double prepayment, boolean isPrepayment,
 			boolean isBookingPaid) {
-		super();
+		
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.hotelRoomNumber = hotelRoomNumber;
@@ -79,11 +79,13 @@ public class BookingTransferObject implements Serializable {
 		this.isPrepayment = isPrepayment;
 		this.isBookingPaid = isBookingPaid;
 	}
+	
+	
 
 	public BookingTransferObject(int bookingId, Date startDate, Date endDate, String hotelRoomNumber,
 			String roomCategoryName, int peopleNumberInRoom, int childrenNumber, double fullPrice, double prepayment,
 			boolean isPrepayment, boolean isBookingPaid) {
-		super();
+		
 		this.bookingId = bookingId;
 		this.startDate = startDate;
 		this.endDate = endDate;

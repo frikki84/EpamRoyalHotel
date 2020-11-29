@@ -44,6 +44,7 @@
 <fmt:message bundle="${loc}" key="reg_form_login" var="reg_form_login" />
 <fmt:message bundle="${loc}" key="reg_form_password"
 	var="reg_form_password" />
+<fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
 <fmt:message bundle="${loc}" key="reg_form_repeat_password"
 	var="reg_form_repeat_password" />
 <fmt:message bundle="${loc}" key="reg_form_phone" var="reg_form_phone" />

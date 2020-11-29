@@ -13,7 +13,7 @@
 <fmt:setLocale value="${sessionScope.local}" />
 
 <fmt:setBundle basename="resources.local" var="loc" />
-
+<fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
 <fmt:message bundle="${loc}" key="admin_navigate_checkin"
 	var="admin_navigate_checkin" />
 <fmt:message bundle="${loc}" key="admin_navigate_add_tax"

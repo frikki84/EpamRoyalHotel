@@ -30,7 +30,7 @@
 	var="admin_navigate_change_admin_info" />
 <fmt:message bundle="${loc}" key="admin_navigate_exit"
 	var="admin_navigate_exit" />
-
+<fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
 <fmt:message bundle="${loc}" key="admin_client_pers_info"
 	var="admin_client_pers_info" />
 <fmt:message bundle="${loc}" key="client_dp_country"

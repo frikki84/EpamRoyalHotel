@@ -41,7 +41,7 @@
 <fmt:message bundle="${loc}" key="language_button_ru"
 	var="language_button_ru" />
 <fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
-
+<fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
 
 
 <link rel="stylesheet"

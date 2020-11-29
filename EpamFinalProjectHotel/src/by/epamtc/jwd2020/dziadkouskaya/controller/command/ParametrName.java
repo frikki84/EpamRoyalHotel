@@ -2,6 +2,7 @@ package by.epamtc.jwd2020.dziadkouskaya.controller.command;
 
 public enum ParametrName {
 
+	GO_TO_CONTACTS,
 	GO_TO_FIRST_PAGE, 
 	GO_TO_REGISTRATION_PAGE, 
 	GO_TO_LOGINATION_PAGE, 
@@ -43,7 +44,6 @@ public enum ParametrName {
 	ADMIN_PRICES_DELETE, 
 	ADMIN_PRICES_ADD,
 	ADMIN_PRICE_GO_TO_ADDING_PAGE,
-	Go_TO_CONTACTS,
 	LOCALE_CHANGE,
 	ERROR_PAGE
 

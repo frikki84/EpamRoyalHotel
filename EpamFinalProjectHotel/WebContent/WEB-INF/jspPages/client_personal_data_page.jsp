@@ -33,6 +33,7 @@
 	var="client_dp_third_name" />
 <fmt:message bundle="${loc}" key="client_dp_name_english"
 	var="client_dp_name_english" />
+<fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
 <fmt:message bundle="${loc}" key="client_dp_surname_english"
 	var="client_dp_surname_english" />
 <fmt:message bundle="${loc}" key="client_dp_birth" var="client_dp_birth" />

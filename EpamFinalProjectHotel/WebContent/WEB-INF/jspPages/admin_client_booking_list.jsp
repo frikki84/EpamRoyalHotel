@@ -54,6 +54,7 @@
 	var="booking_resultlist_price" />
 <fmt:message bundle="${loc}" key="booking_resultlist_check"
 	var="booking_resultlist_check" />
+<fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
 <fmt:message bundle="${loc}" key="booking_resultlist_baby"
 	var="booking_resultlist_baby" />
 <fmt:message bundle="${loc}" key="booking_resultlist_prepayment"

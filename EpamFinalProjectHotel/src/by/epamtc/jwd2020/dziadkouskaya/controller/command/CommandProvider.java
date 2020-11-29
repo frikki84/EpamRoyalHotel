@@ -24,11 +24,10 @@ import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.AdminPriceAdd;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.AdminDeletePrice;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.AdminUserBooking;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.AdminWelcomeNewClient;
-import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.ChangeLocale;
-import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.Contacts;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.DeleteUser;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.GoToBookingHistory;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.GoToBookingPage;
+import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.GoToContacts;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.GoToErrorPage;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.GoToFirstPage;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.GoToLoginationPage;
@@ -58,6 +57,7 @@ public class CommandProvider {
 	
 	public CommandProvider() {
 		//первый +/- адрес, второй - логгер
+		commands.put(ParametrName.GO_TO_CONTACTS, new GoToContacts());
 		commands.put(ParametrName.GO_TO_FIRST_PAGE, new GoToFirstPage());//+ +
 		commands.put(ParametrName.GO_TO_LOGINATION_PAGE, new GoToLoginationPage());//+-
 		commands.put(ParametrName.GO_TO_REGISTRATION_PAGE, new GoToRegistrationPage());//+ -
@@ -98,7 +98,6 @@ public class CommandProvider {
 		commands.put(ParametrName.ADMIN_PRICES_DELETE, new AdminDeletePrice());//++
 		commands.put(ParametrName.ADMIN_PRICE_GO_TO_ADDING_PAGE, new AdminGoToPricesAddPage());//++
 		commands.put(ParametrName.ADMIN_PRICES_ADD, new AdminPriceAdd());//++
-		commands.put(ParametrName.Go_TO_CONTACTS, new Contacts());
 		commands.put(ParametrName.LOCALE_CHANGE, new LocaleChange());//-+
 		commands.put(ParametrName.ERROR_PAGE, new GoToErrorPage());//- + 
 		

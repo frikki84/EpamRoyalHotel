@@ -34,7 +34,7 @@
 <fmt:message bundle="${loc}" key="check_in_check" var="check_in_check" />
 <fmt:message bundle="${loc}" key="check_in_new_client"
 	var="check_in_new_client" />
-
+<fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
 <fmt:message bundle="${loc}" key="booking_history_title"
 	var="booking_history_title" />
 

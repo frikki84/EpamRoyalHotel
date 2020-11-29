@@ -43,6 +43,7 @@
 	var="booking_resultlist_from_date" />
 <fmt:message bundle="${loc}" key="booking_resultlist_to_date"
 	var="booking_resultlist_to_date" />
+<fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
 <fmt:message bundle="${loc}" key="home_button" var="home_button" />
 <fmt:message bundle="${loc}" key="language_button" var="language_button" />
 <fmt:message bundle="${loc}" key="language_button_en"

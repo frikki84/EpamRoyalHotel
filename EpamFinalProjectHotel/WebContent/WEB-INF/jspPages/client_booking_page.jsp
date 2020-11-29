@@ -26,6 +26,7 @@
 	var="booking_children" />
 <fmt:message bundle="${loc}" key="booking_find_roon"
 	var="booking_find_roon" />
+<fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
 <fmt:message bundle="${loc}" key="home_button" var="home_button" />
 <fmt:message bundle="${loc}" key="language_button" var="language_button" />
 <fmt:message bundle="${loc}" key="language_button_en"

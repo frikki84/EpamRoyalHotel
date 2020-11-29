@@ -1,13 +1,11 @@
 package by.epamtc.jwd2020.dziadkouskaya.dao.impl;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 
 import org.junit.After;
 import org.junit.Before;
@@ -30,13 +28,6 @@ public class CountryDaoImplTest {
 
 	private static DaoProvider daoProvider = DaoProvider.getInstance();
 	private CountryDao countryDao = daoProvider.getCountryDao();
-
-	@Before
-	public void reloadTestDB() throws DaoException {
-		Connection con = connectionPool.takeConnection();
-		Connection testCon = connectionPoolTest.takeConnection();
-
-	}
 
 	@After
 	public void disconnectDB() {
@@ -63,8 +54,7 @@ public class CountryDaoImplTest {
 			Country country = new Country(set.getInt(1), set.getString(2));
 			testList.add(country);
 		}
-		
-		
+
 		List<Country> expectedList = countryDao.findCountryList();
 
 		assertEquals(expectedList, testList);
@@ -87,13 +77,13 @@ public class CountryDaoImplTest {
 		String sql = STRING_FIND_COUNTRY_ID_BY_NAME + countryName + STRING_FIND_COUNTRY_ID_BY_NAME_LAST_PART;
 
 		statement = connection.createStatement();
-		
+
 		set = statement.executeQuery(sql);
 
 		if (set.next()) {
 			testValue = set.getInt(1);
 		}
-		
+
 		int expectedValue = countryDao.findCountryId(countryName);
 
 		assertEquals(testValue, expectedValue);

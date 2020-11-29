@@ -24,6 +24,7 @@
 <fmt:message bundle="${loc}" key="booking_adult" var="booking_adult" />
 <fmt:message bundle="${loc}" key="booking_children"
 	var="booking_children" />
+<fmt:message bundle="${loc}" key="contact_buttom" var="contact_buttom" />
 <fmt:message bundle="${loc}" key="booking_find_roon"
 	var="booking_find_roon" />
 <fmt:message bundle="${loc}" key="home_button" var="home_button" />
