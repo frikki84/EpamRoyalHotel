@@ -27,7 +27,7 @@ import by.epamtc.jwd2020.dziadkouskaya.dao.connection_pool.ConnectionPool;
 public class UserDetailDaoImpl implements UserDetailDao {
 	public static final String STRING_FIND_USER_DETAILS_BY_USER_ID = "select * from user_details where User_idUser= ";
 	public static final String STRING_FIND_USER_DETAILS_BY_USER_ID_LAST_PART = " AND (userCategory = 1 OR userCategory = null)";
-	public static final String STRING_FOR_INSERT_INFO_TO_USER_DETAILS = "UPDATE USER_DETAILS SET UserName = ?, UserSurname = ?, UserThirdName = ?, EnglishUserName = ?, EnglishUserSurname = ?, UserPersonBirthDate = ?, PasportNumber = ?, UserPasportID = ?, UserPasportAnotherInfo = ?, Country_idCountry = ? where userCategory = 1 and User_idUser like ";
+	public static final String STRING_FOR_INSERT_INFO_TO_USER_DETAILS = "UPDATE USER_DETAILS SET UserName = ?, UserSurname = ?, UserThirdName = ?, EnglishUserName = ?, EnglishUserSurname = ?, UserPersonBirthDate = ?, PasportNumber = ?, UserPasportID = ?, UserPasportAnotherInfo = ?, Country_idCountry = ? where userCategory = 1 and User_idUser = ";
 	public static final String STRING_FOR_INSERT_ONE_POINT_TO_USER_DETAILS = "UPDATE USER_DETAILS SET ";
 	public static final String STRING_FOR_INSERT_INFO_TO_USER_DETAILS_LAST_PART = ";";
 	public static final String STRING_FIND_COUNTRY_ID_BY_NAME = "select idCountry from countries where CountryName like \"";
@@ -112,16 +112,12 @@ public class UserDetailDaoImpl implements UserDetailDao {
 	 * @throws DaoException {@link DaoException}
 	 */
 	private void updateDetails(UserDetail userDetail) throws DaoException {
+
 		Connection connection = null;
 		PreparedStatement ps = null;
 
 		
 		int userId = userDetail.getUserId();
-		// find country id to add this info to DB
-		Country country = userDetail.getCountry();
-		int countryId = findCountryId(country);
-		country.setId(countryId);
-		userDetail.setCountry(country);
 	
 		try {	
 			
@@ -155,13 +151,8 @@ public class UserDetailDaoImpl implements UserDetailDao {
 			connectionPool.closeConnection(connection, ps);
 		}
 	}
-	/**
-	 * find id of object class Country which usesed for creating user_details
-	 * @param country object class Country
-	 * @return int Ciuntry Id
-	 * @throws DaoException
-	 */
-	private int findCountryId(Country country) throws DaoException {
+	@Override
+	public int findCountryId(Country country) throws DaoException {
 		int countryId = 0;
 		Connection connection = null;
 		Statement statement = null;
@@ -282,7 +273,7 @@ public class UserDetailDaoImpl implements UserDetailDao {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
-		// find country id to add this info to DB
+		
 		Country country = userDetail.getCountry();
 		int countryId = findCountryId(country);
 		country.setId(countryId);

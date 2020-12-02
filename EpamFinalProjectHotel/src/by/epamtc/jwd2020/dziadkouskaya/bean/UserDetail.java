@@ -4,12 +4,11 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
 
-
-public class UserDetail implements Serializable{
+public class UserDetail implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	public static final int DEFAULT_USER_DETAIL_ID = 0;
-		
+
 	private int id;
 	private int userId;
 	private String firstName;
@@ -23,35 +22,31 @@ public class UserDetail implements Serializable{
 	private String passportOtherInfo;
 	private Country country;
 	private ClientCategory category;
-	
+
 	public UserDetail() {
-		super();
-		// TODO Auto-generated constructor stub
+
 	}
-	
+
 	public UserDetail(int userId) {
-		super();
+
 		this.userId = userId;
 	}
-	
+
 	public UserDetail(int userId, ClientCategory category) {
-		super();
+
 		this.userId = userId;
 		this.category = category;
 	}
 
-
 	public UserDetail(int userId, String firstName, String secondName) {
-		super();
+
 		this.userId = userId;
 		this.firstName = firstName;
 		this.secondName = secondName;
 	}
-	
-	
 
 	public UserDetail(int userId, String firstName, String secondName, Country country) {
-		super();
+
 		this.userId = userId;
 		this.firstName = firstName;
 		this.secondName = secondName;
@@ -61,7 +56,7 @@ public class UserDetail implements Serializable{
 	public UserDetail(int userId, String firstName, String secondName, String thirdName, String firstNameEnglish,
 			String secondNameEnglish, Date birthDate, String passportNumber, String passportId,
 			String passportOtherInfo, Country country) {
-		super();
+
 		this.userId = userId;
 		this.firstName = firstName;
 		this.secondName = secondName;
@@ -74,11 +69,11 @@ public class UserDetail implements Serializable{
 		this.passportOtherInfo = passportOtherInfo;
 		this.country = country;
 	}
-	
+
 	public UserDetail(String firstName, String secondName, String thirdName, String firstNameEnglish,
 			String secondNameEnglish, Date birthDate, String passportNumber, String passportId,
 			String passportOtherInfo, Country country) {
-		super();
+
 		this.firstName = firstName;
 		this.secondName = secondName;
 		this.thirdName = thirdName;
@@ -90,12 +85,11 @@ public class UserDetail implements Serializable{
 		this.passportOtherInfo = passportOtherInfo;
 		this.country = country;
 	}
-	
 
-	public UserDetail(int id, int userId, String firstName, String secondName, String thirdName, String firstNameEnglish,
-			String secondNameEnglish, Date birthDate, String passportNumber, String passportId,
+	public UserDetail(int id, int userId, String firstName, String secondName, String thirdName,
+			String firstNameEnglish, String secondNameEnglish, Date birthDate, String passportNumber, String passportId,
 			String passportOtherInfo, Country country) {
-		super();
+
 		this.id = id;
 		this.userId = userId;
 		this.firstName = firstName;
@@ -109,13 +103,11 @@ public class UserDetail implements Serializable{
 		this.passportOtherInfo = passportOtherInfo;
 		this.country = country;
 	}
-	
-	
 
 	public UserDetail(int userId, String firstName, String secondName, String thirdName, String firstNameEnglish,
 			String secondNameEnglish, Date birthDate, String passportNumber, String passportId,
 			String passportOtherInfo, Country country, ClientCategory category) {
-		super();
+
 		this.userId = userId;
 		this.firstName = firstName;
 		this.secondName = secondName;
@@ -129,11 +121,11 @@ public class UserDetail implements Serializable{
 		this.country = country;
 		this.category = category;
 	}
-	
-	public UserDetail(int id,int userId, String firstName, String secondName, String thirdName, String firstNameEnglish,
-			String secondNameEnglish, Date birthDate, String passportNumber, String passportId,
+
+	public UserDetail(int id, int userId, String firstName, String secondName, String thirdName,
+			String firstNameEnglish, String secondNameEnglish, Date birthDate, String passportNumber, String passportId,
 			String passportOtherInfo, Country country, ClientCategory category) {
-		super();
+
 		this.id = id;
 		this.userId = userId;
 		this.firstName = firstName;
@@ -165,7 +157,6 @@ public class UserDetail implements Serializable{
 		this.firstName = firstName;
 	}
 
-	
 	public ClientCategory getCategory() {
 		return category;
 	}
@@ -206,7 +197,6 @@ public class UserDetail implements Serializable{
 		this.secondNameEnglish = secondNameEnglish;
 	}
 
-
 	public Date getBirthDate() {
 		return birthDate;
 	}
@@ -246,7 +236,6 @@ public class UserDetail implements Serializable{
 	public void setCountry(Country country) {
 		this.country = country;
 	}
-
 
 	public int getUserId() {
 		return userId;
@@ -355,8 +344,5 @@ public class UserDetail implements Serializable{
 				+ ", passportId=" + passportId + ", passportOtherInfo=" + passportOtherInfo + ", country=" + country
 				+ ", category=" + category + "]";
 	}
-
-	
-	
 
 }

@@ -24,6 +24,7 @@ import by.epamtc.jwd2020.dziadkouskaya.service.ServiceException;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceProvider;
 import by.epamtc.jwd2020.dziadkouskaya.service.UserService;
 import by.epamtc.jwd2020.dziadkouskaya.service.UserdetailService;
+import by.epamtc.jwd2020.dziadkouskaya.service.validation.UserValidation;
 
 public class AdminGoToClientPersonalPage implements Command {
 	public static final int DEFAULT_ID_FOR_USER_DETAILS = 0;
@@ -60,27 +61,27 @@ public class AdminGoToClientPersonalPage implements Command {
 
 		int clientCode = (int) request.getSession().getAttribute("client_code");
 		
+		String firstName = request.getParameter(PARAMETR_CLIENT_NAME);
+		String secondName = request.getParameter(PARAMETR_CLIENT_SURNAME);
+		String thirdName = request.getParameter(PARAMETR_CLIENT_THIRD_NAME);
+		String firstNameEnglish = request.getParameter(PARAMETR_CLIENT_ENGLISH_NAME);
+		String secondNameEnglish = request.getParameter(PARAMETR_CLIENT_ENGLISH_SURNAME);
+		String passportNumber = request.getParameter(PARAMETR_CLIENT_PASSPORT);
+		String passportId = request.getParameter(PARAMETR_CLIENT_PASSPORT_ID);
+		String passportOtherInfo = request.getParameter(PARAMETR_CLIENT_OTER_INFO);
+		String countryName = request.getParameter(PARAMETR_CLIENT_COUNTRY);
+		Country country = new Country(countryName);
+		String date = request.getParameter(PARAMETR_CLIENT_BIRTHDATE);
+		
 		try {
+			boolean dateCheck = UserValidation.isDate(date);
 			
-
-			String firstName = request.getParameter(PARAMETR_CLIENT_NAME);
-			String secondName = request.getParameter(PARAMETR_CLIENT_SURNAME);
-			String thirdName = request.getParameter(PARAMETR_CLIENT_THIRD_NAME);
-			String firstNameEnglish = request.getParameter(PARAMETR_CLIENT_ENGLISH_NAME);
-			String secondNameEnglish = request.getParameter(PARAMETR_CLIENT_ENGLISH_SURNAME);
-			String passportNumber = request.getParameter(PARAMETR_CLIENT_PASSPORT);
-			String passportId = request.getParameter(PARAMETR_CLIENT_PASSPORT_ID);
-			String passportOtherInfo = request.getParameter(PARAMETR_CLIENT_OTER_INFO);
-			String countryName = request.getParameter(PARAMETR_CLIENT_COUNTRY);
-			Country country = new Country(countryName);
-
-			String date = request.getParameter(PARAMETR_CLIENT_BIRTHDATE);
 			Date birthDate = null;
 			
-			if (date == null || date.equals("")) {
+			if (!dateCheck) {
 				birthDate = Date.valueOf(DEFAULT_BIRTH_DATE_VALUE);
+				
 			} else {
-
 				birthDate = Date.valueOf(date);
 			}
 

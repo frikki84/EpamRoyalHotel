@@ -1,7 +1,14 @@
 package by.epamtc.jwd2020.dziadkouskaya.dao.connection_pool;
 
 import java.util.ResourceBundle;
-//подключая пакет, в котором находятся ресурсы
+
+
+/**
+ * 
+ * @author Yana Dzidkouskaya
+ * create Singleton 
+ *
+ */
 public class DBResourceManager {
 	private final static DBResourceManager instance = new DBResourceManager();
 	

@@ -1,10 +1,9 @@
 package by.epamtc.jwd2020.dziadkouskaya.dao;
 
 public class DaoException extends Exception {
-	private static final long serialVersionUID = 1L;
+
 
 	public DaoException() {
-		super();
 	}
 
 	public DaoException(String message) {
@@ -16,6 +15,10 @@ public class DaoException extends Exception {
 	}
 
 	public DaoException(String message, Exception e) {
+		super(message, e);
+	}
+	
+	public DaoException(String message, Throwable e) {
 		super(message, e);
 	}
 

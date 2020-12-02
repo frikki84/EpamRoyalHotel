@@ -18,14 +18,14 @@ public class CheckOutTransferObject implements Serializable {
 	
 	
 	public CheckOutTransferObject() {
-		super();
+		
 		
 	}
 
 
 	public CheckOutTransferObject(int idRoomBooking, String roomNumber, Date startDate, Date endDate, String userName,
 			String userThirdName, String userSecondName, boolean clientLivingInHotelState) {
-		super();
+		
 		this.idRoomBooking = idRoomBooking;
 		this.roomNumber = roomNumber;
 		this.startDate = startDate;

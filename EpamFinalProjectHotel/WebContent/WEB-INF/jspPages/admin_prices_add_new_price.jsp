@@ -91,7 +91,7 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<!-- Collect the nav links, forms, and other content for toggling -->
+
 				<div class="collapse navbar-collapse offset"
 					id="navbarSupportedContent">
 					<ul class="nav navbar-nav menu_nav ml-auto">
@@ -154,15 +154,6 @@
 											value="${admin_navigate_checkin}" class="nonactive" />
 									</form>
 								</li>
-
-								<%-- 						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="" /> <input
-									type="submit" value="${admin_navigate_add_tax}"
-									class="nonactive" />
-							</form>
-						</li> --%>
-
 								<li>
 									<form action="mainPage" method="post">
 										<input type="hidden" name="command"
@@ -187,21 +178,6 @@
 									</form>
 								</li>
 
-								<%-- 						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
-								<input type="submit" value="${admin_navigate_change_admin_info}"
-									class="nonactive" />
-							</form>
-						</li> --%>
-
-								<%-- 					<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
-								<input type="submit" value="${admin_navigate_add_admin}"
-									class="nonactive" />
-							</form>
-						</li> --%>
 								<li>
 									<form action="mainPage" method="post">
 										<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
@@ -215,42 +191,41 @@
 				</div>
 				<div class="view-account_big">
 					<div class="my_table_booking">
-						
-						<div class = "my_table_booking">
-						<h2 class="my_table_title">${admin_prices_add}</h2>
-						<h4 >${price_adding_error}</h4>
-						<form action="mainPage" method="post">
-							<input type="hidden" name="command" value="admin_prices_add" />
-							<div class="my_table_booking">
-								<label class="my_table_booking_title_mini">${admin_prices_select_category}</label>
-								<div class="my_table_booking_submit">
-									<select name="roomCategoryId" class="col-sm-10">
-										<%-- <option selected="selected">${admin_prices_select_category}</option> --%>
-										<c:forEach items="${room_category_names}" var="roomCat">
-											<option value="${roomCat.id}">${roomCat.roomCategoryName}</option>
-										</c:forEach>
-									</select>
+
+						<div class="my_table_booking">
+							<h2 class="my_table_title">${admin_prices_add}</h2>
+							<h4>${price_adding_error}</h4>
+							<form action="mainPage" method="post">
+								<input type="hidden" name="command" value="admin_prices_add" />
+								<div class="my_table_booking">
+									<label class="my_table_booking_title_mini">${admin_prices_select_category}</label>
+									<div class="my_table_booking_submit">
+										<select name="roomCategoryId" class="col-sm-10">
+											<c:forEach items="${room_category_names}" var="roomCat">
+												<option value="${roomCat.id}">${roomCat.roomCategoryName}</option>
+											</c:forEach>
+										</select>
+									</div>
+									<label class="my_table_booking_title_mini">${admin_prices_add_date}</label>
+									<div class="my_table_booking_submit">
+										<input type="date" class="my_table_booking_submit"
+											name="priceStartDate" required>
+									</div>
+									<label class="my_table_booking_title_mini">${admin_prices_add_price}</label>
+									<div class="my_table_booking_submit">
+										<input type="text" class="form-control" name="price" required>
+									</div>
 								</div>
-								<label class="my_table_booking_title_mini">${admin_prices_add_date}</label>
-								<div class="my_table_booking_submit">
-									<input type="date" class="my_table_booking_submit" name="priceStartDate"
-										required>
-								</div>
-								<label class="my_table_booking_title_mini">${admin_prices_add_price}</label>
-								<div class="my_table_booking_submit">
-									<input type="text" class="form-control" name="price" required>
-								</div>
-							</div>
-							<br /> 
-							<input type="submit" value="${admin_prices_add}" class = "my_table_booking_submit" />
-							<div class = "my_table_booking"></div>
-							
-						</form>
+								<br /> <input type="submit" value="${admin_prices_add}"
+									class="my_table_booking_submit" />
+								<div class="my_table_booking"></div>
+
+							</form>
+						</div>
+
 					</div>
-					
 				</div>
 			</div>
-		</div>
 	</section>
 
 </body>

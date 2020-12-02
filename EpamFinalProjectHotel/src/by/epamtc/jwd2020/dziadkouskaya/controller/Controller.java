@@ -16,8 +16,8 @@ public class Controller extends HttpServlet {
 	private static final String COMMAND_NAME = "command";
 	private CommandProvider provider = CommandProvider.getInstance();
 
-	public Controller() {
-		super();
+	public Controller() {	
+		
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

@@ -17,6 +17,7 @@ import by.epamtc.jwd2020.dziadkouskaya.controller.command.ParametrName;
 import by.epamtc.jwd2020.dziadkouskaya.service.BookingService;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceException;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceProvider;
+import by.epamtc.jwd2020.dziadkouskaya.service.validation.UserValidation;
 
 public class AdminListForCleaners implements Command {
 	public static final String PATH_TO_CLEANER_LIST = "/WEB-INF/jspPages/admin_check_in_out_table.jsp";
@@ -30,25 +31,28 @@ public class AdminListForCleaners implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String dateString = request.getParameter(PARAMETR_DATE);
-		System.out.println("Date clean " + dateString);
-
-		Date date = null;
-		
-		if (dateString == null || dateString.equals("")) {
-			date = new Date(System.currentTimeMillis());
-
-		} else {
-			date = Date.valueOf(dateString);
-		}
-
-		String adress = ParametrName.ADMIN_CLEANER_LIST.toString() + "&" + PARAMETR_DATE + "=" + date;
-		request.setAttribute("address", adress);
 		try {
-			List<InfoForCleanersTransferObject> list = bookingService.prepareListForCleaners(date);
-			request.setAttribute("cleaner_list", list);
+			String dateString = request.getParameter(PARAMETR_DATE);
+			
+			Date date = null;
+
+			boolean dateCheck = UserValidation.isDate(dateString);
+
+			if (!dateCheck) {
+				date = new Date(System.currentTimeMillis());
+
+			} else {
+				date = Date.valueOf(dateString);
+			}
 
 			request.setAttribute("date", date);
+			
+			String adress = ParametrName.ADMIN_CLEANER_LIST.toString() + "&" + PARAMETR_DATE + "=" + date;
+			request.setAttribute("address", adress);
+
+			List<InfoForCleanersTransferObject> list = bookingService.prepareListForCleaners(date);
+			request.setAttribute("cleaner_list", list);		
+					
 
 			request.getRequestDispatcher(PATH_TO_CLEANER_LIST).forward(request, response);
 

@@ -32,7 +32,7 @@ public class RoomBooking implements Serializable {
 	}
 
 	public RoomBooking(int idBooking) {
-		super();
+
 		this.idBooking = idBooking;
 		this.isBookingConfirmed = DEFAULT_BOOKING_CONFIRMED;
 		this.isBookingPaid = DEFAULT_BOOKING_CONFIRMED;
@@ -40,7 +40,7 @@ public class RoomBooking implements Serializable {
 	}
 
 	public RoomBooking(Date startDate, Date endDate, int adultPeopleNumber, int userId, Room room) {
-		super();
+
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.adultPeopleNumber = adultPeopleNumber;
@@ -53,7 +53,7 @@ public class RoomBooking implements Serializable {
 
 	public RoomBooking(Date startDate, Date endDate, int adultPeopleNumber, int childrenNumber, int userId, Room room,
 			Date bookingDate) {
-		super();
+
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.adultPeopleNumber = adultPeopleNumber;
@@ -68,7 +68,7 @@ public class RoomBooking implements Serializable {
 
 	public RoomBooking(int idBooking, Date startDate, Date endDate, int adultPeopleNumber, int childrenNumber,
 			int userId, Room room, Date bookingDate) {
-		super();
+
 		this.idBooking = idBooking;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -84,7 +84,7 @@ public class RoomBooking implements Serializable {
 
 	public RoomBooking(int idBooking, Date startDate, Date endDate, int adultPeopleNumber, int childrenNumber,
 			int userId, Room room, Date bookingDate, boolean isBookingConfirmed) {
-		super();
+
 		this.idBooking = idBooking;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -101,7 +101,7 @@ public class RoomBooking implements Serializable {
 	public RoomBooking(int idBooking, Date startDate, Date endDate, int adultPeopleNumber, int childrenNumber,
 			int userId, Room room, Date bookingDate, boolean isBookingConfirmed, double basicPayment,
 			double babyExpenceSum, double prepaymentSum, boolean isPrepaymentPaid, boolean isBookingPaid) {
-		super();
+
 		this.idBooking = idBooking;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -122,7 +122,7 @@ public class RoomBooking implements Serializable {
 			Date bookingDate, boolean isBookingConfirmed, double basicPayment, BabyExpense babyExpense,
 			double babyExpenceSum, Prepayment prepayment, double prepaymentSum, boolean isPrepaymentPaid,
 			boolean isBookingPaid) {
-		super();
+
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.adultPeopleNumber = adultPeopleNumber;
@@ -143,7 +143,7 @@ public class RoomBooking implements Serializable {
 	public RoomBooking(Date startDate, Date endDate, int adultPeopleNumber, int childrenNumber, int userId, Room room,
 			Date bookingDate, boolean isBookingConfirmed, double basicPayment, double babyExpenceSum,
 			double prepaymentSum, boolean isPrepaymentPaid, boolean isBookingPaid) {
-		super();
+
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.adultPeopleNumber = adultPeopleNumber;
@@ -163,7 +163,7 @@ public class RoomBooking implements Serializable {
 			int userId, Room room, Date bookingDate, boolean isBookingConfirmed, double basicPayment,
 			BabyExpense babyExpense, double babyExpenceSum, Prepayment prepayment, double prepaymentSum,
 			boolean isPrepaymentPaid, boolean isBookingPaid) {
-		super();
+
 		this.idBooking = idBooking;
 		this.startDate = startDate;
 		this.endDate = endDate;

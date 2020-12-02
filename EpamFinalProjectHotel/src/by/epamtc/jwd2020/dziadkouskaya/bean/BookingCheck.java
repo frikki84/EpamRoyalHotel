@@ -20,13 +20,13 @@ public class BookingCheck implements Serializable {
 	
 	
 	public BookingCheck() {
-		super();
+		
 		this.isCheckPayed = DEFAULT_VALUE_OF_PAYMENT_AND_PREPAYMENT;
 		this.isPrepayment = DEFAULT_VALUE_OF_PAYMENT_AND_PREPAYMENT;
 	}
 	
 	public BookingCheck(int idCheck) {
-		super();
+		
 		this.idCheck = idCheck;
 		this.isCheckPayed = DEFAULT_VALUE_OF_PAYMENT_AND_PREPAYMENT;
 		this.isPrepayment = DEFAULT_VALUE_OF_PAYMENT_AND_PREPAYMENT;
@@ -34,7 +34,7 @@ public class BookingCheck implements Serializable {
 
 	public BookingCheck(int idCheck, RoomBooking roomBooking, BabyExpense babyExpense, Prepayment prepayment,
 			double basicPayment, boolean isPrepayment, boolean isCheckPayed) {
-		super();
+		
 		this.idCheck = idCheck;
 		this.roomBooking = roomBooking;
 		this.babyExpense = babyExpense;
@@ -46,7 +46,7 @@ public class BookingCheck implements Serializable {
 	}
 
 	public BookingCheck(RoomBooking roomBooking, BabyExpense babyExpense, Prepayment prepayment, double basicPayment) {
-		super();
+		
 		this.roomBooking = roomBooking;
 		this.babyExpense = babyExpense;
 		this.prepayment = prepayment;
@@ -57,7 +57,7 @@ public class BookingCheck implements Serializable {
 
 	public BookingCheck(RoomBooking roomBooking, BabyExpense babyExpense, Prepayment prepayment, double basicPayment,
 			boolean isPrepayment, boolean isCheckPayed) {
-		super();
+		
 		this.roomBooking = roomBooking;
 		this.babyExpense = babyExpense;
 		this.prepayment = prepayment;
@@ -70,7 +70,7 @@ public class BookingCheck implements Serializable {
 
 	public BookingCheck(RoomBooking roomBooking, BabyExpense babyExpense, Prepayment prepayment, double basicPayment,
 			double childPaySum, double prepaymentSum) {
-		super();
+		
 		this.roomBooking = roomBooking;
 		this.babyExpense = babyExpense;
 		this.prepayment = prepayment;
@@ -81,7 +81,7 @@ public class BookingCheck implements Serializable {
 
 	public BookingCheck(RoomBooking roomBooking, BabyExpense babyExpense, Prepayment prepayment, double basicPayment,
 			boolean isPrepayment, boolean isCheckPayed, double childPaySum, double prepaymentSum) {
-		super();
+		
 		this.roomBooking = roomBooking;
 		this.babyExpense = babyExpense;
 		this.prepayment = prepayment;
@@ -96,7 +96,7 @@ public class BookingCheck implements Serializable {
 	
 	public BookingCheck(int idCheck, RoomBooking roomBooking, BabyExpense babyExpense, Prepayment prepayment,
 			double basicPayment, boolean isPrepayment, boolean isCheckPayed, double childPaySum, double prepaymentSum) {
-		super();
+		
 		this.idCheck = idCheck;
 		this.roomBooking = roomBooking;
 		this.babyExpense = babyExpense;

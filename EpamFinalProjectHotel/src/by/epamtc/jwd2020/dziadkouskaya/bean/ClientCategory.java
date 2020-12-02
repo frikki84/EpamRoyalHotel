@@ -9,22 +9,21 @@ public class ClientCategory implements Serializable {
 	private String clientCategoryName;
 	
 	public ClientCategory() {
-		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public ClientCategory(int clientCategoryId) {
-		super();
+		
 		this.clientCategoryId = clientCategoryId;
 	}
 
 	public ClientCategory(String clientCategoryName) {
-		super();
+		
 		this.clientCategoryName = clientCategoryName;
 	}
 
 	public ClientCategory(int clientCategoryId, String clientCategoryName) {
-		super();
+		
 		this.clientCategoryId = clientCategoryId;
 		this.clientCategoryName = clientCategoryName;
 	}

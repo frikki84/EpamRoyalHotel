@@ -2,49 +2,49 @@ package by.epamtc.jwd2020.dziadkouskaya.bean;
 
 import java.io.Serializable;
 
-
 public class Role implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private int roleId;
 	private String roleName;
-	
+
 	public Role() {
-		super();
-		// TODO Auto-generated constructor stub
+
 	}
-	
-		
+
 	public Role(int roleId) {
-		super();
+
 		this.roleId = roleId;
 	}
-
-
 
 	public Role(String roleName) {
-		super();
+
 		this.roleName = roleName;
 	}
+
 	public Role(int roleId, String roleName) {
-		super();
+
 		this.roleId = roleId;
 		this.roleName = roleName;
 	}
-	
+
 	public int getRoleId() {
 		return roleId;
 	}
+
 	public void setRoleId(int roleId) {
 		this.roleId = roleId;
 	}
+
 	public String getRoleName() {
 		return roleName;
 	}
+
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -53,6 +53,7 @@ public class Role implements Serializable {
 		result = prime * result + ((roleName == null) ? 0 : roleName.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -71,11 +72,10 @@ public class Role implements Serializable {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return getClass() + " [roleId=" + roleId + ", roleName=" + roleName + "]";
 	}
-	
-	
 
 }

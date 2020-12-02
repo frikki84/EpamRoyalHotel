@@ -2,26 +2,23 @@ package by.epamtc.jwd2020.dziadkouskaya.bean;
 
 import java.io.Serializable;
 
-public class UserActivity implements Serializable{
+public class UserActivity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	private int id;
 	private String activityName;
-	
+
 	public UserActivity() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public UserActivity(int id) {
-		super();
+
 		this.id = id;
 	}
 
 	public UserActivity(int id, String activityName) {
-		super();
+
 		this.id = id;
 		this.activityName = activityName;
 	}
@@ -74,11 +71,5 @@ public class UserActivity implements Serializable{
 	public String toString() {
 		return "UserActivity [id=" + id + ", activityName=" + activityName + "]";
 	}
-	
-	
-	
-	
-	
-	
 
 }

@@ -26,7 +26,7 @@ public class BookingTransferObject implements Serializable {
 
 	public BookingTransferObject(Date startDate, Date endDate, String hotelRoomNumber, int peopleNumberInRoom,
 			int childrenNumber, double fullPrice, double prepayment) {
-		super();
+		
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.hotelRoomNumber = hotelRoomNumber;
@@ -38,7 +38,7 @@ public class BookingTransferObject implements Serializable {
 
 	public BookingTransferObject(int bookingId, Date startDate, Date endDate, String hotelRoomNumber,
 			int peopleNumberInRoom, int childrenNumber, double fullPrice, double prepayment) {
-		super();
+		
 		this.bookingId = bookingId;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -51,7 +51,7 @@ public class BookingTransferObject implements Serializable {
 
 	public BookingTransferObject(int bookingId, Date startDate, Date endDate, String hotelRoomNumber,
 			int peopleNumberInRoom, int childrenNumber, double fullPrice, double prepayment, boolean isPrepayment) {
-		super();
+		
 		this.bookingId = bookingId;
 		this.startDate = startDate;
 		this.endDate = endDate;

@@ -1,5 +1,6 @@
 package by.epamtc.jwd2020.dziadkouskaya.dao;
 
+import by.epamtc.jwd2020.dziadkouskaya.bean.Country;
 import by.epamtc.jwd2020.dziadkouskaya.bean.UserDetail;
 
 /**
@@ -52,5 +53,7 @@ public interface UserDetailDao {
 	 * @throws DaoException {@link DaoException}
 	 */
 	public void addNewGuest(UserDetail userDetail) throws DaoException;
+	
+	public int findCountryId(Country country) throws DaoException;
 
 }

@@ -15,20 +15,20 @@ public class InfoForCleanersTransferObject implements Serializable {
 	private boolean cleanBeforeDepatchure;
 	
 	public InfoForCleanersTransferObject() {
-		super();
+		
 		this.cleanAfterArrival = DEFAULT_INFO_FOR_CLEANERS;
 		this.cleanBeforeDepatchure = DEFAULT_INFO_FOR_CLEANERS;
 	}
 
 	public InfoForCleanersTransferObject(String roomNumber, boolean cleanAfterArrival, boolean cleanBeforeDepatchure) {
-		super();
+		
 		this.roomNumber = roomNumber;
 		this.cleanAfterArrival = cleanAfterArrival;
 		this.cleanBeforeDepatchure = cleanBeforeDepatchure;
 	}
 
 	public InfoForCleanersTransferObject(String roomNumber) {
-		super();
+		
 		this.roomNumber = roomNumber;
 		this.cleanAfterArrival = DEFAULT_INFO_FOR_CLEANERS;
 		this.cleanBeforeDepatchure = DEFAULT_INFO_FOR_CLEANERS;
@@ -36,7 +36,7 @@ public class InfoForCleanersTransferObject implements Serializable {
 
 		
 	public InfoForCleanersTransferObject(String roomNumber, boolean cleanAfterArrival) {
-		super();
+		
 		this.roomNumber = roomNumber;
 		this.cleanAfterArrival = cleanAfterArrival;
 		this.cleanBeforeDepatchure = DEFAULT_INFO_FOR_CLEANERS;
@@ -45,21 +45,21 @@ public class InfoForCleanersTransferObject implements Serializable {
 	
 
 	public InfoForCleanersTransferObject(String roomNumber, String roomCategory, boolean cleanAfterArrival) {
-		super();
+		
 		this.roomNumber = roomNumber;
 		this.roomCategory = roomCategory;
 		this.cleanAfterArrival = cleanAfterArrival;
 	}
 
 	public InfoForCleanersTransferObject(String roomNumber, String roomCategory) {
-		super();
+		
 		this.roomNumber = roomNumber;
 		this.roomCategory = roomCategory;
 	}
 
 	public InfoForCleanersTransferObject(String roomNumber, String roomCategory, boolean cleanAfterArrival,
 			boolean cleanBeforeDepatchure) {
-		super();
+		
 		this.roomNumber = roomNumber;
 		this.roomCategory = roomCategory;
 		this.cleanAfterArrival = cleanAfterArrival;

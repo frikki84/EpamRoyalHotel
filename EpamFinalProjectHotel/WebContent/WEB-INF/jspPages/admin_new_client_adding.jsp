@@ -151,13 +151,6 @@
 									</form>
 								</li>
 
-								<%-- 						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="" /> <input
-									type="submit" value="${admin_navigate_add_tax}"
-									class="nonactive" />
-							</form>
-						</li> --%>
 
 								<li>
 									<form action="mainPage" method="post">
@@ -183,22 +176,6 @@
 									</form>
 								</li>
 
-								<%-- 						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
-								<input type="submit" value="${admin_navigate_change_admin_info}"
-									class="nonactive" />
-							</form>
-						</li> --%>
-
-								<%-- 					<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
-								<input type="submit" value="${admin_navigate_add_admin}"
-									class="nonactive" />
-							</form>
-						</li> --%>
-
 								<li>
 									<form action="mainPage" method="post">
 										<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
@@ -221,70 +198,70 @@
 					<div class="row">
 						<div class="col-xs-12 col-sm-9">
 							<div class="panel-body">
-							<!-- 	<div class="my_table_booking "> -->
-									<div class="row">
-										<div class="col-md-6 col-md-offset-3 well">
-											<h3 class="text-center">${reg_form_title}</h3>
+								<!-- 	<div class="my_table_booking "> -->
+								<div class="row">
+									<div class="col-md-6 col-md-offset-3 well">
+										<h3 class="text-center">${reg_form_title}</h3>
 
-											<div class="wrong_password">
-												<c:out value="${resultAnswer}"></c:out>
+										<div class="wrong_password">
+											<c:out value="${resultAnswer}"></c:out>
+										</div>
+
+										<form class="form" action="mainPage" method="post">
+
+											<input type="hidden" name="command"
+												value="admin_add_new_client" />
+
+											<div class="col-xs-12">
+												<div class="form-group">
+
+													<input type="text" class="form-control"
+														placeholder="${reg_form_login}" name="login" required />
+												</div>
+											</div>
+											<div class="col-xs-12">
+												<div class="form-group">
+													<input type="email" class="form-control"
+														placeholder="${reg_form_email}" name="email" />
+												</div>
+											</div>
+											<div class="col-xs-12">
+												<div class="form-group">
+													<input type="text" class="form-control"
+														placeholder="${reg_form_phone}" name="phone" />
+												</div>
 											</div>
 
-											<form class="form" action="mainPage" method="post">
-
-												<input type="hidden" name="command"
-													value="admin_add_new_client" />
-
-												<div class="col-xs-12">
-													<div class="form-group">
-
-														<input type="text" class="form-control"
-															placeholder="${reg_form_login}" name="login" required />
-													</div>
+											<div class="col-xs-12">
+												<div class="form-group">
+													<input type="password" class="form-control"
+														placeholder="${reg_form_password}" name="password" />
 												</div>
-												<div class="col-xs-12">
-													<div class="form-group">
-														<input type="email" class="form-control"
-															placeholder="${reg_form_email}" name="email" />
-													</div>
+											</div>
+											<div class="col-xs-12">
+												<div class="form-group">
+													<input type="password" class="form-control"
+														placeholder="${reg_form_repeat_password}"
+														name="passwordRepeat" />
 												</div>
-												<div class="col-xs-12">
-													<div class="form-group">
-														<input type="text" class="form-control"
-															placeholder="${reg_form_phone}" name="phone" />
-													</div>
-												</div>
+											</div>
+											<div class="text-center col-xs-12">
 
-												<div class="col-xs-12">
-													<div class="form-group">
-														<input type="password" class="form-control"
-															placeholder="${reg_form_password}" name="password" />
-													</div>
-												</div>
-												<div class="col-xs-12">
-													<div class="form-group">
-														<input type="password" class="form-control"
-															placeholder="${reg_form_repeat_password}"
-															name="passwordRepeat" />
-													</div>
-												</div>
-												<div class="text-center col-xs-12">
+												<input type="submit" class="form-control" value="${submit}" />
+											</div>
 
-													<input type="submit" class="form-control" value="${submit}" />
-												</div>
+										</form>
 
-											</form>
-
-										</div>
 									</div>
-
 								</div>
+
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-	<!-- 	</div> -->
+		</div>
+
 	</section>
 
 </body>

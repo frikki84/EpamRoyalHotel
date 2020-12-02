@@ -1,9 +1,11 @@
 package by.epamtc.jwd2020.dziadkouskaya.dao.impl;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ import by.epamtc.jwd2020.dziadkouskaya.bean.RoomCategoryPrice;
 import by.epamtc.jwd2020.dziadkouskaya.dao.BookingDao;
 import by.epamtc.jwd2020.dziadkouskaya.dao.DaoException;
 import by.epamtc.jwd2020.dziadkouskaya.dao.connection_pool.ConnectionPool;
+import by.epamtc.jwd2020.dziadkouskaya.dao.connection_pool.ConnectionPoolException;
 
 public class BookingDaoImpl implements BookingDao {
 	public static final String STRING_FIND_FREE_ROOMS_FIRST_PART = "select r.idHotelRoom, r.HotelRoomNumber, r. HotelRoomFloor, r.idRoomCategory,  rc.HotelRoomCategoryName, rc.ParentCategory, rc.PeopleNumberInRoom"
@@ -71,19 +74,16 @@ public class BookingDaoImpl implements BookingDao {
 	public static final String STRING_MAKE_CLIENT_LIVING_IN_HOTEL = "insert into finalcheckbeforleaving (FinalCheckDate, idRoomBooking, isClientinHotel) values (?, ?, ?);";
 	public static final String STRING_FIND_BOOKINGS_FOR_CHECK_OUT = "select rb.idRoomBooking, r.HotelRoomNumber, rb.BookingStartDate, rb.BookingEndDate, ud.UserName, ud.UserThirdName, ud.UserSurname, fc.isClientinHotel from room_booking rb join rooms r on rb.HotelRoom_idHotelRoom = r.idHotelRoom join users u on rb.User_idUser = u.idUser join user_details ud on ud.User_idUser=u.idUser join finalcheckbeforleaving fc on fc.idRoomBooking=rb.idRoomBooking where ud.userCategory = 1 AND rb.BookingEndDate = \"";
 	public static final String STRING_CLIENT_FINAL_CHECK_OUT = "update finalcheckbeforleaving set isClientinHotel=false where idRoomBooking =";
-	
-	public static final String STRING_FIND_ROOMS_FREE_AFTER_DATE = "select rb.idRoomBooking, rb.BookingStartDate, rb.BookingEndDate, r.HotelRoomNumber, rc.HotelRoomCategoryName, r.idRoomCategory, rc.ParentCategory from room_booking rb join rooms r on  rb.HotelRoom_idHotelRoom = r.idHotelRoom join room_category rc on rc.idHotelRoomCategory=r.idRoomCategory where isPrepaymentPaid is true and BookingEndDate = \"";
-	public static final String STRING_FIND_ROOMS_BUSY_AFTER_DATE = "select rb.idRoomBooking, rb.BookingStartDate, rb.BookingEndDate, r.HotelRoomNumber, rc.HotelRoomCategoryName, r.idRoomCategory, rc.ParentCategory from room_booking rb join rooms r on  rb.HotelRoom_idHotelRoom = r.idHotelRoom join room_category rc on rc.idHotelRoomCategory=r.idRoomCategory where isPrepaymentPaid is true and BookingStartDate = \"";
-	public static final String STRING_FIND_ROOMS_FREE_BUSY_AFTER_DATE_LAST_PART	= "\" order by r.HotelRoomNumber;";
+
+	public static final String STRING_FIND_ROOMS_FREE_AFTER_DATE = "select rb.idRoomBooking, rb.BookingStartDate, rb.BookingEndDate, r.HotelRoomNumber, rc.HotelRoomCategoryName, r.idRoomCategory, rc.ParentCategory from room_booking rb join rooms r on  rb.HotelRoom_idHotelRoom = r.idHotelRoom join room_category rc on rc.idHotelRoomCategory=r.idRoomCategory where (rb.isPrepaymentPaid is true or rb.isBookingPaid is true) and BookingEndDate = \"";
+	public static final String STRING_FIND_ROOMS_BUSY_AFTER_DATE = "select rb.idRoomBooking, rb.BookingStartDate, rb.BookingEndDate, r.HotelRoomNumber, rc.HotelRoomCategoryName, r.idRoomCategory, rc.ParentCategory from room_booking rb join rooms r on  rb.HotelRoom_idHotelRoom = r.idHotelRoom join room_category rc on rc.idHotelRoomCategory=r.idRoomCategory where (rb.isPrepaymentPaid is true or rb.isBookingPaid is true) and BookingStartDate = \"";
+	public static final String STRING_FIND_ROOMS_FREE_BUSY_AFTER_DATE_LAST_PART = "\" order by r.HotelRoomNumber;";
 	public static final String String_WITH_QUOTE_AND_SEMICOLON = "\";";
-	
-	
-	
+
 	private static final Logger logger = LogManager.getLogger(BookingDaoImpl.class);
-	
+
 	private final ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-	
 	@Override
 	public void addNewBooking(RoomBooking roomBooking) throws DaoException {
 		Connection connection = null;
@@ -112,16 +112,18 @@ public class BookingDaoImpl implements BookingDao {
 
 			ps.executeUpdate();
 
-		} catch (SQLException e) {
+		} catch (ConnectionPoolException | SQLException e) {
 			logger.error("Error in adding new booking", e);
-			
+
 			throw new DaoException("Error in adding new booking", e);
 		}
 
 		finally {
-			connectionPool.closeConnection(connection, ps);
-		}
 
+				connectionPool.closeConnection(connection, ps);
+
+
+		}
 	}
 
 	@Override
@@ -131,6 +133,8 @@ public class BookingDaoImpl implements BookingDao {
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet set = null;
+		
+		try {
 
 		connection = connectionPool.takeConnection();
 
@@ -140,7 +144,7 @@ public class BookingDaoImpl implements BookingDao {
 				+ roomBooking.getUserId() + STRING_FIND_ROOM_BOOKING_ID_6 + roomBooking.getRoom().getId()
 				+ STRING_FIND_ROOM_BOOKING_ID_7 + roomBooking.isBookingConfirmed() + STRING_FIND_ROOM_BOOKING_ID_8
 				+ roomBooking.getBookingDate() + STRING_FIND_ROOM_BOOKING_ID_9;
-		try {
+		
 			statement = connection.createStatement();
 			set = statement.executeQuery(sql);
 
@@ -167,6 +171,7 @@ public class BookingDaoImpl implements BookingDao {
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet set = null;
+		ResultSetMetaData data;
 
 		connection = connectionPool.takeConnection();
 
@@ -184,7 +189,7 @@ public class BookingDaoImpl implements BookingDao {
 				babyExpense = new BabyExpense(id, name, price, date);
 
 			}
-		} catch (SQLException e) {
+		} catch (ConnectionPoolException | SQLException e) {
 			logger.error("Error in finding BabyExpense ", e);
 			throw new DaoException("Error in finding BabyExpense  " + e);
 
@@ -213,6 +218,7 @@ public class BookingDaoImpl implements BookingDao {
 				+ STRING_FIND_FREE_ROOMS_THIRD_PART + endDate + STRING_FIND_FREE_ROOMS_FOURTH_PART;
 
 		try {
+
 			statement = connection.createStatement();
 			set = statement.executeQuery(sql);
 
@@ -251,7 +257,7 @@ public class BookingDaoImpl implements BookingDao {
 
 			}
 
-		} catch (SQLException e) {
+		} catch (ConnectionPoolException | SQLException e) {
 			logger.error("Error in finding Free Rooms  ", e);
 			throw new DaoException("Error in finding Free Rooms  " + e);
 
@@ -287,7 +293,7 @@ public class BookingDaoImpl implements BookingDao {
 				resultMap.put(set.getDate(1), set.getDouble(2));
 			}
 
-		} catch (SQLException e) {
+		} catch (ConnectionPoolException | SQLException e) {
 			logger.error("Error in finding Free Rooms", e);
 			throw new DaoException("Error in finding Free Rooms  " + e);
 
@@ -325,7 +331,7 @@ public class BookingDaoImpl implements BookingDao {
 				prepayment = new Prepayment(id, name, coeff, startDate);
 
 			}
-		} catch (SQLException e) {
+		} catch (ConnectionPoolException | SQLException e) {
 			logger.error("Error in finding BabyExpense", e);
 			throw new DaoException("Error in finding BabyExpense  " + e);
 
@@ -367,13 +373,13 @@ public class BookingDaoImpl implements BookingDao {
 				boolean isPrepaiment = set.getBoolean(10);
 				boolean isBookingPaid = set.getBoolean(11);
 
-				BookingTransferObject transferObject = new BookingTransferObject(id, startDate, endDate, room, roomCategoryName, adults,
-						children, payment, prepayment, isPrepaiment, isBookingPaid);
+				BookingTransferObject transferObject = new BookingTransferObject(id, startDate, endDate, room,
+						roomCategoryName, adults, children, payment, prepayment, isPrepaiment, isBookingPaid);
 				userBookingList.add(transferObject);
 
 			}
 
-		} catch (SQLException e) {
+		} catch (ConnectionPoolException | SQLException e) {
 			logger.error("Error in finding user history ", e);
 			throw new DaoException("Error in finding user history  " + e);
 
@@ -390,16 +396,17 @@ public class BookingDaoImpl implements BookingDao {
 	public void makePrepaymentPaid(int bookingId) throws DaoException {
 		Connection connection = null;
 		PreparedStatement ps = null;
+		connection = connectionPool.takeConnection();
 
 		try {
-			connection = connectionPool.takeConnection();
+			
 
 			String sql = STRING_MAKE_PREPAYMENT_PAID + bookingId + STRING_UPDATE_BOOKING_MAKE_IT_CONFIRMED2;
 			ps = connection.prepareStatement(sql);
 
 			ps.executeUpdate();
 
-		} catch (SQLException e) {
+		} catch (ConnectionPoolException | SQLException e) {
 			logger.error("Error in making prepayment paid", e);
 			throw new DaoException("Error in making prepayment paid", e);
 		}
@@ -436,9 +443,9 @@ public class BookingDaoImpl implements BookingDao {
 				int babyExpenseId = set.getInt(10);
 				int prepaymentId = set.getInt(11);
 				double basicPayment = set.getDouble(12);
-				
+
 				double babyExpenceSum = set.getDouble(13);
-				
+
 				double prepaymentSum = set.getDouble(14);
 				boolean isPrepaymentPaid = set.getBoolean(15);
 				boolean isBookingPaid = set.getBoolean(16);
@@ -449,7 +456,7 @@ public class BookingDaoImpl implements BookingDao {
 
 			}
 
-		} catch (SQLException e) {
+		} catch (ConnectionPoolException | SQLException e) {
 			logger.error("Error in finding roomBooking ", e);
 			throw new DaoException("Error in finding roomBooking  " + e);
 
@@ -481,7 +488,7 @@ public class BookingDaoImpl implements BookingDao {
 			if (set.next()) {
 				peopleNumber = set.getInt(1);
 			}
-		} catch (SQLException e) {
+		} catch (ConnectionPoolException | SQLException e) {
 			logger.error("Error in finding peopleNumber ", e);
 			throw new DaoException("Error in finding peopleNumber  " + e);
 
@@ -497,20 +504,20 @@ public class BookingDaoImpl implements BookingDao {
 	@Override
 	public void checkInClientWithPayment(FinalCheckBeforeClientLeaving leaving) throws DaoException {
 		makeSumForLivingPaid(leaving);
-		checkInCkient(leaving);	
-		
+		checkInCkient(leaving);
+
 	}
-	
+
 	@Override
 	public void checkInClientWithoutPayment(FinalCheckBeforeClientLeaving leaving) throws DaoException {
-		checkInCkient(leaving);	
-		
+		checkInCkient(leaving);
+
 	}
-	
+
 	public void makeSumForLivingPaid(FinalCheckBeforeClientLeaving leaving) throws DaoException {
 		Connection connection = null;
 		PreparedStatement ps = null;
-		
+
 		int bookingId = leaving.getBooking().getIdBooking();
 
 		try {
@@ -521,17 +528,17 @@ public class BookingDaoImpl implements BookingDao {
 
 			ps.executeUpdate();
 
-		} catch (SQLException e) {
+		} catch (ConnectionPoolException | SQLException e) {
 			logger.error("Error in making living sum paid", e);
 			throw new DaoException("Error in making living sum paid", e);
 		}
 
 		finally {
 			connectionPool.closeConnection(connection, ps);
-		}	
-		
+		}
+
 	}
-	
+
 	public void checkInCkient(FinalCheckBeforeClientLeaving leaving) throws DaoException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -547,7 +554,7 @@ public class BookingDaoImpl implements BookingDao {
 
 			ps.executeUpdate();
 
-		} catch (SQLException e) {
+		} catch (ConnectionPoolException | SQLException e) {
 			logger.error("Error in final check", e);
 			throw new DaoException("Error in final check", e);
 		}
@@ -568,8 +575,6 @@ public class BookingDaoImpl implements BookingDao {
 		connection = connectionPool.takeConnection();
 
 		String sql = STRING_FIND_BOOKINGS_FOR_CHECK_OUT + date + STRING_FIND_ROOM_BOOKING_ID_9;
-		
-		
 
 		try {
 			statement = connection.createStatement();
@@ -584,15 +589,14 @@ public class BookingDaoImpl implements BookingDao {
 				String thirdName = set.getString(6);
 				String secondName = set.getString(7);
 				boolean clientStatus = set.getBoolean(8);
-				
-				CheckOutTransferObject object = new CheckOutTransferObject(idBooking, roomNumber, startDate, endDate, name, thirdName, secondName, clientStatus);
+
+				CheckOutTransferObject object = new CheckOutTransferObject(idBooking, roomNumber, startDate, endDate,
+						name, thirdName, secondName, clientStatus);
 				bookingList.add(object);
-				
-				
 
 			}
 
-		} catch (SQLException e) {
+		} catch (ConnectionPoolException | SQLException e) {
 			logger.error("Error in check out user", e);
 			throw new DaoException("Error in check out user  " + e);
 
@@ -605,7 +609,6 @@ public class BookingDaoImpl implements BookingDao {
 		return bookingList;
 	}
 
-	
 	@Override
 	public void checkOutClient(int bookingId) throws DaoException {
 		Connection connection = null;
@@ -619,7 +622,7 @@ public class BookingDaoImpl implements BookingDao {
 
 			ps.executeUpdate();
 
-		} catch (SQLException e) {
+		} catch (ConnectionPoolException | SQLException e) {
 			logger.error("Error in final check", e);
 			throw new DaoException("Error in final check", e);
 		}
@@ -640,7 +643,7 @@ public class BookingDaoImpl implements BookingDao {
 		connection = connectionPool.takeConnection();
 
 		String sql = STRING_FIND_ROOMS_FREE_AFTER_DATE + date + STRING_FIND_ROOMS_FREE_BUSY_AFTER_DATE_LAST_PART;
-		
+
 		try {
 			statement = connection.createStatement();
 			set = statement.executeQuery(sql);
@@ -648,29 +651,27 @@ public class BookingDaoImpl implements BookingDao {
 			while (set.next()) {
 				int idBooking = set.getInt(1);
 				Date startDate = set.getDate(2);
-				Date endDate =set.getDate(3);
+				Date endDate = set.getDate(3);
 				String roomName = set.getString(4);
 				String roomCategory = set.getString(5);
 				int roomCategoryId = set.getInt(6);
 				int roomCategoryParentId = set.getInt(7);
-				
+
 				RoomCategory category = new RoomCategory(roomCategoryId, roomCategory, roomCategoryParentId);
-				
+
 				Room room = new Room(roomName, category);
-				
+
 				RoomBooking booking = new RoomBooking();
 				booking.setIdBooking(idBooking);
 				booking.setStartDate(startDate);
 				booking.setEndDate(endDate);
 				booking.setRoom(room);
-			
 
 				bookingList.add(booking);
-							
 
 			}
 
-		} catch (SQLException e) {
+		} catch (ConnectionPoolException | SQLException e) {
 			logger.error("Error in finding free rooms after date", e);
 			throw new DaoException("Error in finding free rooms after date  " + e);
 
@@ -685,7 +686,7 @@ public class BookingDaoImpl implements BookingDao {
 
 	@Override
 	public List<RoomBooking> findBusyRoomsAfterNessecaryDate(Date date) throws DaoException {
-		
+
 		List<RoomBooking> bookingList = new ArrayList<>();
 
 		Connection connection = null;
@@ -695,7 +696,7 @@ public class BookingDaoImpl implements BookingDao {
 		connection = connectionPool.takeConnection();
 
 		String sql = STRING_FIND_ROOMS_BUSY_AFTER_DATE + date + STRING_FIND_ROOMS_FREE_BUSY_AFTER_DATE_LAST_PART;
-		
+
 		try {
 			statement = connection.createStatement();
 			set = statement.executeQuery(sql);
@@ -703,29 +704,27 @@ public class BookingDaoImpl implements BookingDao {
 			while (set.next()) {
 				int idBooking = set.getInt(1);
 				Date startDate = set.getDate(2);
-				Date endDate =set.getDate(3);
+				Date endDate = set.getDate(3);
 				String roomName = set.getString(4);
 				String roomCategory = set.getString(5);
 				int roomCategoryId = set.getInt(6);
 				int roomCategoryParentId = set.getInt(7);
-				
+
 				RoomCategory category = new RoomCategory(roomCategoryId, roomCategory, roomCategoryParentId);
-				
+
 				Room room = new Room(roomName, category);
-				
+
 				RoomBooking booking = new RoomBooking();
 				booking.setIdBooking(idBooking);
 				booking.setStartDate(startDate);
 				booking.setEndDate(endDate);
 				booking.setRoom(room);
-			
 
 				bookingList.add(booking);
-							
 
 			}
 
-		} catch (SQLException e) {
+		} catch (ConnectionPoolException | SQLException e) {
 			logger.error("Error in finding free rooms after date", e);
 			throw new DaoException("Error in finding free rooms after date  " + e);
 
@@ -737,6 +736,5 @@ public class BookingDaoImpl implements BookingDao {
 
 		return bookingList;
 	}
-	
-	
+
 }

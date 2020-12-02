@@ -32,7 +32,7 @@ public class GoToBookingPage implements Command {
 			List<Integer> roomCapasityList = roomCategoryService.createRoomCategoryList();
 			request.setAttribute("room_capacity", roomCapasityList);
 			
-			String adress = ParametrName.RESULT_BOOKING_LIST.toString(); // booking_page
+			String adress = ParametrName.RESULT_BOOKING_LIST.toString();
 			request.setAttribute("address from GoToBookingPage", adress);
 
 			request.getRequestDispatcher(STRING_TO_USER_BOOKING_PAGE).forward(request, response);

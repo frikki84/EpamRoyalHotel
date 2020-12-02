@@ -138,13 +138,6 @@
 									value="${log_form_login}" />
 							</div>
 
-
-							<%-- <div class="clearfix">
-						<label class="pull-left checkbox-inline"> <input
-							type="checkbox">${log_form_remember_me}</label> <a href="#"
-							class="pull-right">${log_form_forgot_password}</a>
-					</div> --%>
-
 						</form>
 						<form action="mainPage" method="post">
 							<input type="hidden" name="command"

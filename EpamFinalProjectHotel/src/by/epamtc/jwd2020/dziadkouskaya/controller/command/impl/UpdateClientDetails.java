@@ -24,6 +24,7 @@ import by.epamtc.jwd2020.dziadkouskaya.service.ServiceException;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceProvider;
 import by.epamtc.jwd2020.dziadkouskaya.service.UserService;
 import by.epamtc.jwd2020.dziadkouskaya.service.UserdetailService;
+import by.epamtc.jwd2020.dziadkouskaya.service.validation.UserValidation;
 
 public class UpdateClientDetails implements Command {
 	public static final int DEFAULT_ID_FOR_USER_DETAILS = 0;
@@ -61,35 +62,37 @@ public class UpdateClientDetails implements Command {
 
 		int clientCode = (int) request.getSession().getAttribute("client_code");
 		int bookingId = (int) request.getSession().getAttribute("client_booking");
-		System.out.println(bookingId);
+
+		String firstName = request.getParameter(PARAMETR_CLIENT_NAME);
+		String secondName = request.getParameter(PARAMETR_CLIENT_SURNAME);
+		String thirdName = request.getParameter(PARAMETR_CLIENT_THIRD_NAME);
+		String firstNameEnglish = request.getParameter(PARAMETR_CLIENT_ENGLISH_NAME);
+		String secondNameEnglish = request.getParameter(PARAMETR_CLIENT_ENGLISH_SURNAME);
+		String passportNumber = request.getParameter(PARAMETR_CLIENT_PASSPORT);
+		String passportId = request.getParameter(PARAMETR_CLIENT_PASSPORT_ID);
+		String passportOtherInfo = request.getParameter(PARAMETR_CLIENT_OTER_INFO);
+		String countryName = request.getParameter(PARAMETR_CLIENT_COUNTRY);
+		String date = request.getParameter(PARAMETR_CLIENT_BIRTHDATE);
 
 		try {
 
-			String firstName = request.getParameter(PARAMETR_CLIENT_NAME);
-			String secondName = request.getParameter(PARAMETR_CLIENT_SURNAME);
-			String thirdName = request.getParameter(PARAMETR_CLIENT_THIRD_NAME);
-			String firstNameEnglish = request.getParameter(PARAMETR_CLIENT_ENGLISH_NAME);
-			String secondNameEnglish = request.getParameter(PARAMETR_CLIENT_ENGLISH_SURNAME);
-			String passportNumber = request.getParameter(PARAMETR_CLIENT_PASSPORT);
-			String passportId = request.getParameter(PARAMETR_CLIENT_PASSPORT_ID);
-			String passportOtherInfo = request.getParameter(PARAMETR_CLIENT_OTER_INFO);
-
-			String countryName = request.getParameter(PARAMETR_CLIENT_COUNTRY);
 			Country country = new Country(countryName);
 
-			String date = request.getParameter(PARAMETR_CLIENT_BIRTHDATE);
+			boolean dateCheck = UserValidation.isDate(date);
+
 			Date birthDate = null;
 
-			if (date == null || date.equals("")) {
-				birthDate = Date.valueOf(DEFAULT_BIRTH_DATE_VALUE);
-			} else {
-
+			if (dateCheck) {
 				birthDate = Date.valueOf(date);
+
+			} else {
+				birthDate = Date.valueOf(DEFAULT_BIRTH_DATE_VALUE);
 			}
 
 			UserDetail userDetail = new UserDetail(clientCode, firstName, secondName, thirdName, firstNameEnglish,
 					secondNameEnglish, birthDate, passportNumber, passportId, passportOtherInfo, country,
 					DEFAULT_CLIENT_CATEGORY);
+			System.out.println("UpdateClientDetails " + userDetail);
 
 			userdetailService.updateUserDetails(userDetail);
 

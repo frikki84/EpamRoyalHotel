@@ -120,7 +120,6 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse offset"
 					id="navbarSupportedContent">
 					<ul class="nav navbar-nav menu_nav ml-auto">
@@ -182,15 +181,7 @@
 											value="${admin_navigate_checkin}" class="nonactive" />
 									</form>
 								</li>
-
-								<%-- 						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="" /> <input
-									type="submit" value="${admin_navigate_add_tax}"
-									class="nonactive" />
-							</form>
-						</li> --%>
-
+								
 								<li>
 									<form action="mainPage" method="post">
 										<input type="hidden" name="command"
@@ -213,23 +204,7 @@
 										<input type="submit" value="${admin_navigate_change_taxes}"
 											class="active" />
 									</form>
-								</li>
-
-								<%-- 						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
-								<input type="submit" value="${admin_navigate_change_admin_info}"
-									class="nonactive" />
-							</form>
-						</li> --%>
-
-								<%-- 					<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
-								<input type="submit" value="${admin_navigate_add_admin}"
-									class="nonactive" />
-							</form>
-						</li> --%>
+								</li>							
 								<li>
 									<form action="mainPage" method="post">
 										<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
@@ -247,8 +222,8 @@
 
 						<form action="mainPage" method="post">
 							<input type="hidden" name="command" value="admin_cleaner_list" />
-							<input type="date" name="date" placeholder="${date}" /> <input
-								type="submit" value="${admin_check_out_list_date}" class = "my_table_booking_submit">
+							<input type="date" name="date" placeholder="${date}" class = "my_table_booking_submit"/> 
+							<input type="submit" value="${admin_check_out_list_date}" class = "my_table_booking_submit">
 
 						</form>
 						<br />
@@ -275,8 +250,6 @@
 											<th width="20%" align="center"><c:if
 													test="${item.cleanBeforeDepatchure}">"X"</c:if></th>
 									</c:forEach>
-
-
 								</table>
 							</form>
 						</div>
@@ -285,6 +258,5 @@
 			</div>
 		</div>
 	</section>
-
 </body>
 </html>

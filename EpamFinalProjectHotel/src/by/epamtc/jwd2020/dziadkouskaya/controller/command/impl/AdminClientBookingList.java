@@ -18,7 +18,7 @@ import by.epamtc.jwd2020.dziadkouskaya.service.BookingService;
 import by.epamtc.jwd2020.dziadkouskaya.service.RoomCategoryService;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceException;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceProvider;
-import by.epamtc.jwd2020.dziadkouskaya.service.Validation;
+import by.epamtc.jwd2020.dziadkouskaya.service.validation.UserValidation;
 
 public class AdminClientBookingList implements Command {
 	public static final String DEFAULT_VALIDATION_STRING = "";
@@ -53,7 +53,7 @@ public class AdminClientBookingList implements Command {
 		String validationString;
 
 		try {
-			validationString = Validation.checkDates(startDate, endDate);
+			validationString = UserValidation.checkDates(startDate, endDate);
 
 			if (!validationString.equals(DEFAULT_VALIDATION_STRING)) {
 

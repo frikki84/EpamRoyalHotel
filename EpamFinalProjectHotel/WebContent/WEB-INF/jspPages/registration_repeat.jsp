@@ -134,7 +134,7 @@
 							</div>
 							<div class="col-xs-12">
 								<div class="form-group">
-									<input type="text" class="form-control"
+									<input type="tel" class="form-control"
 										placeholder="${reg_form_phone}" name="phone" />
 								</div>
 							</div>

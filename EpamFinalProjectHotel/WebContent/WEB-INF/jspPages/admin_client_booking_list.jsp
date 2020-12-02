@@ -81,7 +81,7 @@
 	href="vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
 <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-<!-- main css -->
+
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
 <link rel="icon" href="image/favicon.png" type="image/png">
@@ -101,7 +101,7 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<!-- Collect the nav links, forms, and other content for toggling -->
+
 				<div class="collapse navbar-collapse offset"
 					id="navbarSupportedContent">
 					<ul class="nav navbar-nav menu_nav ml-auto">
@@ -165,13 +165,6 @@
 									</form>
 								</li>
 
-								<%-- 						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="" /> <input
-									type="submit" value="${admin_navigate_add_tax}"
-									class="nonactive" />
-							</form>
-						</li> --%>
 
 								<li>
 									<form action="mainPage" method="post">
@@ -196,23 +189,6 @@
 											class="nonactive" />
 									</form>
 								</li>
-
-								<%-- 						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
-								<input type="submit" value="${admin_navigate_change_admin_info}"
-									class="nonactive" />
-							</form>
-						</li> --%>
-
-								<%-- 					<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
-								<input type="submit" value="${admin_navigate_add_admin}"
-									class="nonactive" />
-							</form>
-						</li> --%>
-
 								<li>
 									<form action="mainPage" method="post">
 										<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
@@ -220,13 +196,9 @@
 											class="nonactive" />
 									</form>
 								</li>
-
-
-
 							</ul>
 						</nav>
 					</div>
-
 				</div>
 
 				<div class="view-account_big">
@@ -242,9 +214,9 @@
 										${booking_info.get(0).startDate} ${booking_resultlist_to_date}
 										${booking_info.get(0).endDate}</div>
 
-									<!-- <div class="my_booking_table"> -->
 									<form action="mainPage" method="post">
-										<input type="hidden" name="command" value="admin_client_new_booking" />
+										<input type="hidden" name="command"
+											value="admin_client_new_booking" />
 
 										<table border="2" class="my_table_booking">
 											<tr>

@@ -72,10 +72,10 @@
 
 <fmt:message bundle="${loc}" key="booking_history_pay"
 	var="booking_history_pay" />
-	
+
 <fmt:message bundle="${loc}" key="admin_client_go_to_pers_page"
-	var="admin_client_go_to_pers_page" /> 
-	
+	var="admin_client_go_to_pers_page" />
+
 <fmt:message bundle="${loc}" key="home_button" var="home_button" />
 <fmt:message bundle="${loc}" key="language_button" var="language_button" />
 <fmt:message bundle="${loc}" key="language_button_en"
@@ -97,7 +97,7 @@
 	href="vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
 <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-<!-- main css -->
+
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
 <link rel="icon" href="image/favicon.png" type="image/png">
@@ -117,7 +117,7 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<!-- Collect the nav links, forms, and other content for toggling -->
+
 				<div class="collapse navbar-collapse offset"
 					id="navbarSupportedContent">
 					<ul class="nav navbar-nav menu_nav ml-auto">
@@ -156,7 +156,7 @@
 			<div class="overlay bg-parallax" data-stellar-ratio="0.9"
 				data-stellar-vertical-offset="0" data-background=""
 				style="transform: translateY(-0.017054px);"></div>
-				
+
 			<div class="container">
 				<div class="view-account">
 
@@ -170,7 +170,7 @@
 
 							</div>
 						</div>
-						
+
 						<nav class="side-menu">
 							<ul class="nav">
 
@@ -181,14 +181,6 @@
 											value="${admin_navigate_checkin}" class="active" />
 									</form>
 								</li>
-
-								<%-- 						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="" /> <input
-									type="submit" value="${admin_navigate_add_tax}"
-									class="nonactive" />
-							</form>
-						</li> --%>
 
 								<li>
 									<form action="mainPage" method="post">
@@ -213,23 +205,6 @@
 											class="nonactive" />
 									</form>
 								</li>
-
-								<%-- 						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
-								<input type="submit" value="${admin_navigate_change_admin_info}"
-									class="nonactive" />
-							</form>
-						</li> --%>
-
-								<%-- 					<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
-								<input type="submit" value="${admin_navigate_add_admin}"
-									class="nonactive" />
-							</form>
-						</li> --%>
-
 								<li>
 									<form action="mainPage" method="post">
 										<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
@@ -246,7 +221,7 @@
 
 				</div>
 
-				<div class="view-account_big">				
+				<div class="view-account_big">
 					<div class="row">
 						<h2 class="my_table_title">${userInfoForGreetings}</h2>
 						<div class="my_table_booking">
@@ -283,27 +258,25 @@
 													<c:out value="${admin_client_booking_status}">
 													</c:out>
 												</c:if> <c:if test="${item.isBookingPaid==false}">
-													
-													<button type="submit" name="client_booking" class = "my_table_booking_submit"
-														value="${item.bookingId}">${admin_client_booking_info}</button>
+
+													<button type="submit" name="client_booking"
+														class="my_table_booking_submit" value="${item.bookingId}">${admin_client_booking_info}</button>
 												</c:if></th>
 										</tr>
 									</c:forEach>
 								</form>
 							</table>
 						</div>
-						
-											<div class="my_table_booking">
-						<form action="mainPage" method="post">
-							<input type="hidden" name="command"
-								value="ADMIN_CHECK_IN_CLIENT" /> 
-								<input type="submit"
-								value="${admin_client_go_to_pers_page}" class="my_table_booking_submit" />
-							<div class="my_table_booking"></div>
+						<div class="my_table_booking">
+							<form action="mainPage" method="post">
+								<input type="hidden" name="command"
+									value="UPDATE_CLIENT_DETAIL_WITHOUT_BOOKING" /> <input
+									type="submit" value="${admin_client_go_to_pers_page}"
+									class="my_table_booking_submit" />
+								<div class="my_table_booking"></div>
 
-						</form>
-					</div>
-						
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>

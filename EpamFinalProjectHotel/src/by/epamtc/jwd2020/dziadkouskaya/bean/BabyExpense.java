@@ -13,13 +13,12 @@ public class BabyExpense implements Serializable {
 	private Date babyexpenseStartDate;
 	
 	public BabyExpense() {
-		super();
-		// TODO Auto-generated constructor stub
+
 	}
 	
 	
 	public BabyExpense(int id) {
-		super();
+		
 		this.id = id;
 	}
 
@@ -27,14 +26,14 @@ public class BabyExpense implements Serializable {
 
 
 	public BabyExpense(int id, String babyExpenseName, double babyExpenseValuePerDay) {
-		super();
+		
 		this.id = id;
 		this.babyExpenseName = babyExpenseName;
 		this.babyExpenseValuePerDay = babyExpenseValuePerDay;
 	}
 
 	public BabyExpense(int id, String babyExpenseName, double babyExpenseValuePerDay, Date babyexpenseStartDate) {
-		super();
+		
 		this.id = id;
 		this.babyExpenseName = babyExpenseName;
 		this.babyExpenseValuePerDay = babyExpenseValuePerDay;
@@ -42,7 +41,7 @@ public class BabyExpense implements Serializable {
 	}
 
 	public BabyExpense(String babyExpenseName, double babyExpenseValuePerDay, Date babyexpenseStartDate) {
-		super();
+		
 		this.babyExpenseName = babyExpenseName;
 		this.babyExpenseValuePerDay = babyExpenseValuePerDay;
 		this.babyexpenseStartDate = babyexpenseStartDate;

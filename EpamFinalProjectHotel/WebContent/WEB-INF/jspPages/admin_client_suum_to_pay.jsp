@@ -106,7 +106,7 @@
 	href="vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
 <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-<!-- main css -->
+
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
 <link rel="icon" href="image/favicon.png" type="image/png">
@@ -126,37 +126,9 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse offset"
-					id="navbarSupportedContent">
-					<%-- <ul class="nav navbar-nav menu_nav ml-auto">
-						<li class="nav-item active"><a class="nav-link"
-							href="index.jsp">${home_button}</a></li>
-						<li class="nav-item submenu dropdown"><a href="#"
-							class="nav-link dropdown-toggle" data-toggle="dropdown"
-							role="button" aria-haspopup="true" aria-expanded="false">${language_button}</a>
-							<ul class="dropdown-menu">
-								<li class="nav-item">
-									<form action="mainPage" method="post">
-										<input type="hidden" name="command" value="locale_change">
-										<input type="hidden" name="local" value="en"> <input
-											type="hidden" name="address" value="${address}"> <input
-											type="submit" value="${language_button_en}" class="nav-link" />
-									</form>
-								</li>
-								<li class="nav-item">
-									<form action="mainPage" method="post">
-										<input type="hidden" name="command" value="locale_change">
-										<input type="hidden" name="local" value="ru"> <input
-											type="hidden" name="address" value="${address}"> <input
-											type="submit" value="${language_button_ru}" class="nav-link" />
-									</form>
-								</li>
 
-							</ul></li>
-						<li class="nav-item"><a class="nav-link" href="contacts.jsp">${contact_buttom}</a></li>
-					</ul> --%>
-				</div>
+				<div class="collapse navbar-collapse offset"
+					id="navbarSupportedContent"></div>
 			</nav>
 		</div>
 	</header>
@@ -190,14 +162,6 @@
 									</form>
 								</li>
 
-								<%-- 						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="" /> <input
-									type="submit" value="${admin_navigate_add_tax}"
-									class="nonactive" />
-							</form>
-						</li> --%>
-
 								<li>
 									<form action="mainPage" method="post">
 										<input type="hidden" name="command"
@@ -221,22 +185,6 @@
 											class="active" />
 									</form>
 								</li>
-
-								<%-- 						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
-								<input type="submit" value="${admin_navigate_change_admin_info}"
-									class="nonactive" />
-							</form>
-						</li> --%>
-
-								<%-- 					<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
-								<input type="submit" value="${admin_navigate_add_admin}"
-									class="nonactive" />
-							</form>
-						</li> --%>
 
 								<li>
 									<form action="mainPage" method="post">

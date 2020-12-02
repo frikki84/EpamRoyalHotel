@@ -120,7 +120,6 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse offset"
 					id="navbarSupportedContent">
 					<ul class="nav navbar-nav menu_nav ml-auto">
@@ -182,15 +181,7 @@
 											value="ADMIN_FIND_USER_TO_CHECK_IN" /> <input type="submit"
 											value="${admin_navigate_checkin}" class="nonactive" />
 									</form>
-								</li>
-
-								<%-- 						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="" /> <input
-									type="submit" value="${admin_navigate_add_tax}"
-									class="nonactive" />
-							</form>
-						</li> --%>
+								</li>							
 
 								<li>
 									<form action="mainPage" method="post">
@@ -214,24 +205,7 @@
 										<input type="submit" value="${admin_navigate_change_taxes}"
 											class="active" />
 									</form>
-								</li>
-
-								<%-- 						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
-								<input type="submit" value="${admin_navigate_change_admin_info}"
-									class="nonactive" />
-							</form>
-						</li> --%>
-
-								<%-- 					<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
-								<input type="submit" value="${admin_navigate_add_admin}"
-									class="nonactive" />
-							</form>
-						</li> --%>
-
+								</li>							
 								<li>
 									<form action="mainPage" method="post">
 										<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
@@ -239,15 +213,10 @@
 											class="nonactive" />
 									</form>
 								</li>
-
-
-
 							</ul>
 						</nav>
 					</div>
-
 				</div>
-
 				<div class="view-account_big">
 				<h2 class="my_table_title">${admin_check_out_enter_date}</h2>
 					<div class="row">
@@ -297,11 +266,8 @@
 													<c:out value="${admin_check_out_list_client_out}"></c:out>
 
 												</c:if></th>
-
 										</tr>
-
 									</c:forEach>
-
 								</form>
 							</table>
 						</div>

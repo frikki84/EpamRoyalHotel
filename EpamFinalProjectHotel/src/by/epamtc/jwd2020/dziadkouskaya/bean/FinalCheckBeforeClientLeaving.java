@@ -14,13 +14,12 @@ public class FinalCheckBeforeClientLeaving implements Serializable {
 	private Date leavingDate;
 	
 	public FinalCheckBeforeClientLeaving() {
-		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public FinalCheckBeforeClientLeaving(double finalMainSum, double additionalPSum, RoomBooking booking,
 			boolean personLiving, Date leavingDate) {
-		super();
+		
 		this.finalMainSum = finalMainSum;
 		this.additionalPSum = additionalPSum;
 		this.booking = booking;
@@ -30,7 +29,7 @@ public class FinalCheckBeforeClientLeaving implements Serializable {
 
 	public FinalCheckBeforeClientLeaving(int id, double finalMainSum, double additionalPSum, RoomBooking booking,
 			boolean personLiving, Date leavingDate) {
-		super();
+		
 		this.id = id;
 		this.finalMainSum = finalMainSum;
 		this.additionalPSum = additionalPSum;
@@ -40,13 +39,13 @@ public class FinalCheckBeforeClientLeaving implements Serializable {
 	}
 
 	public FinalCheckBeforeClientLeaving(RoomBooking booking, boolean personLiving) {
-		super();
+		
 		this.booking = booking;
 		this.personLiving = personLiving;
 	}
 
 	public FinalCheckBeforeClientLeaving(RoomBooking booking, boolean personLiving, Date leavingDate) {
-		super();
+		
 		this.booking = booking;
 		this.personLiving = personLiving;
 		this.leavingDate = leavingDate;

@@ -3,7 +3,6 @@ package by.epamtc.jwd2020.dziadkouskaya.controller.command.impl;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.epamtc.jwd2020.dziadkouskaya.bean.BookingTransferObject;
 import by.epamtc.jwd2020.dziadkouskaya.bean.RoomBooking;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.Command;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.ParametrName;
@@ -20,7 +18,7 @@ import by.epamtc.jwd2020.dziadkouskaya.service.BookingService;
 import by.epamtc.jwd2020.dziadkouskaya.service.RoomCategoryService;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceException;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceProvider;
-import by.epamtc.jwd2020.dziadkouskaya.service.Validation;
+import by.epamtc.jwd2020.dziadkouskaya.service.validation.UserValidation;
 
 public class ResultBookingList implements Command {
 	public static final String DEFAULT_VALIDATION_STRING = "";
@@ -30,6 +28,7 @@ public class ResultBookingList implements Command {
 	public static final String PATAMETR_END_DATE = "endDate";
 	public static final String PATAMETR_PEOPLE_NUMBER = "peopleNumber";
 	public static final String PATAMETR_CHILDREN = "childrenNumber";
+	public static final String MSG_WRONG_DATE_FORMAT = "Wrong date format. Please, repeat";
 
 	public static final String PATH_TO_ERROR_PAGE = "mainPage?command = error_page";
 
@@ -48,14 +47,28 @@ public class ResultBookingList implements Command {
 
 		String lastDate = request.getParameter(PATAMETR_END_DATE);
 
-		Date startDate = Date.valueOf(firstDate);
-
-		Date endDate = Date.valueOf(lastDate);
-
-		String validationString;
-
 		try {
-			validationString = Validation.checkDates(startDate, endDate);
+
+			boolean firstDateCheck = UserValidation.isDate(firstDate);
+			boolean lastDateCheck = UserValidation.isDate(lastDate);
+
+			if (!firstDateCheck || !lastDateCheck) {
+
+				request.setAttribute("wrong_date", MSG_WRONG_DATE_FORMAT);
+				List<Integer> roomCapasityList = roomCategoryService.createRoomCategoryList();
+				request.setAttribute("room_capacity", roomCapasityList);
+
+				request.getRequestDispatcher(PATH_TO_THIS_PAGE_WITH_INFO_ABOUT_WRONG_DATES).forward(request, response);
+
+			}
+
+			Date startDate = Date.valueOf(firstDate);
+
+			Date endDate = Date.valueOf(lastDate);
+
+			String validationString;
+
+			validationString = UserValidation.checkDates(startDate, endDate);
 
 			if (!validationString.equals(DEFAULT_VALIDATION_STRING)) {
 

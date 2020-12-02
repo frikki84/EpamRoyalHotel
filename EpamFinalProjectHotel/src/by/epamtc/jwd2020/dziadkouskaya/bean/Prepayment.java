@@ -6,30 +6,29 @@ import java.sql.Date;
 public class Prepayment implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private int id;
 	private String prepaymentName;
 	private double prepaymentCoefficient;
 	private Date startDateOfValue;
 	private int daysBetweenBookingAndComeIn;
-	
+
 	public Prepayment() {
-		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Prepayment(int id) {
-		super();
+
 		this.id = id;
 	}
 
 	public Prepayment(String prepaymentName) {
-		super();
+
 		this.prepaymentName = prepaymentName;
 	}
 
 	public Prepayment(String prepaymentName, double prepaymentCoefficient, Date startDateOfValue) {
-		super();
+
 		this.prepaymentName = prepaymentName;
 		this.prepaymentCoefficient = prepaymentCoefficient;
 		this.startDateOfValue = startDateOfValue;
@@ -37,7 +36,7 @@ public class Prepayment implements Serializable {
 
 	public Prepayment(String prepaymentName, double prepaymentCoefficient, Date startDateOfValue,
 			int daysBetweenBookingAndComeIn) {
-		super();
+
 		this.prepaymentName = prepaymentName;
 		this.prepaymentCoefficient = prepaymentCoefficient;
 		this.startDateOfValue = startDateOfValue;
@@ -46,7 +45,7 @@ public class Prepayment implements Serializable {
 
 	public Prepayment(int id, String prepaymentName, double prepaymentCoefficient, Date startDateOfValue,
 			int daysBetweenBookingAndComeIn) {
-		super();
+
 		this.id = id;
 		this.prepaymentName = prepaymentName;
 		this.prepaymentCoefficient = prepaymentCoefficient;
@@ -54,11 +53,8 @@ public class Prepayment implements Serializable {
 		this.daysBetweenBookingAndComeIn = daysBetweenBookingAndComeIn;
 	}
 
-	
-	
-	
 	public Prepayment(int id, String prepaymentName, double prepaymentCoefficient, Date startDateOfValue) {
-		super();
+
 		this.id = id;
 		this.prepaymentName = prepaymentName;
 		this.prepaymentCoefficient = prepaymentCoefficient;
@@ -153,9 +149,5 @@ public class Prepayment implements Serializable {
 				+ prepaymentCoefficient + ", startDateOfValue=" + startDateOfValue + ", daysBetweenBookingAndComeIn="
 				+ daysBetweenBookingAndComeIn + "]";
 	}
-	
-	
-	
-	
 
 }

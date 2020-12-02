@@ -2,35 +2,32 @@ package by.epamtc.jwd2020.dziadkouskaya.bean;
 
 import java.io.Serializable;
 
-public class Country implements Serializable{
+public class Country implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private int id;
 	private String name;
-	
+
 	public Country() {
-		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Country(String name) {
-		super();
+
 		this.name = name;
 	}
 
 	public Country(int id) {
-		super();
+
 		this.id = id;
 	}
 
 	public Country(int id, String name) {
-		super();
+
 		this.id = id;
 		this.name = name;
 	}
 
-	
-	
 	public int getId() {
 		return id;
 	}
@@ -79,7 +76,5 @@ public class Country implements Serializable{
 	public String toString() {
 		return "Country [id=" + id + ", name=" + name + "]";
 	}
-	
-	
 
 }

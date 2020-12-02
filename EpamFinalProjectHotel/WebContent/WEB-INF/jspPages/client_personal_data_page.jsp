@@ -197,6 +197,8 @@
 
 						<div class="view-account_big">
 							<h2 class="my_table_title">${client_dp_profile}</h2>
+							<h2 class="my_table_title wrong">${wrong_email_phone}</h2>
+							
 							<div class="row">
 								<div class="col-xs-12 col-sm-9">
 
@@ -253,7 +255,7 @@
 												<div class="form-group">
 													<label class="col-sm-2 control-label">${client_dp_birth}</label>
 													<div class="col-sm-10">
-														<input type="date" class="form-control" name="birthDate"
+														<input type="date" class="my_table_booking_submit" name="birthDate"
 															value="${userDetail.birthDate}" />
 
 													</div>
@@ -297,7 +299,7 @@
 												<div class="form-group">
 													<label class="col-sm-2 control-label">${reg_form_phone}</label>
 													<div class="col-sm-10">
-														<input type="text" class="form-control"
+														<input type="tel" class="form-control"
 															value="${userPhoneTmail.phone}" name="phone">
 													</div>
 												</div>
@@ -305,7 +307,7 @@
 												<div class="form-group">
 													<label class="col-sm-2 control-label">${reg_form_email}</label>
 													<div class="col-sm-10">
-														<input type="text" class="form-control"
+														<input type="email" class="form-control"
 															value="${userPhoneTmail.email}" name="email">
 													</div>
 												</div>

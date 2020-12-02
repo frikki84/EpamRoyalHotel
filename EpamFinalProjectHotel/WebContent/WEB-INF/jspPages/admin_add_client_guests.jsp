@@ -105,7 +105,6 @@
 	href="vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
 <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-<!-- main css -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
 <link rel="icon" href="image/favicon.png" type="image/png">
@@ -125,36 +124,8 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse offset"
 					id="navbarSupportedContent">
-					<%-- <ul class="nav navbar-nav menu_nav ml-auto">
-						<li class="nav-item active"><a class="nav-link"
-							href="index.jsp">${home_button}</a></li>
-						<li class="nav-item submenu dropdown"><a href="#"
-							class="nav-link dropdown-toggle" data-toggle="dropdown"
-							role="button" aria-haspopup="true" aria-expanded="false">${language_button}</a>
-							<ul class="dropdown-menu">
-								<li class="nav-item">
-									<form action="mainPage" method="post">
-										<input type="hidden" name="command" value="locale_change">
-										<input type="hidden" name="local" value="en"> <input
-											type="hidden" name="address" value="${address}"> <input
-											type="submit" value="${language_button_en}" class="nav-link" />
-									</form>
-								</li>
-								<li class="nav-item">
-									<form action="mainPage" method="post">
-										<input type="hidden" name="command" value="locale_change">
-										<input type="hidden" name="local" value="ru"> <input
-											type="hidden" name="address" value="${address}"> <input
-											type="submit" value="${language_button_ru}" class="nav-link" />
-									</form>
-								</li>
-
-							</ul></li>
-						<li class="nav-item"><a class="nav-link" href="contacts.jsp">${contact_buttom}</a></li>
-					</ul> --%>
 				</div>
 			</nav>
 		</div>
@@ -187,16 +158,7 @@
 											value="ADMIN_FIND_USER_TO_CHECK_IN" /> <input type="submit"
 											value="${admin_navigate_checkin}" class="nonactive" />
 									</form>
-								</li>
-
-								<%-- 						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="" /> <input
-									type="submit" value="${admin_navigate_add_tax}"
-									class="nonactive" />
-							</form>
-						</li> --%>
-
+								</li>								
 								<li>
 									<form action="mainPage" method="post">
 										<input type="hidden" name="command"
@@ -220,23 +182,6 @@
 											class="active" />
 									</form>
 								</li>
-
-								<%-- 						<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
-								<input type="submit" value="${admin_navigate_change_admin_info}"
-									class="nonactive" />
-							</form>
-						</li> --%>
-
-								<%-- 					<li>
-							<form action="mainPage" method="post">
-								<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
-								<input type="submit" value="${admin_navigate_add_admin}"
-									class="nonactive" />
-							</form>
-						</li> --%>
-
 								<li>
 									<form action="mainPage" method="post">
 										<input type="hidden" name="command" value="EXIT_TO_MAIN_PAGE" />
@@ -244,9 +189,6 @@
 											class="nonactive" />
 									</form>
 								</li>
-
-
-
 							</ul>
 						</nav>
 					</div>
@@ -308,7 +250,7 @@
 												<div class="form-group">
 													<label class="col-sm-2 control-label">${client_dp_birth}</label>
 													<div class="col-sm-10">
-														<input type="text" class="form-control" name="birthDate" />
+														<input type="date" class="my_table_booking_submit" name="birthDate" />
 
 													</div>
 												</div>
@@ -372,13 +314,11 @@
 								<input type="submit" class="my_form_control"
 									value="${admin_client_next_step}" />
 							</div>
-
 						</form>
 					</div>
 					<br />
 				</div>
 			</div>
 	</section>
-
 </body>
 </html>

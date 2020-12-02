@@ -16,20 +16,17 @@ public class User implements Serializable {
 	private UserActivity activity;
 
 	public User() {
-		super();
+
 		this.activity = DEFAULT_USER_ACTIVITY;
 	}
-	
-	
+
 	public User(int userId) {
-		super();
+
 		this.userId = userId;
 	}
 
-
-
 	public User(int userId, String login, String password) {
-		super();
+
 		this.userId = userId;
 		this.login = login;
 		this.password = password;
@@ -37,7 +34,7 @@ public class User implements Serializable {
 	}
 
 	public User(String login, String password, Role role) {
-		super();
+
 		this.login = login;
 		this.password = password;
 		this.role = role;
@@ -45,7 +42,7 @@ public class User implements Serializable {
 	}
 
 	public User(String login, String password, String email, Role role) {
-		super();
+
 		this.login = login;
 		this.password = password;
 		this.email = email;
@@ -54,7 +51,7 @@ public class User implements Serializable {
 	}
 
 	public User(String login, String password, String email, String phone, Role role) {
-		super();
+
 		this.login = login;
 		this.password = password;
 		this.email = email;
@@ -64,7 +61,7 @@ public class User implements Serializable {
 	}
 
 	public User(int userId, String login, String password, String email, String phone, Role role) {
-		super();
+
 		this.userId = userId;
 		this.login = login;
 		this.password = password;
@@ -75,7 +72,7 @@ public class User implements Serializable {
 	}
 
 	public User(int userId, String email, String phone, Role role) {
-		super();
+
 		this.userId = userId;
 		this.email = email;
 		this.phone = phone;
@@ -83,10 +80,9 @@ public class User implements Serializable {
 		this.activity = DEFAULT_USER_ACTIVITY;
 
 	}
-	
 
 	public User(String login, String password, String email, Role role, UserActivity activity) {
-		super();
+
 		this.login = login;
 		this.password = password;
 		this.email = email;
@@ -94,9 +90,8 @@ public class User implements Serializable {
 		this.activity = activity;
 	}
 
-
 	public User(String login, String password, String email, String phone, Role role, UserActivity activity) {
-		super();
+
 		this.login = login;
 		this.password = password;
 		this.email = email;
@@ -105,10 +100,9 @@ public class User implements Serializable {
 		this.activity = activity;
 	}
 
-
 	public User(int userId, String login, String password, String email, String phone, Role role,
 			UserActivity activity) {
-		super();
+
 		this.userId = userId;
 		this.login = login;
 		this.password = password;

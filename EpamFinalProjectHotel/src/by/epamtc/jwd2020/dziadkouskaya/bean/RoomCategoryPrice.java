@@ -6,26 +6,25 @@ import java.sql.Date;
 public class RoomCategoryPrice implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private int id;
 	private Date startDate;
 	private double pricePerDay;
 	private RoomCategory roomCategory;
-	
+
 	public RoomCategoryPrice() {
-		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public RoomCategoryPrice(Date startDate, double pricePerDay, RoomCategory roomCategory) {
-		super();
+
 		this.startDate = startDate;
 		this.pricePerDay = pricePerDay;
 		this.roomCategory = roomCategory;
 	}
 
 	public RoomCategoryPrice(int id, Date startDate, double pricePerDay, RoomCategory roomCategory) {
-		super();
+
 		this.id = id;
 		this.startDate = startDate;
 		this.pricePerDay = pricePerDay;
@@ -108,7 +107,5 @@ public class RoomCategoryPrice implements Serializable {
 		return "RoomCategoryPrice [id=" + id + ", startDate=" + startDate + ", pricePerDay=" + pricePerDay
 				+ ", roomCategory=" + roomCategory + "]";
 	}
-	
-	
 
 }

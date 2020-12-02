@@ -24,6 +24,7 @@ import by.epamtc.jwd2020.dziadkouskaya.service.ServiceException;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceProvider;
 import by.epamtc.jwd2020.dziadkouskaya.service.UserService;
 import by.epamtc.jwd2020.dziadkouskaya.service.UserdetailService;
+import by.epamtc.jwd2020.dziadkouskaya.service.validation.UserValidation;
 
 public class UpdateClientDetailWithoutBooking implements Command {
 	public static final int DEFAULT_ID_FOR_USER_DETAILS = 0;
@@ -40,13 +41,16 @@ public class UpdateClientDetailWithoutBooking implements Command {
 	public static final String PARAMETR_CLIENT_EMAIL = "email";
 	public static final String PARAMETR_CLIENT_PHONE = "phone";
 	public static final String ADMIN_CLIENT_PAGE_WITHOUT_CHECK_IN = "/WEB-INF/jspPages/admin_personal_page_only.jsp";
+	
+	public static final String MSG_WRONG_BIRTH_DATE = "Wrong date format";
 
 	public static final ClientCategory DEFAULT_CLIENT_CATEGORY = new ClientCategory(1, "Клиент-заказчик");
+	public static final Country DEFAULT_COUNTRY = new Country(4, "Другие страны");
 	public static Role DEFAULT_ROLE_VALUE = new Role(4);
 	public static String DEFAULT_BIRTH_DATE_VALUE = "1971-01-01";
 	public static final String PATH_TO_ERROR_PAGE = "mainPage?command=error_page";
 
-	private static final Logger logger = LogManager.getLogger(UpdateClientDetails.class);
+	private static final Logger logger = LogManager.getLogger(UpdateClientDetailWithoutBooking.class);
 
 	ServiceProvider seviceProvider = ServiceProvider.getInstance();
 
@@ -70,15 +74,25 @@ public class UpdateClientDetailWithoutBooking implements Command {
 			String passportNumber = request.getParameter(PARAMETR_CLIENT_PASSPORT);
 			String passportId = request.getParameter(PARAMETR_CLIENT_PASSPORT_ID);
 			String passportOtherInfo = request.getParameter(PARAMETR_CLIENT_OTER_INFO);
-
 			String countryName = request.getParameter(PARAMETR_CLIENT_COUNTRY);
-			Country country = new Country(countryName);
-
 			String date = request.getParameter(PARAMETR_CLIENT_BIRTHDATE);
+			
+			
+			Country country = null;
+			
+			if (countryName == null) {
+				country = DEFAULT_COUNTRY;				
+			} else {
+				country = new Country(countryName);
+			}			
+			
+			
+			boolean dateCheck = UserValidation.isDate(date);
 			Date birthDate = null;
 
-			if (date == null || date.equals("")) {
+			if (!dateCheck) {
 				birthDate = Date.valueOf(DEFAULT_BIRTH_DATE_VALUE);
+								
 			} else {
 
 				birthDate = Date.valueOf(date);
@@ -132,11 +146,11 @@ public class UpdateClientDetailWithoutBooking implements Command {
 			request.getRequestDispatcher(ADMIN_CLIENT_PAGE_WITHOUT_CHECK_IN).forward(request, response);
 
 		} catch (ServiceException e) {
-			logger.error("UpdateClientDetails ServiceException", e);
+			logger.error("UpdateClientDetailWithoutBooking ServiceException", e);
 			response.sendRedirect(PATH_TO_ERROR_PAGE);
 
 		} catch (Exception e) {
-			logger.error("UpdateClientDetails Exception", e);
+			logger.error("UpdateClientDetailWithoutBooking Exception", e);
 			response.sendRedirect(PATH_TO_ERROR_PAGE);
 		}
 

@@ -5,36 +5,36 @@ import java.io.Serializable;
 public class Room implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private int id;
 	private String hotelRoomNumber;
 	private int floorNumber;
 	private RoomCategory roomCategory;
-	
+
 	public Room() {
-		super();
+
 	}
 
 	public Room(int id) {
-		super();
+
 		this.id = id;
 	}
 
 	public Room(String hotelRoomNumber, int floorNumber, RoomCategory roomCategory) {
-		super();
+
 		this.hotelRoomNumber = hotelRoomNumber;
 		this.floorNumber = floorNumber;
 		this.roomCategory = roomCategory;
 	}
 
 	public Room(String hotelRoomNumber, RoomCategory roomCategory) {
-		super();
+
 		this.hotelRoomNumber = hotelRoomNumber;
 		this.roomCategory = roomCategory;
 	}
 
 	public Room(int id, String hotelRoomNumber, int floorNumber, RoomCategory roomCategory) {
-		super();
+
 		this.id = id;
 		this.hotelRoomNumber = hotelRoomNumber;
 		this.floorNumber = floorNumber;
@@ -73,7 +73,6 @@ public class Room implements Serializable {
 		this.roomCategory = roomCategory;
 	}
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -116,13 +115,5 @@ public class Room implements Serializable {
 		return "Room [id=" + id + ", hotelRoomNumber=" + hotelRoomNumber + ", floorNumber=" + floorNumber
 				+ ", roomCategory=" + roomCategory + "]";
 	}
-	
-	
-
-	
-	
-	
-	
-
 
 }

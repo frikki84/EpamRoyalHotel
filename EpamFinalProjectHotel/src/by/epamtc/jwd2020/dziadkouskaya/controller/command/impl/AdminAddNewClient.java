@@ -56,20 +56,26 @@ public class AdminAddNewClient implements Command {
 			password = request.getParameter("password");
 
 			passwordRepeat = request.getParameter("passwordRepeat");
+			
+			boolean passwordCheck = userService.checkNewUserPassword(password, passwordRepeat);
+			
+			boolean phoneCheck = UserValidation.checkUserPhoneNumber(phone);
+			
+			boolean emailCheck = UserValidation.checkUserEmail(email);
 
-			if (!userService.checkNewUserPassword(password, passwordRepeat)) {
+			if (!passwordCheck) {
 
 				request.setAttribute("resultAnswer", MSG_ABOUT_WRONG_PASSWORD);
 
 				request.getRequestDispatcher(PATH_TO_PERSONAL_DATA_PAGE).forward(request, response);
 
-			} else if (!UserValidation.checkUserPhoneNumber(phone) && !phone.equals(DEFAULT_STRING_VALUE)) {
+			} else if (!phoneCheck && !phone.equals(DEFAULT_STRING_VALUE)) {
 
 				request.setAttribute("resultAnswer", MSG_ABOUT_WRONG_PHONE);
 
 				request.getRequestDispatcher(PATH_TO_PERSONAL_DATA_PAGE).forward(request, response);
 
-			} else if (!UserValidation.checkUserEmail(email) && !phone.equals(DEFAULT_STRING_VALUE)) {
+			} else if (!emailCheck && !phone.equals(DEFAULT_STRING_VALUE)) {
 
 				request.setAttribute("resultAnswer", MSG_ABOUT_WRONG_EMAIL);
 
