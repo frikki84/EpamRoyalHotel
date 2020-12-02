@@ -30,7 +30,7 @@ import by.epamtc.jwd2020.dziadkouskaya.bean.RoomCategoryPrice;
 import by.epamtc.jwd2020.dziadkouskaya.dao.BookingDao;
 import by.epamtc.jwd2020.dziadkouskaya.dao.DaoException;
 import by.epamtc.jwd2020.dziadkouskaya.dao.connection_pool.ConnectionPool;
-import by.epamtc.jwd2020.dziadkouskaya.dao.connection_pool.ConnectionPoolException;
+import by.epamtc.jwd2020.dziadkouskaya.dao.connection_pool.ConnectionPoolError;
 
 public class BookingDaoImpl implements BookingDao {
 	public static final String STRING_FIND_FREE_ROOMS_FIRST_PART = "select r.idHotelRoom, r.HotelRoomNumber, r. HotelRoomFloor, r.idRoomCategory,  rc.HotelRoomCategoryName, rc.ParentCategory, rc.PeopleNumberInRoom"
@@ -112,7 +112,7 @@ public class BookingDaoImpl implements BookingDao {
 
 			ps.executeUpdate();
 
-		} catch (ConnectionPoolException | SQLException e) {
+		} catch (ConnectionPoolError | SQLException e) {
 			logger.error("Error in adding new booking", e);
 
 			throw new DaoException("Error in adding new booking", e);
@@ -189,7 +189,7 @@ public class BookingDaoImpl implements BookingDao {
 				babyExpense = new BabyExpense(id, name, price, date);
 
 			}
-		} catch (ConnectionPoolException | SQLException e) {
+		} catch (ConnectionPoolError | SQLException e) {
 			logger.error("Error in finding BabyExpense ", e);
 			throw new DaoException("Error in finding BabyExpense  " + e);
 
@@ -257,7 +257,7 @@ public class BookingDaoImpl implements BookingDao {
 
 			}
 
-		} catch (ConnectionPoolException | SQLException e) {
+		} catch (ConnectionPoolError | SQLException e) {
 			logger.error("Error in finding Free Rooms  ", e);
 			throw new DaoException("Error in finding Free Rooms  " + e);
 
@@ -293,7 +293,7 @@ public class BookingDaoImpl implements BookingDao {
 				resultMap.put(set.getDate(1), set.getDouble(2));
 			}
 
-		} catch (ConnectionPoolException | SQLException e) {
+		} catch (ConnectionPoolError | SQLException e) {
 			logger.error("Error in finding Free Rooms", e);
 			throw new DaoException("Error in finding Free Rooms  " + e);
 
@@ -331,7 +331,7 @@ public class BookingDaoImpl implements BookingDao {
 				prepayment = new Prepayment(id, name, coeff, startDate);
 
 			}
-		} catch (ConnectionPoolException | SQLException e) {
+		} catch (ConnectionPoolError | SQLException e) {
 			logger.error("Error in finding BabyExpense", e);
 			throw new DaoException("Error in finding BabyExpense  " + e);
 
@@ -379,7 +379,7 @@ public class BookingDaoImpl implements BookingDao {
 
 			}
 
-		} catch (ConnectionPoolException | SQLException e) {
+		} catch (ConnectionPoolError | SQLException e) {
 			logger.error("Error in finding user history ", e);
 			throw new DaoException("Error in finding user history  " + e);
 
@@ -406,7 +406,7 @@ public class BookingDaoImpl implements BookingDao {
 
 			ps.executeUpdate();
 
-		} catch (ConnectionPoolException | SQLException e) {
+		} catch (ConnectionPoolError | SQLException e) {
 			logger.error("Error in making prepayment paid", e);
 			throw new DaoException("Error in making prepayment paid", e);
 		}
@@ -456,7 +456,7 @@ public class BookingDaoImpl implements BookingDao {
 
 			}
 
-		} catch (ConnectionPoolException | SQLException e) {
+		} catch (ConnectionPoolError | SQLException e) {
 			logger.error("Error in finding roomBooking ", e);
 			throw new DaoException("Error in finding roomBooking  " + e);
 
@@ -488,7 +488,7 @@ public class BookingDaoImpl implements BookingDao {
 			if (set.next()) {
 				peopleNumber = set.getInt(1);
 			}
-		} catch (ConnectionPoolException | SQLException e) {
+		} catch (ConnectionPoolError | SQLException e) {
 			logger.error("Error in finding peopleNumber ", e);
 			throw new DaoException("Error in finding peopleNumber  " + e);
 
@@ -528,7 +528,7 @@ public class BookingDaoImpl implements BookingDao {
 
 			ps.executeUpdate();
 
-		} catch (ConnectionPoolException | SQLException e) {
+		} catch (ConnectionPoolError | SQLException e) {
 			logger.error("Error in making living sum paid", e);
 			throw new DaoException("Error in making living sum paid", e);
 		}
@@ -554,7 +554,7 @@ public class BookingDaoImpl implements BookingDao {
 
 			ps.executeUpdate();
 
-		} catch (ConnectionPoolException | SQLException e) {
+		} catch (ConnectionPoolError | SQLException e) {
 			logger.error("Error in final check", e);
 			throw new DaoException("Error in final check", e);
 		}
@@ -596,7 +596,7 @@ public class BookingDaoImpl implements BookingDao {
 
 			}
 
-		} catch (ConnectionPoolException | SQLException e) {
+		} catch (ConnectionPoolError | SQLException e) {
 			logger.error("Error in check out user", e);
 			throw new DaoException("Error in check out user  " + e);
 
@@ -622,7 +622,7 @@ public class BookingDaoImpl implements BookingDao {
 
 			ps.executeUpdate();
 
-		} catch (ConnectionPoolException | SQLException e) {
+		} catch (ConnectionPoolError | SQLException e) {
 			logger.error("Error in final check", e);
 			throw new DaoException("Error in final check", e);
 		}
@@ -671,7 +671,7 @@ public class BookingDaoImpl implements BookingDao {
 
 			}
 
-		} catch (ConnectionPoolException | SQLException e) {
+		} catch (ConnectionPoolError | SQLException e) {
 			logger.error("Error in finding free rooms after date", e);
 			throw new DaoException("Error in finding free rooms after date  " + e);
 
@@ -724,7 +724,7 @@ public class BookingDaoImpl implements BookingDao {
 
 			}
 
-		} catch (ConnectionPoolException | SQLException e) {
+		} catch (ConnectionPoolError | SQLException e) {
 			logger.error("Error in finding free rooms after date", e);
 			throw new DaoException("Error in finding free rooms after date  " + e);
 
