@@ -298,6 +298,22 @@
 												</c:forEach>
 											</select>
 										</div>
+										
+										<div class="form-group">
+													<label class="col-sm-2 control-label">${reg_form_phone}</label>
+													<div class="col-sm-10">
+														<input type="tel" class="form-control"
+															value="${userPhoneTmail.phone}" name="phone">
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="col-sm-2 control-label">${reg_form_email}</label>
+													<div class="col-sm-10">
+														<input type="email" class="form-control"
+															value="${userPhoneTmail.email}" name="email">
+													</div>
+												</div>
 
 										<div class="form-group">
 											<div class="col-sm-10">

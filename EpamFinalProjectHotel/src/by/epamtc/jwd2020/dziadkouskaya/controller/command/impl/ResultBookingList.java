@@ -46,6 +46,9 @@ public class ResultBookingList implements Command {
 		String firstDate = request.getParameter(PATAMETR_START_DATE);
 
 		String lastDate = request.getParameter(PATAMETR_END_DATE);
+		
+		String address = ParametrName.RESULT_BOOKING_LIST.toString(); 
+		request.setAttribute("address", address);
 
 		try {
 
@@ -55,8 +58,9 @@ public class ResultBookingList implements Command {
 			if (!firstDateCheck || !lastDateCheck) {
 
 				request.setAttribute("wrong_date", MSG_WRONG_DATE_FORMAT);
+				
 				List<Integer> roomCapasityList = roomCategoryService.createRoomCategoryList();
-				request.setAttribute("room_capacity", roomCapasityList);
+				request.setAttribute("room_capacity", roomCapasityList);	
 
 				request.getRequestDispatcher(PATH_TO_THIS_PAGE_WITH_INFO_ABOUT_WRONG_DATES).forward(request, response);
 
@@ -79,6 +83,7 @@ public class ResultBookingList implements Command {
 				request.getRequestDispatcher(PATH_TO_THIS_PAGE_WITH_INFO_ABOUT_WRONG_DATES).forward(request, response);
 
 			} else {
+				
 				String peopleNumber = request.getParameter(PATAMETR_PEOPLE_NUMBER);
 				String children = request.getParameter(PATAMETR_CHILDREN);
 
@@ -90,7 +95,7 @@ public class ResultBookingList implements Command {
 
 				request.setAttribute("booking_info", bookingInfo);
 
-				String address = ParametrName.RESULT_BOOKING_LIST.toString() + "&" + PATAMETR_START_DATE + "="
+				address = ParametrName.RESULT_BOOKING_LIST.toString() + "&" + PATAMETR_START_DATE + "="
 						+ firstDate + "&" + PATAMETR_END_DATE + "=" + endDate + "&" + PATAMETR_PEOPLE_NUMBER + "="
 						+ peopleNumber + "&" + PATAMETR_CHILDREN + "=" + children;
 

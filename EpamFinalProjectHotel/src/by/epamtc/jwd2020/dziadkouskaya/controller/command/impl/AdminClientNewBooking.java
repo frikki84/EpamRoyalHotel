@@ -34,8 +34,7 @@ public class AdminClientNewBooking implements Command {
 		RoomBooking finalBooking = (RoomBooking) request.getSession().getAttribute("booking_info");
 
 		int clientId = (int) request.getSession().getAttribute("client_code");
-		System.out.println("client code " + clientId);
-
+		
 		finalBooking.setBookingConfirmed(true);
 		finalBooking.setUserId(clientId);
 

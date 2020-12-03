@@ -92,8 +92,7 @@ public class UpdateClientDetails implements Command {
 			UserDetail userDetail = new UserDetail(clientCode, firstName, secondName, thirdName, firstNameEnglish,
 					secondNameEnglish, birthDate, passportNumber, passportId, passportOtherInfo, country,
 					DEFAULT_CLIENT_CATEGORY);
-			System.out.println("UpdateClientDetails " + userDetail);
-
+			
 			userdetailService.updateUserDetails(userDetail);
 
 			List<Country> countryList = countryService.findCountryList();

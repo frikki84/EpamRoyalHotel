@@ -51,8 +51,6 @@ public class UserDetailServiceImpl implements UserdetailService {
 				country.setId(countryId);
 				
 			}
-
-			System.out.println("Service " + country);
 			
 			userDetail.setCountry(country);
 

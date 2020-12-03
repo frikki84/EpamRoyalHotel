@@ -57,7 +57,7 @@ public class UpdateClientDetailWithoutBooking implements Command {
 	private UserdetailService userdetailService = seviceProvider.getUserDetailService();
 	private CountryService countryService = seviceProvider.getCountryService();
 	private UserService userService = seviceProvider.getUserService();
-	private BookingService bookingService = seviceProvider.getBookingService();
+	
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

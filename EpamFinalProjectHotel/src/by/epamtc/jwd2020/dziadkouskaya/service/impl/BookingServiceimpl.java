@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.LogManager;
@@ -28,6 +29,7 @@ import by.epamtc.jwd2020.dziadkouskaya.dao.DaoProvider;
 import by.epamtc.jwd2020.dziadkouskaya.dao.impl.CountryDaoImpl;
 import by.epamtc.jwd2020.dziadkouskaya.service.BookingService;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceException;
+import by.epamtc.jwd2020.dziadkouskaya.service.validation.DateOperations;
 
 public class BookingServiceimpl implements BookingService {
 
@@ -49,16 +51,15 @@ public class BookingServiceimpl implements BookingService {
 
 		try {
 			resultList = bookingDao.findFreeRooms(userId, peopleNumber, childrenNumber, startDate, endDate);
+			
+			List<Date> livingInHotelDatesList = createDateListBetweenTwoDates(startDate, endDate);
+	
 
-			for (RoomBooking booking : resultList) {
-
-				List<Date> livingInHotelDatesList = createDateListBetweenTwoDates(startDate, endDate);
+			for (RoomBooking booking : resultList) {	
+				Map<Date, Double> priceMap = bookingDao.findRoomPrice(booking);
 
 				for (Date date : livingInHotelDatesList) {
-					Map<Date, Double> priceMap;
-
-					priceMap = bookingDao.findRoomPrice(booking);
-
+					
 					double pricePerDay = findPricePerDay(priceMap, date);
 					sumForLiving += pricePerDay;
 				}
@@ -96,9 +97,9 @@ public class BookingServiceimpl implements BookingService {
 		Date finalDate = sortedPricesByDates.firstKey();
 
 		for (Date item : sortedPricesByDates.keySet()) {
-			long middleSubtract = subtractDays(item, date);
-
-			if (taxPerDay < 1.0 & middleSubtract <= 0) {
+			long middleSubtract = DateOperations.subtractDays(item, date);
+			
+			if (taxPerDay < 1.0 & middleSubtract < 0) {
 				taxPerDay = sortedPricesByDates.get(finalDate);
 
 			}
@@ -113,14 +114,6 @@ public class BookingServiceimpl implements BookingService {
 		}
 
 		return taxPerDay;
-	}
-
-	public static long subtractDays(Date startDate, Date endDate) {
-
-		long duration = endDate.getTime() - startDate.getTime();
-		long diffInHours = TimeUnit.MILLISECONDS.toDays(duration);
-
-		return diffInHours;
 	}
 
 	public List<Date> createDateListBetweenTwoDates(Date startDate, Date endDate) {
@@ -149,7 +142,7 @@ public class BookingServiceimpl implements BookingService {
 	}
 
 	private double findCheckValueBabyExpense(RoomBooking booking, BabyExpense babyExpense) {
-		long livingPeriod = subtractDays(booking.getStartDate(), booking.getEndDate());
+		long livingPeriod = DateOperations.subtractDays(booking.getStartDate(), booking.getEndDate());
 		double resultValue = booking.getChildrenNumber() * babyExpense.getBabyExpenseValuePerDay() * livingPeriod;
 
 		return resultValue;

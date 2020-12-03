@@ -23,6 +23,7 @@ import by.epamtc.jwd2020.dziadkouskaya.service.ServiceException;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceProvider;
 import by.epamtc.jwd2020.dziadkouskaya.service.UserService;
 import by.epamtc.jwd2020.dziadkouskaya.service.UserdetailService;
+import by.epamtc.jwd2020.dziadkouskaya.service.validation.UserValidation;
 
 public class AdminAddGuestInfo implements Command {
 	public static final String DEFAULT_STRING_VALUE = "";
@@ -51,7 +52,7 @@ public class AdminAddGuestInfo implements Command {
 			request.setAttribute("sum_to_pay", sumToPay);
 
 			List<UserDetail> detailList = new ArrayList<UserDetail>();
-
+		
 			String[] firstName = request.getParameterValues("firstName");
 			String[] secondName = request.getParameterValues("secondName");
 			String[] thirdName = request.getParameterValues("thirdName");
@@ -65,11 +66,17 @@ public class AdminAddGuestInfo implements Command {
 
 			int guestNumber = firstName.length;
 
+			boolean checkDate = false;
+			
 			for (int i = 0; i < guestNumber; i++) {
+				 checkDate = UserValidation.isDate(date[i]);
+				
 				Date birthDate = null;
-				if (date[i] == null || date[i].equals(DEFAULT_STRING_VALUE)) {
+				
+				if (!checkDate) {
 
 					birthDate = Date.valueOf(DEFAULT_BIRTH_DATE_VALUE);
+					
 				} else {
 					birthDate = Date.valueOf(date[i]);
 				}

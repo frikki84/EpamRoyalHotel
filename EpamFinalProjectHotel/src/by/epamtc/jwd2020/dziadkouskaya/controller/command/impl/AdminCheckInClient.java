@@ -35,7 +35,7 @@ public class AdminCheckInClient implements Command {
 	private UserdetailService userDetailService = serviceProvider.getUserDetailService();
 	private CountryService countryService = serviceProvider.getCountryService();
 	private UserService userService = serviceProvider.getUserService();
-	private BookingService bookingService = serviceProvider.getBookingService();
+	
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

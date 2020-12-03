@@ -22,6 +22,7 @@ import by.epamtc.jwd2020.dziadkouskaya.service.validation.UserValidation;
 
 public class AdminClientBookingList implements Command {
 	public static final String DEFAULT_VALIDATION_STRING = "";
+	public static final String MSG_WRONG_DATE_FORMAT = "Wrong date format. Please, repeat";
 	public static final String PATH_TO_THIS_PAGE_WITH_INFO_ABOUT_WRONG_DATES = "/WEB-INF/jspPages/admin_client_booking_page.jsp";
 	public static final String PATH_TO_USER_RESULT_BOOKING_LIST = "/WEB-INF/jspPages/admin_client_booking_list.jsp";
 	public static final String PATAMETR_START_DATE = "startDate";
@@ -42,47 +43,68 @@ public class AdminClientBookingList implements Command {
 
 		int userId = (int) request.getSession().getAttribute("user_code");
 
-		String firstDate = request.getParameter(PATAMETR_START_DATE);
-
-		String lastDate = request.getParameter(PATAMETR_END_DATE);
-
-		Date startDate = Date.valueOf(firstDate);
-
-		Date endDate = Date.valueOf(lastDate);
-
-		String validationString;
-
+		String address = ParametrName.RESULT_BOOKING_LIST.toString(); 
+		request.setAttribute("address", address);
+		
 		try {
-			validationString = UserValidation.checkDates(startDate, endDate);
+			String firstDate = request.getParameter(PATAMETR_START_DATE);
 
-			if (!validationString.equals(DEFAULT_VALIDATION_STRING)) {
+			String lastDate = request.getParameter(PATAMETR_END_DATE);
 
-				request.setAttribute("wrong_date", validationString);
+			boolean checkFirstDate = UserValidation.isDate(firstDate);
+			boolean checkLastDate = UserValidation.isDate(firstDate);
+			
+
+			if (!checkFirstDate || !checkLastDate) {
+				request.setAttribute("wrong_date", MSG_WRONG_DATE_FORMAT);
+				
 				List<Integer> roomCapasityList = roomCategoryService.createRoomCategoryList();
 				request.setAttribute("room_capacity", roomCapasityList);
+				
+				
 
 				request.getRequestDispatcher(PATH_TO_THIS_PAGE_WITH_INFO_ABOUT_WRONG_DATES).forward(request, response);
 
 			} else {
-				String peopleNumber = request.getParameter(PATAMETR_PEOPLE_NUMBER);
-				String children = request.getParameter(PATAMETR_CHILDREN);
 
-				int adultPeopleNumber = Integer.parseInt(peopleNumber);
-				int childrenNumber = Integer.parseInt(children);
+				Date startDate = Date.valueOf(firstDate);
 
-				List<RoomBooking> bookingInfo = bookingService.findFreeRooms(userId, adultPeopleNumber, childrenNumber,
-						startDate, endDate);
+				Date endDate = Date.valueOf(lastDate);
 
-				request.setAttribute("booking_info", bookingInfo);
+				String validationString;
 
-				String address = ParametrName.ADMIN_CLIENT_BOOKING_LIST.toString() + "&" + PATAMETR_START_DATE + "="
-						+ firstDate + "&" + PATAMETR_END_DATE + "=" + endDate + "&" + PATAMETR_PEOPLE_NUMBER + "="
-						+ peopleNumber + "&" + PATAMETR_CHILDREN + "=" + children;
+				validationString = UserValidation.checkDates(startDate, endDate);
 
-				request.setAttribute("address", address);
+				if (!validationString.equals(DEFAULT_VALIDATION_STRING)) {
 
-				request.getRequestDispatcher(PATH_TO_USER_RESULT_BOOKING_LIST).forward(request, response);
+					request.setAttribute("wrong_date", validationString);
+					List<Integer> roomCapasityList = roomCategoryService.createRoomCategoryList();
+					request.setAttribute("room_capacity", roomCapasityList);
 
+					request.getRequestDispatcher(PATH_TO_THIS_PAGE_WITH_INFO_ABOUT_WRONG_DATES).forward(request,
+							response);
+
+				} else {
+					String peopleNumber = request.getParameter(PATAMETR_PEOPLE_NUMBER);
+					String children = request.getParameter(PATAMETR_CHILDREN);
+
+					int adultPeopleNumber = Integer.parseInt(peopleNumber);
+					int childrenNumber = Integer.parseInt(children);
+
+					List<RoomBooking> bookingInfo = bookingService.findFreeRooms(userId, adultPeopleNumber,
+							childrenNumber, startDate, endDate);
+
+					request.setAttribute("booking_info", bookingInfo);
+
+					address = ParametrName.ADMIN_CLIENT_BOOKING_LIST.toString() + "&" + PATAMETR_START_DATE + "="
+							+ firstDate + "&" + PATAMETR_END_DATE + "=" + endDate + "&" + PATAMETR_PEOPLE_NUMBER + "="
+							+ peopleNumber + "&" + PATAMETR_CHILDREN + "=" + children;
+
+					request.setAttribute("address", address);
+
+					request.getRequestDispatcher(PATH_TO_USER_RESULT_BOOKING_LIST).forward(request, response);
+
+				}
 			}
 		} catch (ServiceException e) {
 			logger.error("AdminClientBookingList ServiceException", e);

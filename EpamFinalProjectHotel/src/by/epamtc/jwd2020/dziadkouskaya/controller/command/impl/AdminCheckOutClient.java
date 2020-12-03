@@ -17,9 +17,11 @@ import by.epamtc.jwd2020.dziadkouskaya.controller.command.ParametrName;
 import by.epamtc.jwd2020.dziadkouskaya.service.BookingService;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceException;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceProvider;
+import by.epamtc.jwd2020.dziadkouskaya.service.validation.UserValidation;
 
 public class AdminCheckOutClient implements Command {
 	public static final String PATH_TO_ADMIN_CHECK_OUT_LIST = "/WEB-INF/jspPages/admin_check_out_list.jsp";
+	public static final String WRONG_DATE_FORMAT = "Wrong date format. Please, repeat";
 	public static final String PARAMETR_CLIENT_BOOOKING = "client_booking";
 	public static final String PARAMETR_CLIENT_END_DATE = "endDate";
 	public static final String PATH_TO_ERROR_PAGE = "mainPage?command=error_page";
@@ -34,23 +36,29 @@ public class AdminCheckOutClient implements Command {
 		String bookingNumber = request.getParameter(PARAMETR_CLIENT_BOOOKING);
 		String lastDate = request.getParameter("PARAMETR_CLIENT_END_DATE");
 
-		String adress = ParametrName.ADMIN_CHECK_OUT_CLIENT_FINAL.toString() + "&" + PARAMETR_CLIENT_BOOOKING + "=" + bookingNumber
-				+ "&" + PARAMETR_CLIENT_END_DATE + "=" + lastDate;
+		String adress = ParametrName.ADMIN_CHECK_OUT_CLIENT_FINAL.toString() + "&" + PARAMETR_CLIENT_BOOOKING + "="
+				+ bookingNumber + "&" + PARAMETR_CLIENT_END_DATE + "=" + lastDate;
 		request.setAttribute("address", adress);
-
-		int clientBooking = Integer.parseInt(bookingNumber);
-		Date date = Date.valueOf(lastDate);
-		request.setAttribute("date", date);
-
-		List<CheckOutTransferObject> list = null;
-
 		try {
-			bookingService.checkOutClient(clientBooking);
+			boolean dateCheck = UserValidation.isDate(lastDate);
+			if (!dateCheck) {
+				request.setAttribute("wrong_date", WRONG_DATE_FORMAT);
+				request.getRequestDispatcher(PATH_TO_ADMIN_CHECK_OUT_LIST).forward(request, response);
+			} else {
 
-			list = bookingService.findInfoForCheckingOut(date);
-			request.setAttribute("check_out_list", list);
+				int clientBooking = Integer.parseInt(bookingNumber);
+				Date date = Date.valueOf(lastDate);
+				request.setAttribute("date", date);
 
-			request.getRequestDispatcher(PATH_TO_ADMIN_CHECK_OUT_LIST).forward(request, response);
+				List<CheckOutTransferObject> list = null;
+
+				bookingService.checkOutClient(clientBooking);
+
+				list = bookingService.findInfoForCheckingOut(date);
+				request.setAttribute("check_out_list", list);
+
+				request.getRequestDispatcher(PATH_TO_ADMIN_CHECK_OUT_LIST).forward(request, response);
+			}
 
 		} catch (ServiceException e) {
 			logger.error("AdminCheckOutClient ServiceException", e);

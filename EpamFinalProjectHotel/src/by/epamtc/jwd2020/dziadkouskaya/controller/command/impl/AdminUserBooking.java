@@ -19,9 +19,23 @@ import by.epamtc.jwd2020.dziadkouskaya.service.ServiceException;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceProvider;
 import by.epamtc.jwd2020.dziadkouskaya.service.UserService;
 import by.epamtc.jwd2020.dziadkouskaya.service.UserdetailService;
+import by.epamtc.jwd2020.dziadkouskaya.service.validation.UserValidation;
 
+/**
+ * 
+ * @author Yana Dziadkouskaya
+ * 
+ *         class AdminUserBooking provide for administrator opportunity to find
+ *         all client bookings by client login. If login exists administrator
+ *         goes to client booking list. If login doesn't exist administrator is
+ *         said to use another login.
+ *         
+ *         class is also used after new booking for client by administrator.
+ *
+ */
 public class AdminUserBooking implements Command {
 	public static final String DEFAULT_STRING_IF_USER_LOGIN_WAS_FIND_IN_DB = "";
+	public static final String MSG_ABOUT_EMPTY_LOGIN_FIELD = "You haven't enter the login";
 	public static final String PARAMETR_USER_NAME = "user_info";
 	public static final String PATH_TO_CLIENT_BOOKING_PAGE = "/WEB-INF/jspPages/admin_client_booking.jsp";
 	public static final String PATH_TO_PAGE_REPEAT_LOGIN = "/WEB-INF/jspPages/admin_client_check_in.jsp";
@@ -56,9 +70,11 @@ public class AdminUserBooking implements Command {
 			if (checkingResult.equals(DEFAULT_STRING_IF_USER_LOGIN_WAS_FIND_IN_DB)) {
 
 				clientId = userService.findUserCode(clientName);
+				
 				request.getSession(true).setAttribute("client_code", clientId);
 
 				String userInfoForGreetings = userDetailService.findClientDetails(clientId);
+				
 				request.setAttribute("userInfoForGreetings", userInfoForGreetings);
 
 				List<BookingTransferObject> clientBookings = bookingService.findUserBookings(clientId);
@@ -74,8 +90,13 @@ public class AdminUserBooking implements Command {
 				request.setAttribute("booking_list", clientBookings);
 
 				request.getRequestDispatcher(PATH_TO_CLIENT_BOOKING_PAGE).forward(request, response);
+
 			} else {
 				request.setAttribute("wrong_login", checkingResult);
+
+				adress = ParametrName.ADMIN_FIND_USER_TO_CHECK_IN.toString();
+				request.setAttribute("address", adress);
+
 				request.getRequestDispatcher(PATH_TO_PAGE_REPEAT_LOGIN).forward(request, response);
 			}
 

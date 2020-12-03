@@ -17,6 +17,7 @@ import by.epamtc.jwd2020.dziadkouskaya.controller.command.ParametrName;
 import by.epamtc.jwd2020.dziadkouskaya.service.BookingService;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceException;
 import by.epamtc.jwd2020.dziadkouskaya.service.ServiceProvider;
+import by.epamtc.jwd2020.dziadkouskaya.service.validation.UserValidation;
 
 public class AdminCheckOutListWithDate implements Command {
 	public static final String PATH_TO_ADMIN_CHECK_OUT_LIST = "/WEB-INF/jspPages/admin_check_out_list.jsp";
@@ -31,10 +32,14 @@ public class AdminCheckOutListWithDate implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String dateString = request.getParameter(PARAMETR_CLIENT_CHECK_OUT_DATE);
+		
+		try {
+			
+		boolean dateCheck = UserValidation.isDate(dateString);
+		
+		Date date = null;	
 
-		Date date = null;
-
-		if (dateString == null || dateString.equals("")) {
+		if (!dateCheck) {
 			date = new Date(System.currentTimeMillis());
 
 		} else {
@@ -49,7 +54,7 @@ public class AdminCheckOutListWithDate implements Command {
 
 		List<CheckOutTransferObject> list = null;
 
-		try {
+		
 			list = bookingService.findInfoForCheckingOut(date);
 			request.setAttribute("check_out_list", list);
 

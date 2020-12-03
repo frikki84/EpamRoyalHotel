@@ -1,7 +1,6 @@
 package by.epamtc.jwd2020.dziadkouskaya.dao.impl;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,9 +11,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 
 import by.epamtc.jwd2020.dziadkouskaya.bean.BabyExpense;
 
@@ -26,7 +27,6 @@ import by.epamtc.jwd2020.dziadkouskaya.bean.Prepayment;
 import by.epamtc.jwd2020.dziadkouskaya.bean.Room;
 import by.epamtc.jwd2020.dziadkouskaya.bean.RoomBooking;
 import by.epamtc.jwd2020.dziadkouskaya.bean.RoomCategory;
-import by.epamtc.jwd2020.dziadkouskaya.bean.RoomCategoryPrice;
 import by.epamtc.jwd2020.dziadkouskaya.dao.BookingDao;
 import by.epamtc.jwd2020.dziadkouskaya.dao.DaoException;
 import by.epamtc.jwd2020.dziadkouskaya.dao.connection_pool.ConnectionPool;
@@ -44,7 +44,7 @@ public class BookingDaoImpl implements BookingDao {
 
 	public static final String STRING_TO_FIND_ROOM_PRICE = "select rp.RoomPriceStartDate, rp.`RoomPrice, rub/day` "
 			+ "from rooms r join room_category rc on rc.idHotelRoomCategory = r.idRoomCategory "
-			+ "join room_price rp on rp.idRoomCategory = rc.idHotelRoomCategory " + "where idHotelRoom = ";
+			+ "join room_price rp on rp.idRoomCategory = rc.idHotelRoomCategory " + "where r.idHotelRoom = ";
 
 	public static final String STRING_TO_FIND_ROOM_PRICE_LAST_PART = " order by rp.RoomPriceStartDate;";
 
@@ -292,6 +292,7 @@ public class BookingDaoImpl implements BookingDao {
 			while (set.next()) {
 				resultMap.put(set.getDate(1), set.getDouble(2));
 			}
+
 
 		} catch (ConnectionPoolError | SQLException e) {
 			logger.error("Error in finding Free Rooms", e);

@@ -22,6 +22,7 @@ import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.AdminGoToPricesAd
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.AdminListForCleaners;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.AdminPriceAdd;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.AdminDeletePrice;
+import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.AdminFindUserDetails;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.AdminUserBooking;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.AdminWelcomeNewClient;
 import by.epamtc.jwd2020.dziadkouskaya.controller.command.impl.DeleteUser;
@@ -78,6 +79,7 @@ public class CommandProvider {
 		commands.put(ParametrName.ADMIN_USER_BOOKING, new AdminUserBooking());
 		commands.put(ParametrName.ADMIN_CLIENT_NEW_BOOKING, new AdminClientNewBooking());
 		commands.put(ParametrName.ADMIN_FIND_USER_TO_CHECK_IN, new AdminFindUserToCheckIn()); 
+		commands.put(ParametrName.ADMIN_FIND_CLIENT_DETAILS, new AdminFindUserDetails());
 		commands.put(ParametrName.ADMIN_GO_TO_ADDING_NEW_CLIENT, new AdminGoToClientAdding());
 		commands.put(ParametrName.ADMIN_WELCOME_NEW_CLIENT, new AdminWelcomeNewClient());
 		commands.put(ParametrName.ADMIN_ADD_NEW_CLIENT, new AdminAddNewClient());

@@ -219,6 +219,7 @@
 				</div>
 				<div class="view-account_big">
 				<h2 class="my_table_title">${admin_check_out_enter_date}</h2>
+				<h2 class="my_table_title" color = "red">${wrong_date}</h2>
 					<div class="row">
 
 						<form action="mainPage" method="post">

@@ -75,6 +75,11 @@
 
 <fmt:message bundle="${loc}" key="admin_client_go_to_pers_page"
 	var="admin_client_go_to_pers_page" />
+<fmt:message bundle="${loc}" key="admin_check_in_new_booking"
+	var="admin_check_in_new_booking" />
+	
+	
+	
 
 <fmt:message bundle="${loc}" key="home_button" var="home_button" />
 <fmt:message bundle="${loc}" key="language_button" var="language_button" />
@@ -270,13 +275,29 @@
 						<div class="my_table_booking">
 							<form action="mainPage" method="post">
 								<input type="hidden" name="command"
-									value="UPDATE_CLIENT_DETAIL_WITHOUT_BOOKING" /> <input
+									value="ADMIN_FIND_CLIENT_DETAILS" /> <input
 									type="submit" value="${admin_client_go_to_pers_page}"
 									class="my_table_booking_submit" />
 								<div class="my_table_booking"></div>
 
 							</form>
 						</div>
+						<br/>
+						<br/>					
+						
+					<div class="my_table_booking">
+							<form action="mainPage" method="post">
+								<input type="hidden" name="command"
+									value="ADMIN_WELCOME_NEW_CLIENT" /> <input
+									type="submit" value="${admin_check_in_new_booking}"
+									class="my_table_booking_submit" />
+								<div class="my_table_booking"></div>
+
+							</form>
+						</div>
+						
+						<br/>
+						<br/>
 					</div>
 				</div>
 			</div>
