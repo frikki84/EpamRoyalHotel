@@ -28,7 +28,7 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * 
- * @author Mi
+ * @author Yana Dziadkouskaya
  *
  */
 public class ConnectionPool {
